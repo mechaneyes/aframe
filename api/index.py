@@ -1,25 +1,29 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI
+from langchain import ConversationChain
+from langchain.chat_models import ChatOpenAI
 from pydantic import BaseModel
+from fastapi_async_langchain.responses import StreamingResponse
 
-class Prompt(BaseModel):
-    name: str | None = None
-    the_prompt: str
-    temperature: float | None = 0.0
-
-
+load_dotenv()
 app = FastAPI()
 
 
-@app.get("/api/python")
+class Request(BaseModel):
+    conversation_id: str
+    message: str
+
+
+@app.get("/api/hello/world")
 def hello_world():
     return {"message": "Hello World"}
 
 
-# @app.get("/prompt/{prompt}")
-# def read_item(prompt: int, q: Union[str, None] = None):
-#     return {"prompt": prompt, "q": q}
-
-
-@app.post("/third/eyes")
-def create_prompt(prompt: Prompt):
-    return prompt
+@app.post("/chat")
+async def chat(request: Request) -> StreamingResponse:
+    chain = ConversationChain(
+        llm=ChatOpenAI(temperature=0, streaming=True), verbose=True
+    )
+    return StreamingResponse.from_chain(
+        chain, request.query, media_type="text/event-stream"
+    )

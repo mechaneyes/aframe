@@ -9,6 +9,26 @@
 
 <br/>
 
+# mechaneyes notes
+
+## fastapi-async-langchain 0.5.4
+
+https://pypi.org/project/fastapi-async-langchain/0.5.4/
+
+https://github.com/ajndkr/lanarky/blob/main/examples/README.md
+
+<br/>
+
+### Install dependencies:
+
+```zsh
+pip install -r requirements.txt
+```
+
+Note: The requirements.txt file is generated using pip-tools. To update the locked requirements, update the requirements.in file and run pip-compile requirements.in. To upgrade the dependencies, run pip-compile --upgrade requirements.in.
+
+<br /><br /><br />
+
 ## Introduction
 
 This is a hybrid Next.js + Python app that uses Next.js as the frontend and FastAPI as the API backend. One great use case of this is to write Next.js apps that use Python AI libraries on the backend.

@@ -1,7 +1,23 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  const [chat, setChat] = useState([])
+
+  const chatter = async () => {
+    const response = await fetch("/api/hello/world")
+    const msg = await response.json()
+    setChat(msg)
+    console.log('chat', chat)
+  }
+
+  useEffect(() => {
+    chatter()
+  }, [])
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
