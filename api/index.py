@@ -1,8 +1,7 @@
 import os
 from dotenv import load_dotenv
 import openai
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import pinecone
 from langchain import ConversationChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
@@ -10,13 +9,13 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
-from pydantic import BaseModel
-
-# from fastapi_async_langchain.responses import StreamingResponse
-import pinecone
-from llama_index import GPTVectorStoreIndex
 from llama_index.vector_stores import PineconeVectorStore
 from llama_index.storage.storage_context import StorageContext
+from llama_index import GPTVectorStoreIndex
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
 
 
 load_dotenv()
