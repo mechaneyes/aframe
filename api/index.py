@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import openai
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from langchain import ConversationChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
@@ -35,7 +36,9 @@ index_name = "pitchfork-rag"
 text_field = "content"
 
 # https://community.pinecone.io/t/retrieve-embeddings-stored-in-index-name/906/2
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo", temperature=0.0)
+llm = ChatOpenAI(
+    openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo", temperature=0.0
+)
 
 # embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 embeddings = OpenAIEmbeddings()
@@ -66,18 +69,27 @@ response = docsearch.similarity_search(query, k=3)
 # qa(query)
 
 
-
-
-
-
-
-
 app = FastAPI()
 
+origins = [
+    "http://127.0.0.1:8000/",
+    "http://localhost:3000",
+]
 
-# class Request(BaseModel):
-#     conversation_id: str
-#     message: str
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+class SendPrompt(BaseModel):
+    prompt: str
+
+
+prompts = []
 
 
 @app.get("/api/hello/world")
@@ -85,11 +97,6 @@ def hello_world():
     return response
 
 
-# @app.post("/api/chat")
-# async def chat(request: Request) -> StreamingResponse:
-#     chain = ConversationChain(
-#         llm=ChatOpenAI(temperature=0, streaming=True), verbose=True
-#     )
-#     return StreamingResponse.from_chain(
-#         chain, request.query, media_type="text/event-stream"
-#     )
+@app.post("/api/prompt")
+def send_prompt(prompt: SendPrompt):
+    return prompt
