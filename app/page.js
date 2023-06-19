@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import axios from 'axios';
+
 export default function Home() {
     const [prompt, setPrompt] = useState("")
     const [chatResponse, setChatResponse] = useState([])
@@ -40,23 +42,17 @@ export default function Home() {
             "prompt": prompt
         }
 
-        fetch("http://127.0.0.1:8000/api/prompt", {
-            method: "POST",
+        axios.post('http://127.0.0.1:8000/api/prompt', newPrompt, {
+            timeout: 5000,
             headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newPrompt)
-        }).then((response) => {
-            if (response.ok) {
-                return response.json();
+                'Content-Type': 'application/json'
             }
-            throw new Error('Something went wrong');
         })
-            .then((responseJson) => {
-                console.log('responseJson', responseJson)
+            .then((response) => {
+                console.log('responseJson', response.data);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
     }
 

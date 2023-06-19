@@ -47,32 +47,18 @@ chain = load_qa_chain(llm, chain_type="stuff")
 
 query = "what is massive attack's music like?"
 docsearch = Pinecone.from_existing_index(index_name, embeddings)
-response = docsearch.similarity_search(query, k=3)
+the_response = docsearch.similarity_search(query, k=3)
 # print(response)
 
 # vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
 # storage_context = StorageContext.from_defaults(vector_store=vector_store)
 # index = GPTVectorStoreIndex.from_vector_store(vector_store)
 
-# query_engine = index.as_query_engine()
-# query = "what is massive attack's music like?"
-# response = query_engine.query("what is massive attack's music like?")
-
-
-# qa = RetrievalQA.from_chain_type(
-#     llm=llm,
-#     chain_type="stuff",
-#     retriever=vectorstore.as_retriever(),
-#     return_source_documents=True)
-# )
-
-# qa(query)
-
 
 app = FastAPI()
 
 origins = [
-    "http://127.0.0.1:8000/",
+    "http://localhost:3000/",
     "http://localhost:3000",
 ]
 
@@ -92,11 +78,12 @@ class SendPrompt(BaseModel):
 prompts = []
 
 
-@app.get("/api/hello/world")
-def hello_world():
+def respond_to_prompt(the_prompt):
+    response = docsearch.similarity_search(the_prompt, k=3)
+    print(response)
     return response
 
 
 @app.post("/api/prompt")
 def send_prompt(prompt: SendPrompt):
-    return prompt
+    return respond_to_prompt(prompt.prompt)
