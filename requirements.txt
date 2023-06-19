@@ -1,3 +1,4 @@
+torch
 fastapi==0.95.2
 uvicorn[standard]
 lanarky
@@ -6,3 +7,7 @@ openai
 tiktoken
 faiss-cpu
 gradio
+pinecone-client[grpc]
+llama-index
+ipython
+lanarky
