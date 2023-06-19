@@ -5,17 +5,18 @@ import pinecone
 from langchain import ConversationChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
+from langchain.chains import LLMChain
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain import PromptTemplate
 from llama_index.vector_stores import PineconeVectorStore
 from llama_index.storage.storage_context import StorageContext
 from llama_index import GPTVectorStoreIndex
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
 
 
 load_dotenv()
@@ -46,7 +47,33 @@ query = "what is massive attack's music like?"
 # index = GPTVectorStoreIndex.from_vector_store(vector_store)
 
 
+# ————————————————————————————————————o Prompt Templates —>
+#
+# Prompt Templates and LLMs with Langchain
+# https://www.pinecone.io/learn/langchain-prompt-templates/
+#
 
+# template = """Answer the question based on the context below. If the
+# question cannot be answered using the information provided answer
+# with "I don't know".
+
+# Context:
+
+# Question: {query}
+
+# Answer: """
+
+# prompt_template = PromptTemplate(input_variables=["query"], template=template)
+
+# print(
+#     prompt_template.format(
+#         query="Which libraries and model providers offer LLMs?"
+#     )
+# )
+
+
+# ————————————————————————————————————o API —>
+#
 app = FastAPI()
 
 origins = [
@@ -63,19 +90,34 @@ app.add_middleware(
 )
 
 
-
 class SendPrompt(BaseModel):
     prompt: str
 
-prompts = []
+
 
 def respond_to_prompt(the_prompt):
-    response = docsearch.similarity_search(the_prompt, k=3)
-    print(response)
-    return response
+    context = docsearch.similarity_search(the_prompt, k=2)
 
+    template = """Answer the question based on the context below. If the
+    question cannot be answered using the information provided answer
+    with "I don't know".
+
+    Context: {context}
+    Question: {the_prompt}
+    Answer: """
+
+    prompt = PromptTemplate(
+        input_variables=["context", "the_prompt"], template=template
+    )
+    chain = LLMChain(llm=llm, prompt=prompt)
+
+    output = chain.run({"context": context, "the_prompt": the_prompt})
+    output = output + "\n\n" + str(context)
+    print(output)
+    return output
 
 
 @app.post("/api/prompt")
 def send_prompt(prompt: SendPrompt):
+    # respond_to_prompt(prompt.prompt)
     return respond_to_prompt(prompt.prompt)

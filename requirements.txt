@@ -11,3 +11,4 @@ pinecone-client[grpc]
 llama-index
 ipython
 lanarky
+prompt_engineering

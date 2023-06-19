@@ -28,7 +28,7 @@ export default function Home() {
 
     axios
       .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
-        timeout: 5000,
+        timeout: 30000,
         headers: {
           "Content-Type": "application/json",
         },
