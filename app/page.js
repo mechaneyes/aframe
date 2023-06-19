@@ -9,8 +9,8 @@ import axios from "axios";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [chatResponse, setChatResponse] = useState([]);
+  const [seenIds, setSeenIds] = useState(new Set());
   const [displayedResponse, setDisplayedResponse] = useState([]);
-  const [seenContents, setSeenContents] = useState(new Set());
 
   useEffect(() => {
     setDisplayedResponse(chatResponse);
@@ -36,26 +36,28 @@ export default function Home() {
       .then((response) => {
         console.log("responseJson", response.data);
 
-        const newResponses = response.data.filter(
-          (item) => !seenContents.has(item.page_content)
-        );
-        const newChatResponse = newResponses.map((item) => (
-          <div key={item.metadata.reviewid} className="response">
-            <p>{item.page_content}</p>
-            <a href={item.metadata.url}>{item.metadata.url}</a>
-          </div>
-        ));
-        setChatResponse((chatResponse) => [
-          ...chatResponse,
-          ...newChatResponse,
-        ]);
-        setSeenContents(
-          (seenContents) =>
-            new Set([
-              ...seenContents,
-              ...newResponses.map((item) => item.page_content),
-            ])
-        );
+        ((response) => {
+          const newResponses = response.data.filter(
+            (item) => !seenIds.has(item.metadata.reviewid)
+          );
+          const newChatResponse = newResponses.map((item) => (
+            <div key={item.metadata.reviewid} className="response">
+              <p>{item.page_content}</p>
+              <a href={item.metadata.url}>{item.metadata.url}</a>
+            </div>
+          ));
+          setChatResponse((chatResponse) => [
+            ...chatResponse,
+            ...newChatResponse,
+          ]);
+          setSeenIds(
+            (seenIds) =>
+              new Set([
+                ...seenIds,
+                ...newResponses.map((item) => item.metadata.reviewid),
+              ])
+          );
+        })(response);
       })
       .catch((error) => {
         console.log(error);

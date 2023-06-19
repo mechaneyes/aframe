@@ -26,32 +26,25 @@ PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT") or "PINECONE_ENVIRONMEN
 
 
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.Model.retrieve("gpt-3.5-turbo")
-
-
-pinecone_index = pinecone.GRPCIndex("pitchfork-rag")
 index_name = "pitchfork-rag"
 text_field = "content"
 
-# https://community.pinecone.io/t/retrieve-embeddings-stored-in-index-name/906/2
+
 llm = ChatOpenAI(
     openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo", temperature=0.0
 )
 
-# embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 embeddings = OpenAIEmbeddings()
-
-chain = load_qa_chain(llm, chain_type="stuff")
+docsearch = Pinecone.from_existing_index(index_name, embeddings)
 
 query = "what is massive attack's music like?"
-docsearch = Pinecone.from_existing_index(index_name, embeddings)
-the_response = docsearch.similarity_search(query, k=3)
-# print(response)
+# the_response = docsearch.similarity_search(query, k=3)
+# print(the_response)
 
 # vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
 # storage_context = StorageContext.from_defaults(vector_store=vector_store)
 # index = GPTVectorStoreIndex.from_vector_store(vector_store)
+
 
 
 app = FastAPI()
@@ -70,17 +63,17 @@ app.add_middleware(
 )
 
 
+
 class SendPrompt(BaseModel):
     prompt: str
 
-
 prompts = []
-
 
 def respond_to_prompt(the_prompt):
     response = docsearch.similarity_search(the_prompt, k=3)
     print(response)
     return response
+
 
 
 @app.post("/api/prompt")
