@@ -9,12 +9,14 @@ import axios from "axios";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [chatResponse, setChatResponse] = useState([]);
+  const [triggerDisplay, setTriggerDisplay] = useState(false);
+  const [gptFreestyle, setGptFreestyle] = useState([]);
   const [seenIds, setSeenIds] = useState(new Set());
   const [displayedResponse, setDisplayedResponse] = useState([]);
 
   useEffect(() => {
     setDisplayedResponse(chatResponse);
-  }, [chatResponse]);
+  }, [triggerDisplay]);
 
   const handleInput = (event) => {
     setPrompt(event.target.value);
@@ -28,36 +30,44 @@ export default function Home() {
 
     axios
       .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
-        timeout: 30000,
+        timeout: 60000,
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         console.log("responseJson", response.data);
+        setGptFreestyle(response.data[0]);
 
         ((response) => {
-          const newResponses = response.data.filter(
-            (item) => !seenIds.has(item.metadata.reviewid)
-          );
-          const newChatResponse = newResponses.map((item) => (
-            <div key={item.metadata.reviewid} className="response">
-              <p>{item.page_content}</p>
+          const newResponses = response.data[1].filter((item) => {
+            if (!seenIds.has(item.metadata.reviewid)) {
+              seenIds.add(item.metadata.reviewid);
+              return true;
+            }
+            return false;
+          });
+
+          const newChatResponse = newResponses.map((item, index) => (
+            <div
+              key={`${item.metadata.reviewid}-${index}`}
+              className="response__reference"
+            >
+              {/* <p>{item.page_content}</p> */}
               <a href={item.metadata.url}>{item.metadata.url}</a>
             </div>
           ));
+
           setChatResponse((chatResponse) => [
             ...chatResponse,
             ...newChatResponse,
           ]);
-          setSeenIds(
-            (seenIds) =>
-              new Set([
-                ...seenIds,
-                ...newResponses.map((item) => item.metadata.reviewid),
-              ])
-          );
+
+          setSeenIds(seenIds);
         })(response);
+      })
+      .then(() => {
+        setTriggerDisplay(!triggerDisplay);
       })
       .catch((error) => {
         console.log(error);
@@ -74,7 +84,12 @@ export default function Home() {
       </form>
       <div className="response__container">
         <h2 className={`mb-3 text-2xl font-semibold`}>Response</h2>
-        {displayedResponse}
+        <div className="response response--creative">
+          <p>{gptFreestyle}</p>
+        </div>
+        <br />
+        <br />
+        <div className="response response--references">{displayedResponse}</div>
       </div>
     </main>
   );

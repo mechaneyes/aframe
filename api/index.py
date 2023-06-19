@@ -30,46 +30,50 @@ pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
 index_name = "pitchfork-rag"
 text_field = "content"
 
-
-llm = ChatOpenAI(
-    openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo", temperature=0.0
-)
-
 embeddings = OpenAIEmbeddings()
 docsearch = Pinecone.from_existing_index(index_name, embeddings)
 
-query = "what is massive attack's music like?"
+query = "tell me what autechre events were like in the 90s?"
 # the_response = docsearch.similarity_search(query, k=3)
 # print(the_response)
 
-# vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
-# storage_context = StorageContext.from_defaults(vector_store=vector_store)
-# index = GPTVectorStoreIndex.from_vector_store(vector_store)
 
 
-# ————————————————————————————————————o Prompt Templates —>
+
+
+# ————————————————————————————————————o prompting + chaining —>
 #
-# Prompt Templates and LLMs with Langchain
-# https://www.pinecone.io/learn/langchain-prompt-templates/
-#
+llm = ChatOpenAI(
+    openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo-16k", temperature=0.5
+)
 
-# template = """Answer the question based on the context below. If the
-# question cannot be answered using the information provided answer
-# with "I don't know".
+def respond_to_prompt(the_prompt):
+    context = docsearch.similarity_search(the_prompt, k=3)
 
-# Context:
+    template = """Answer the question based on the context below. Please 
+    produce an answer of at least 500 words. Where necessary, break up the 
+    answer into paragraphs. Paragraphs should be separated by two new line 
+    characters, `\n\n`. If the question cannot be answered using the 
+    information provided answer with "I don't know".
 
-# Question: {query}
+    Context: {context}
+    Question: {the_prompt}
+    Answer: """
 
-# Answer: """
+    prompt = PromptTemplate(
+        input_variables=["context", "the_prompt"], template=template
+    )
+    chain = LLMChain(llm=llm, prompt=prompt)
 
-# prompt_template = PromptTemplate(input_variables=["query"], template=template)
+    output = chain.run({"context": context, "the_prompt": the_prompt})
+    output = [output, context]
+    print(output)
 
-# print(
-#     prompt_template.format(
-#         query="Which libraries and model providers offer LLMs?"
-#     )
-# )
+    return format_output(output)
+
+
+def format_output(from_response):
+    return from_response
 
 
 # ————————————————————————————————————o API —>
@@ -92,29 +96,6 @@ app.add_middleware(
 
 class SendPrompt(BaseModel):
     prompt: str
-
-
-
-def respond_to_prompt(the_prompt):
-    context = docsearch.similarity_search(the_prompt, k=2)
-
-    template = """Answer the question based on the context below. If the
-    question cannot be answered using the information provided answer
-    with "I don't know".
-
-    Context: {context}
-    Question: {the_prompt}
-    Answer: """
-
-    prompt = PromptTemplate(
-        input_variables=["context", "the_prompt"], template=template
-    )
-    chain = LLMChain(llm=llm, prompt=prompt)
-
-    output = chain.run({"context": context, "the_prompt": the_prompt})
-    output = output + "\n\n" + str(context)
-    print(output)
-    return output
 
 
 @app.post("/api/prompt")
