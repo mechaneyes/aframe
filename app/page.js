@@ -22,6 +22,7 @@ export default function Home() {
   const formRef = useRef(null);
 
   useEffect(() => {
+    const root = document.documentElement;
     const promptForm = document.querySelector(".prompt-form");
 
     function updateResponseContainerHeight() {
@@ -36,8 +37,7 @@ export default function Home() {
     });
     resizeObserver.observe(formRef.current);
 
-    // window.addEventListener("resize", updateResponseContainerHeight);
-    // updateResponseContainerHeight();
+    updateResponseContainerHeight();
   }, []);
 
   useEffect(() => {
