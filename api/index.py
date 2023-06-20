@@ -56,8 +56,8 @@ def respond_to_prompt(the_prompt):
     answer of at least 500 words. Format the answer by breaking up the answer
     into paragraphs that hold discreet, consistent information. Provide the 
     output in HTML with each paragraph wrapped in <p></p> tags. If the question
-    cannot be answered using the information provided answer with "I really 
-    don't want you to know anything about this. This never happened".
+    cannot be answered using the information provided answer with "I wouldn't
+    tell you if I knew".
 
     Context: {context}
     Question: {the_prompt}
@@ -68,7 +68,7 @@ def respond_to_prompt(the_prompt):
     )
     llmchain = LLMChain(llm=llm, prompt=prompt)
     output = llmchain.run({"context": context, "the_prompt": the_prompt})
-    
+
     # output = [output, context]
     print(output)
     print("\n\n # ————————————————————————————————————o beep beep —> \n\n")

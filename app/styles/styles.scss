@@ -3,33 +3,46 @@
 }
 
 .thirdeyes {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-between;
   padding: 0 2rem;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 
   p {
     margin: 0 0 1rem 0;
   }
 
   .prompt-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     font-size: 1rem;
     color: white;
+    background-color: #414141;
+    overflow: hidden;
+    border-bottom: 1px solid white;
+
+    &--submitted {
+      font-style: italic;
+    }
 
     &__input {
-      position: fixed;
-      top: 0;
-      left: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       width: 100%;
-      min-height: 50px;
+      min-height: 65px;
       padding: 0.8rem;
-      background-color: #414141;
-      overflow: hidden;
 
       &:focus {
         outline: none;
-        border-bottom: 1px solid white;
       }
 
       div {
@@ -58,10 +71,80 @@
 
   .response {
     &__container {
+      width: 100%;
       margin-top: calc(var(--prompt-form-height) + 1rem);
       padding-bottom: 2rem;
     }
-    &--creative {
+
+    &__reference {
+      font-size: 0.85rem;
+      color: #9e9e9e;
+      line-height: 1.5rem;
     }
+  }
+
+  // o————————————————————————————————————o beep beep —>
+  //
+  .spinner {
+    $ripple-position: 18px;
+    $ripple-size-2: 36px;
+    $ripple-size-1: 40px;
+
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    &.lds-ripple {
+      //   display: inline-block;
+      position: relative;
+      width: $ripple-size-1;
+      height: $ripple-size-1;
+    }
+    &.lds-ripple div {
+      position: absolute;
+      border: 2px solid #fff;
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    &.lds-ripple div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+
+    @keyframes lds-ripple {
+      0% {
+        top: $ripple-position;
+        left: $ripple-position;
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+      4.9% {
+        top: $ripple-position;
+        left: $ripple-position;
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+      5% {
+        top: $ripple-position;
+        left: $ripple-position;
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        top: 0px;
+        left: 0px;
+        width: $ripple-size-2;
+        height: $ripple-size-2;
+        opacity: 0;
+      }
+    }
+  }
+
+  .timer {
+    position: absolute;
+    margin: 0;
   }
 }
