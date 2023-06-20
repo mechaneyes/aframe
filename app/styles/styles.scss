@@ -1,0 +1,67 @@
+:root {
+  --prompt-form-height: auto;
+}
+
+.thirdeyes {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+  padding: 0 2rem;
+
+  p {
+    margin: 0 0 1rem 0;
+  }
+
+  .prompt-form {
+    width: 100%;
+    font-size: 1rem;
+    color: white;
+
+    &__input {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 50px;
+      padding: 0.8rem;
+      background-color: #414141;
+      overflow: hidden;
+
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid white;
+      }
+
+      div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+
+    &__cursor {
+      display: inline-block;
+      background: white;
+      line-height: 1rem;
+      margin-left: 1px;
+      animation: blink-animation 0.95s steps(2, start) infinite;
+      width: 1px;
+      height: 1.35rem;
+    }
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .response {
+    &__container {
+      margin-top: calc(var(--prompt-form-height) + 1rem);
+      padding-bottom: 2rem;
+    }
+    &--creative {
+    }
+  }
+}

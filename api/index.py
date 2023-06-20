@@ -47,14 +47,17 @@ llm = ChatOpenAI(
     openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo-16k", temperature=0.5
 )
 
+context = ''
+
 def respond_to_prompt(the_prompt):
     context = docsearch.similarity_search(the_prompt, k=3)
 
-    template = """Answer the question based on the context below. Please 
-    produce an answer of at least 500 words. Where necessary, break up the 
-    answer into paragraphs. Paragraphs should be separated by two new line 
-    characters, `\n\n`. If the question cannot be answered using the 
-    information provided answer with "I don't know".
+    template = """Answer the question based on the context below. Produce an 
+    answer of at least 500 words. Format the answer by breaking up the answer
+    into paragraphs that hold discreet, consistent information. Provide the 
+    output in HTML with each paragraph wrapped in <p></p> tags. If the question
+    cannot be answered using the information provided answer with "I really 
+    don't want you to know anything about this. This never happened".
 
     Context: {context}
     Question: {the_prompt}
@@ -63,17 +66,39 @@ def respond_to_prompt(the_prompt):
     prompt = PromptTemplate(
         input_variables=["context", "the_prompt"], template=template
     )
-    chain = LLMChain(llm=llm, prompt=prompt)
-
-    output = chain.run({"context": context, "the_prompt": the_prompt})
-    output = [output, context]
+    llmchain = LLMChain(llm=llm, prompt=prompt)
+    output = llmchain.run({"context": context, "the_prompt": the_prompt})
+    
+    # output = [output, context]
     print(output)
+    print("\n\n # ————————————————————————————————————o beep beep —> \n\n")
+    print(context)
 
-    return format_output(output)
+    # format_output([output, context])
+    # return context
+    return [output, context]
 
 
-def format_output(from_response):
-    return from_response
+def format_output(prev):
+    template = """Format the copy in the text below. Keep the text the 
+    same, but break up the answer into paragraphs that hold discreet, 
+    consistent information. Provide the output in HTML with each 
+    paragraph wrapped in <p></p> tags.
+
+    Text: {prev[0]}
+    Output: """
+
+    prompt = PromptTemplate(
+        input_variables=["prev"], template=template
+    )
+    llmchain = LLMChain(llm=llm, prompt=prompt)
+    output = llmchain.run({"prev": prev[0]})
+    # print(output)
+    # return [output, context]
+    # return output
+    # print([prev[0], prev[1]])
+    print(prev[0])
+    return output
 
 
 # ————————————————————————————————————o API —>
