@@ -17,6 +17,7 @@ export default function Home() {
   const [placeholderVisible, setPlaceholderVisible] = useState(true);
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
+  const [introVisible, setIntroVisible] = useState(true);
   const [displayTimer, setDisplayTimer] = useState("");
   const formRef = useRef(null);
 
@@ -39,6 +40,13 @@ export default function Home() {
 
     // window.addEventListener("resize", updateResponseContainerHeight);
     // updateResponseContainerHeight();
+  }, []);
+
+  useEffect(() => {
+    const introduction = document.querySelector(".introduction");
+    const distanceFromLeft = introduction.offsetLeft;
+    console.log(distanceFromLeft);
+    root.style.setProperty("--distance-from-left", `${distanceFromLeft}px`);
   }, []);
 
   // o————————————————————————————————————o timer —>
@@ -67,6 +75,9 @@ export default function Home() {
   };
 
   const handleChange = (e) => {
+    const inputElement =
+      document.getElementsByClassName("prompt-form__input")[0];
+
     if (e.which === 13) {
       e.preventDefault();
       setSpinnerVisible(true);
@@ -74,13 +85,12 @@ export default function Home() {
       setInterval(setTime, 1000);
       setGptReferences([]);
 
-      console.log(
-        document.getElementsByClassName("prompt-form__input")[0].innerHTML
-      );
+      inputElement.blur();
+
+      console.log(inputElement.innerHTML);
 
       const newPrompt = {
-        prompt:
-          document.getElementsByClassName("prompt-form__input")[0].innerHTML,
+        prompt: inputElement.innerHTML,
       };
 
       axios
@@ -127,7 +137,8 @@ export default function Home() {
           setTriggerDisplay(!triggerDisplay);
           clearInterval(setTime);
           console.log("totalSeconds", totalSeconds);
-          setDisplayTimer(totalSeconds);
+          setDisplayTimer(totalSeconds + "s");
+          setIntroVisible(false);
         })
         .catch((error) => {
           console.log(error);
@@ -152,14 +163,20 @@ export default function Home() {
           ref={formRef}
         >
           {placeholderVisible ? (
-            <div>
+            <div className="hello">
               hello<div className="prompt-form__cursor"></div>
             </div>
           ) : (
             content
           )}
         </div>
-        <div className="spinner lds-ripple">
+        <div
+          className={
+            spinnerVisible
+              ? "spinner spinner--visible lds-ripple"
+              : "spinner spinner--hidden"
+          }
+        >
           {spinnerVisible ? (
             <>
               <div></div>
@@ -167,15 +184,34 @@ export default function Home() {
             </>
           ) : (
             <p
-              className="timer"
-              dangerouslySetInnerHTML={{ __html: displayTimer + "s" }}
+              className={
+                spinnerVisible ? "timer timer--hidden" : "timer timer--visible"
+              }
+              dangerouslySetInnerHTML={{ __html: displayTimer }}
             ></p>
           )}
         </div>
       </div>
 
+      <section
+        className={
+          introVisible
+            ? "introduction introduction--visible"
+            : "introduction introduction--hidden"
+        }
+      >
+        <h1 className="introduction__title">Third Eyes</h1>
+        <p className="introduction__description">
+          Third Eyes is a tool that helps you write by providing you with
+          references and inspiration from an archive built on top of 18,393
+          Pitchfork reviews.
+        </p>
+        <p>
+          The app is powered by GPT-3.5, a language model developed by OpenAI.
+        </p>
+      </section>
+
       <div className="response__container">
-        {/* <h2 className={`mb-3 text-2xl font-semibold`}>Response</h2> */}
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}

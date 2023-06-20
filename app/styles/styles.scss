@@ -1,5 +1,6 @@
 :root {
   --prompt-form-height: auto;
+  --distance-from-left: auto;
 }
 
 .thirdeyes {
@@ -10,6 +11,12 @@
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+
+  h1 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    font-weight: 300;
+  }
 
   p {
     margin: 0 0 1rem 0;
@@ -38,7 +45,7 @@
       justify-content: flex-start;
       align-items: center;
       width: 100%;
-      min-height: 65px;
+      min-height: 1rem;
       padding: 0.8rem;
 
       &:focus {
@@ -69,9 +76,28 @@
     }
   }
 
+  .hello {
+    padding-left: calc(var(--distance-from-left) - 0.8rem)
+  }
+
+  .introduction {
+    display: block;
+    max-width: 650px;
+    margin-top: calc(var(--prompt-form-height) + 1rem);
+
+    p {
+        font-size: 1.1rem;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
+
   .response {
     &__container {
       width: 100%;
+      max-width: 650px;
       margin-top: calc(var(--prompt-form-height) + 1rem);
       padding-bottom: 2rem;
     }
@@ -93,6 +119,20 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
+
+    .timer {
+      margin: 0;
+    }
+
+    .timer {
+      &--visible {
+        visibility: visible;
+      }
+      
+      &--hidden {
+        visibility: hidden;
+      }
+    }
 
     &.lds-ripple {
       //   display: inline-block;
@@ -141,10 +181,5 @@
         opacity: 0;
       }
     }
-  }
-
-  .timer {
-    position: absolute;
-    margin: 0;
   }
 }
