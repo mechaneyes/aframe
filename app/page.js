@@ -21,8 +21,6 @@ export default function Home() {
   const [displayTimer, setDisplayTimer] = useState("");
   const formRef = useRef(null);
 
-  const root = document.documentElement;
-
   useEffect(() => {
     const promptForm = document.querySelector(".prompt-form");
 
@@ -43,6 +41,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const root = document.documentElement;
     const introduction = document.querySelector(".introduction");
     const distanceFromLeft = introduction.offsetLeft;
     console.log(distanceFromLeft);
