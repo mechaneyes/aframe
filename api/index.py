@@ -31,16 +31,14 @@ query = "tell me what autechre events were like in the 90s?"
 # print(the_response)
 
 
-
-
-
 # ————————————————————————————————————o prompting + chaining —>
 #
 llm = ChatOpenAI(
     openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo-16k", temperature=0.5
 )
 
-context = ''
+context = ""
+
 
 def respond_to_prompt(the_prompt):
     context = docsearch.similarity_search(the_prompt, k=3)
@@ -81,9 +79,7 @@ def format_output(prev):
     Text: {prev[0]}
     Output: """
 
-    prompt = PromptTemplate(
-        input_variables=["prev"], template=template
-    )
+    prompt = PromptTemplate(input_variables=["prev"], template=template)
     llmchain = LLMChain(llm=llm, prompt=prompt)
     output = llmchain.run({"prev": prev[0]})
     # print(output)
@@ -102,14 +98,16 @@ origins = [
     "http://localhost:3000/",
     "http://localhost:3000",
     "https://third-eyes-pitchfork.vercel.app/",
+    "http://127.0.0.1:8000/api/prompt",
+    "http://127.0.0.1:8000/",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
 )
 
 
