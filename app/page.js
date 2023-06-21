@@ -98,7 +98,7 @@ export default function Home() {
       };
 
       axios
-        .post("https://127.0.0.1:8000/api/prompt", newPrompt, {
+        .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
           // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
           // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
           timeout: 90000,

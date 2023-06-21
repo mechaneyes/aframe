@@ -24,11 +24,19 @@ gunicorn api.index:app  --workers 4 --worker-class uvicorn.workers.UvicornWorker
 
 
 
-gunicorn --keyfile=/etc/letsencrypt/live/eyesee.digital-0001/privkey.pem --certfile=/etc/letsencrypt/live/eyesee.digital-0001/fullchain.pem -k uvicorn.workers.UvicornWorker api.index:app
+
+gunicorn --keyfile=./key.pem --certfile=./cert.pem -k uvicorn.workers.UvicornWorker example:app
+
+gunicorn --keyfile=/etc/letsencrypt/live/neoneon.one/privkey.pem --certfile=/etc/letsencrypt/live/neoneon.one/fullchain.pem -k uvicorn.workers.UvicornWorker api.index:app
 
 
-uvicorn api.index:app --host 127.0.0.1 --port 8000 --ssl-certfile /etc/letsencrypt/live/eyesee.digital-0001/fullchain.pem --ssl-keyfile /etc/letsencrypt/live/eyesee.digital-0001/privkey.pem
 
 
 
-sudo lsof -t -i tcp:443 | xargs kill -9
+uvicorn example:app --port 5000 --ssl-keyfile=./key.pem --ssl-certfile=./cert.pem
+
+uvicorn api.index:app --host 127.0.0.1 --port 8000 --ssl-certfile /etc/letsencrypt/live/neoneon.one/fullchain.pem --ssl-keyfile /etc/letsencrypt/live/neoneon.one/privkey.pem
+
+
+
+/etc/letsencrypt/live/neoneon.one/fullchain.pem
