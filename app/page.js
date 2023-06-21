@@ -66,17 +66,14 @@ export default function Home() {
 
   // also, focus on input when user presses any key
   //
-  const setFocus = () => {
-    if (firstInput) {
-      formRef.current.focus();
-      setFirstInput(false);
-    }
-  };
   useEffect(() => {
     addEventListener("keydown", (event) => {
-      setFocus();
+      if (firstInput) {
+        formRef.current.focus();
+        setFirstInput(false);
+      }
     });
-  }, []);
+  }, [firstInput]);
 
   const submitPrompt = (e) => {
     // key 13 is enter is key 13 is enter is key 13 is enter
@@ -218,13 +215,14 @@ export default function Home() {
         </p>
         <p>
           Pitchfork really has covered a lot of ground considering the music
-          that's out there. So feel free to get creative in your prompting. I'm
-          repeatedly and pleasantly surprised with the app's flexibility.
+          that&apos;s out there. So feel free to get creative in your prompting.
+          I&apos;m repeatedly and pleasantly surprised with the app&apos;s
+          flexibility.
         </p>
+        <p>The app is powered by GPT-3.5-Turbo. can haz want GPT-4</p>
         <p>
-          The app is powered by GPT-3.5-Turbo. can haz want GPT-4
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
-        <p><a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a></p>
         <div className="introduction__image">
           <Image
             src="/party-pic-1024px-1.0.1.jpg"
