@@ -17,7 +17,7 @@ https://pypi.org/project/fastapi-async-langchain/0.5.4/
 
 https://github.com/ajndkr/lanarky/blob/main/examples/README.md
 
-<br/>
+<br >
 
 ### Install dependencies:
 
@@ -26,6 +26,30 @@ pip install -r requirements.txt
 ```
 
 Note: The requirements.txt file is generated using pip-tools. To update the locked requirements, update the requirements.in file and run pip-compile requirements.in. To upgrade the dependencies, run pip-compile --upgrade requirements.in.
+
+### python on ubuntu
+https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
+
+### apache vs node
+https://tecadmin.net/apache-frontend-proxy-nodejs/
+
+<br/><br/>
+
+## next js
+
+### next images full widh
+
+```javascript
+<Image
+  src="url"
+  width={0}
+  height={0}
+  sizes="100vw"
+  style={{ width: '100%', height: 'auto' }} // optional
+/>
+```
+
+
 
 <br /><br /><br />
 

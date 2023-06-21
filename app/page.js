@@ -21,6 +21,11 @@ export default function Home() {
   const [displayTimer, setDisplayTimer] = useState("");
   const formRef = useRef(null);
 
+  // o————————————————————————————————————o form height —>
+  //
+  // height of prompt form grows as user types. using a css
+  // variable this pushes the chat responses down
+  //
   useEffect(() => {
     const root = document.documentElement;
     const promptForm = document.querySelector(".prompt-form");
@@ -38,14 +43,6 @@ export default function Home() {
     resizeObserver.observe(formRef.current);
 
     updateResponseContainerHeight();
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const introduction = document.querySelector(".introduction");
-    const distanceFromLeft = introduction.offsetLeft;
-    console.log(distanceFromLeft);
-    root.style.setProperty("--distance-from-left", `${distanceFromLeft}px`);
   }, []);
 
   // o————————————————————————————————————o timer —>
@@ -148,47 +145,51 @@ export default function Home() {
   return (
     <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
       <div className="prompt-form">
-        <div
-          className={
-            promptSubmitted
-              ? "prompt-form__input prompt-form--submitted"
-              : "prompt-form__input"
-          }
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onFocus={hidePlaceholder}
-          onKeyDown={handleChange}
-          tabIndex="0"
-          ref={formRef}
-        >
-          {placeholderVisible ? (
-            <div className="hello">
-              hello<div className="prompt-form__cursor"></div>
-            </div>
-          ) : (
-            content
-          )}
-        </div>
-        <div
-          className={
-            spinnerVisible
-              ? "spinner spinner--visible lds-ripple"
-              : "spinner spinner--hidden"
-          }
-        >
-          {spinnerVisible ? (
-            <>
-              <div></div>
-              <div></div>
-            </>
-          ) : (
-            <p
-              className={
-                spinnerVisible ? "timer timer--hidden" : "timer timer--visible"
-              }
-              dangerouslySetInnerHTML={{ __html: displayTimer }}
-            ></p>
-          )}
+        <div className="prompt-form__centered">
+          <div
+            className={
+              promptSubmitted
+                ? "prompt-form__input prompt-form--submitted"
+                : "prompt-form__input"
+            }
+            contentEditable={true}
+            suppressContentEditableWarning={true}
+            onFocus={hidePlaceholder}
+            onKeyDown={handleChange}
+            tabIndex="0"
+            ref={formRef}
+          >
+            {placeholderVisible ? (
+              <div className="hello">
+                hello<div className="prompt-form__cursor"></div>
+              </div>
+            ) : (
+              content
+            )}
+          </div>
+          <div
+            className={
+              spinnerVisible
+                ? "spinner spinner--visible lds-ripple"
+                : "spinner spinner--hidden"
+            }
+          >
+            {spinnerVisible ? (
+              <>
+                <div></div>
+                <div></div>
+              </>
+            ) : (
+              <p
+                className={
+                  spinnerVisible
+                    ? "timer timer--hidden"
+                    : "timer timer--visible"
+                }
+                dangerouslySetInnerHTML={{ __html: displayTimer }}
+              ></p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -208,6 +209,16 @@ export default function Home() {
         <p>
           The app is powered by GPT-3.5, a language model developed by OpenAI.
         </p>
+        <div className="introduction__image">
+          <Image
+            src="/party-pic-1024px-1.0.1.jpg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: '100%', height: 'auto' }}
+            alt="Party Pic"
+          />
+        </div>
       </section>
 
       <div className="response__container">

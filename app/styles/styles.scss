@@ -22,6 +22,16 @@
     margin: 0 0 1rem 0;
   }
 
+//   .image {
+//     &--full-width {
+//       width: 100%;
+//     }
+
+//     &--16x9 {
+//         aspect-ratio: 16 / 9;
+//     }
+//   }
+
   .prompt-form {
     display: flex;
     justify-content: space-between;
@@ -40,13 +50,22 @@
       font-style: italic;
     }
 
+    &__centered {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 650px;
+        margin: auto;
+    }
+
     &__input {
       display: flex;
       justify-content: flex-start;
       align-items: center;
       width: 100%;
       min-height: 1rem;
-      padding: 0.8rem;
+      padding: 0.8rem 0;
 
       &:focus {
         outline: none;
@@ -91,6 +110,10 @@
 
     &--hidden {
       display: none;
+    }
+
+    &__image {
+        margin-top: 2rem;
     }
   }
 
