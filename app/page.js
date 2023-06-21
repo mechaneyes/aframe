@@ -217,8 +217,14 @@ export default function Home() {
           Pitchfork reviews.
         </p>
         <p>
-          The app is powered by GPT-3.5, a language model developed by OpenAI.
+          Pitchfork really has covered a lot of ground considering the music
+          that's out there. So feel free to get creative in your prompting. I'm
+          repeatedly and pleasantly surprised with the app's flexibility.
         </p>
+        <p>
+          The app is powered by GPT-3.5-Turbo. can haz want GPT-4
+        </p>
+        <p><a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a></p>
         <div className="introduction__image">
           <Image
             src="/party-pic-1024px-1.0.1.jpg"
