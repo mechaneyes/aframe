@@ -48,8 +48,6 @@ export default function Home() {
 
   // o————————————————————————————————————o timer —>
   //
-  //   const minutesLabel = document.getElementById("minutes");
-  //   const secondsLabel = document.getElementById("seconds");
   let totalSeconds = 0;
 
   const setTime = () => {
@@ -77,7 +75,7 @@ export default function Home() {
 
   const submitPrompt = (e) => {
     // key 13 is enter is key 13 is enter is key 13 is enter
-    if (e.which === 13) {
+    if (e.keyCode === 13) {
       e.preventDefault();
       setSpinnerVisible(true);
       setPromptSubmitted(true);
@@ -209,17 +207,18 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__description">
-          Third Eyes is a tool that helps you write by providing you with
-          references and inspiration from an archive built on top of 18,393
-          Pitchfork reviews.
+          Third Eyes allows you to query a knowledge base of 18,393 Pitchfork
+          reviews, surfacing inspiration and references for your listening, and
+          potentially writing pleasure.
         </p>
         <p>
-          Pitchfork really has covered a lot of ground considering the music
-          that&apos;s out there. So feel free to get creative in your prompting.
-          I&apos;m repeatedly and pleasantly surprised with the app&apos;s
-          flexibility.
+          This is an MVP, so please pardon the dust. Keep in mind the app is
+          fairly slow atm.
         </p>
-        <p>The app is powered by GPT-3.5-Turbo. can haz want GPT-4</p>
+        <p>
+          So feel free to get creative in your prompting. I&apos;m repeatedly
+          and pleasantly surprised with the app&apos;s flexibility.
+        </p>
         <p>
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
