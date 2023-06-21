@@ -20,6 +20,7 @@ export default function Home() {
   const [introVisible, setIntroVisible] = useState(true);
   const [displayTimer, setDisplayTimer] = useState("");
   const formRef = useRef(null);
+  const inputRef = useRef(null);
 
   // o————————————————————————————————————o form height —>
   //
@@ -70,10 +71,12 @@ export default function Home() {
     setPlaceholderVisible(false);
   };
 
-  const handleChange = (e) => {
-    const inputElement =
-      document.getElementsByClassName("prompt-form__input")[0];
+  // focus on input when user presses any key
+  //
+  addEventListener("keydown", (event) => formRef.current.focus());
 
+  const handleChange = (e) => {
+    // key 13 is enter
     if (e.which === 13) {
       e.preventDefault();
       setSpinnerVisible(true);
@@ -215,7 +218,7 @@ export default function Home() {
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: '100%', height: 'auto' }}
+            style={{ width: "100%", height: "auto" }}
             alt="Party Pic"
           />
         </div>
