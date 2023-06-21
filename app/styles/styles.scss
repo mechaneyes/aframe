@@ -1,5 +1,6 @@
 @import 'https://use.typekit.net/amb7lhn.css';
 @import './typography';
+@import 'mixins';
 
 :root {
   --prompt-form-height: auto;
@@ -26,7 +27,8 @@
   p {
     margin: 0 0 1rem 0;
     // font-weight: 100;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    line-height: 1.7rem;
   }
 
 //   .image {
@@ -64,6 +66,13 @@
         width: 100%;
         max-width: 650px;
         margin: auto;
+        padding: 0 2rem;
+
+        @media (min-width: 720px) {
+            padding: 0;
+        }
+
+        
     }
 
     &__input {
@@ -133,7 +142,7 @@
     }
 
     &__reference {
-      font-size: 0.85rem;
+      font-size: 1rem;
       color: #9e9e9e;
       line-height: 1.5rem;
     }
