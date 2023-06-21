@@ -19,8 +19,8 @@ export default function Home() {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [displayTimer, setDisplayTimer] = useState("");
+  const [firstInput, setFirstInput] = useState(true);
   const formRef = useRef(null);
-  const inputRef = useRef(null);
 
   // o————————————————————————————————————o form height —>
   //
@@ -47,6 +47,7 @@ export default function Home() {
   }, []);
 
   // o————————————————————————————————————o timer —>
+  //
   //   const minutesLabel = document.getElementById("minutes");
   //   const secondsLabel = document.getElementById("seconds");
   let totalSeconds = 0;
@@ -57,26 +58,28 @@ export default function Home() {
     // minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
   };
 
-  const pad = (val) => {
-    let valString = val + "";
-    if (valString.length < 2) {
-      return "0" + valString;
-    } else {
-      return valString;
-    }
-  };
-  // <label id="minutes">00</label>:<label id="seconds">00</label>
-
+  // o————————————————————————————————————o placeholder —>
+  //
   const hidePlaceholder = () => {
     setPlaceholderVisible(false);
   };
 
-  // focus on input when user presses any key
+  // also, focus on input when user presses any key
   //
-  addEventListener("keydown", (event) => formRef.current.focus());
+  const setFocus = () => {
+    if (firstInput) {
+      formRef.current.focus();
+      setFirstInput(false);
+    }
+  };
+  useEffect(() => {
+    addEventListener("keydown", (event) => {
+      setFocus();
+    });
+  }, []);
 
-  const handleChange = (e) => {
-    // key 13 is enter
+  const submitPrompt = (e) => {
+    // key 13 is enter is key 13 is enter is key 13 is enter
     if (e.which === 13) {
       e.preventDefault();
       setSpinnerVisible(true);
@@ -84,6 +87,8 @@ export default function Home() {
       setInterval(setTime, 1000);
       setGptReferences([]);
 
+      const inputElement =
+        document.getElementsByClassName("prompt-form__input")[0];
       inputElement.blur();
 
       console.log(inputElement.innerHTML);
@@ -93,8 +98,10 @@ export default function Home() {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
-          timeout: 0,
+        .post("https://127.0.0.1:8000/api/prompt", newPrompt, {
+          // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
+          // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
+          timeout: 90000,
           headers: {
             "Content-Type": "application/json",
           },
@@ -158,7 +165,7 @@ export default function Home() {
             contentEditable={true}
             suppressContentEditableWarning={true}
             onFocus={hidePlaceholder}
-            onKeyDown={handleChange}
+            onKeyDown={submitPrompt}
             tabIndex="0"
             ref={formRef}
           >

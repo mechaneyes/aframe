@@ -108,6 +108,10 @@ app = FastAPI()
 origins = [
     "http://localhost:3000/",
     "http://localhost:3000",
+    "https://eyesee.digital/",
+    "https://eyesee.digital",
+    "https://api.eyesee.digital:8000/",
+    "https://api.eyesee.digital:8000",
 ]
 
 app.add_middleware(

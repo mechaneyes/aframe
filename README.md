@@ -49,6 +49,9 @@ https://tecadmin.net/apache-frontend-proxy-nodejs/
 />
 ```
 
+### metadata in <head>
+
+https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 
 
 <br /><br /><br />

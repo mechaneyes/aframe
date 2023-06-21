@@ -9,8 +9,26 @@ python -m uvicorn api.index:app --host 0.0.0.0 --port 443 --workers 4
 uvicorn api.index:app --host 0.0.0.0 --port 8080 --workers 4
 uvicorn api.index:app --host 0.0.0.0 --port 8443 --workers 4
 uvicorn api.index:app --host 127.0.0.1 --port 443 --workers 4
+uvicorn api.index:app --host 127.0.0.1 --port 443 --workers 4
 
-$ sudo update-alternatives --config python3
+gunicorn -k uvicorn.workers.UvicornWorker
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker
+
+
+
+
+
+
+gunicorn api.index:app  --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:80
+
+
+
+
+gunicorn --keyfile=/etc/letsencrypt/live/eyesee.digital-0001/privkey.pem --certfile=/etc/letsencrypt/live/eyesee.digital-0001/fullchain.pem -k uvicorn.workers.UvicornWorker api.index:app
+
+
+uvicorn api.index:app --host 127.0.0.1 --port 8000 --ssl-certfile /etc/letsencrypt/live/eyesee.digital-0001/fullchain.pem --ssl-keyfile /etc/letsencrypt/live/eyesee.digital-0001/privkey.pem
+
 
 
 sudo lsof -t -i tcp:443 | xargs kill -9
