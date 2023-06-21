@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import pinecone
 from langchain.chat_models import ChatOpenAI
+from langchain.chains import LLMChain
+from langchain.llms import OpenAI
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain import PromptTemplate
@@ -99,10 +101,6 @@ app = FastAPI()
 origins = [
     "http://localhost:3000/",
     "http://localhost:3000",
-    "https://eyesee.digital/",
-    "https://eyesee.digital",
-    "https://api.eyesee.digital:8000/",
-    "https://api.eyesee.digital:8000",
 ]
 
 app.add_middleware(
