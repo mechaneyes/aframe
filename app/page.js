@@ -73,79 +73,91 @@ export default function Home() {
     });
   }, [firstInput]);
 
-  const submitPrompt = (e) => {
-    // key 13 is enter is key 13 is enter is key 13 is enter
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      setSpinnerVisible(true);
-      setPromptSubmitted(true);
-      setInterval(setTime, 1000);
-      setGptReferences([]);
+  // o————————————————————————————————————o api, waves hands —>
+  //
+  const makeRequest = () => {
+    setSpinnerVisible(true);
+    setPromptSubmitted(true);
+    setInterval(setTime, 1000);
+    setGptReferences([]);
 
-      const inputElement =
-        document.getElementsByClassName("prompt-form__input")[0];
-      inputElement.blur();
+    const inputElement =
+      document.getElementsByClassName("prompt-form__input")[0];
+    inputElement.blur();
 
-      console.log(inputElement.innerHTML);
+    console.log('inputElement.innerHTML', inputElement.innerHTML);
 
-      const newPrompt = {
-        prompt: inputElement.innerHTML,
-      };
+    const newPrompt = {
+      prompt: inputElement.innerHTML,
+    };
 
-      axios
-        .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
-          // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
-          // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
-          timeout: 90000,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log("responseJson", response);
+    axios
+      .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
+        // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
+        // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
+        timeout: 90000,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("responseJson", response);
 
-          setGptFreestyle(response.data[0]);
+        setGptFreestyle(response.data[0]);
 
-          ((response) => {
-            const newResponses = response.data[1].filter((item) => {
-              if (!seenIds.has(item.metadata.reviewid)) {
-                seenIds.add(item.metadata.reviewid);
-                return true;
-              }
-              return false;
-            });
+        ((response) => {
+          const newResponses = response.data[1].filter((item) => {
+            if (!seenIds.has(item.metadata.reviewid)) {
+              seenIds.add(item.metadata.reviewid);
+              return true;
+            }
+            return false;
+          });
 
-            const newChatResponse = newResponses.map((item, index) => (
-              <div
-                key={`${item.metadata.reviewid}-${index}`}
-                className="response__reference"
-              >
-                {/* <p>{item.page_content}</p> */}
-                <a href={item.metadata.url}>{item.metadata.url}</a>
-              </div>
-            ));
-            setSeenIds(seenIds);
+          const newChatResponse = newResponses.map((item, index) => (
+            <div
+              key={`${item.metadata.reviewid}-${index}`}
+              className="response__reference"
+            >
+              {/* <p>{item.page_content}</p> */}
+              <a href={item.metadata.url}>{item.metadata.url}</a>
+            </div>
+          ));
+          setSeenIds(seenIds);
 
-            setGptReferences((gptReferences) => [
-              ...gptReferences,
-              ...newChatResponse,
-            ]);
-            setSpinnerVisible(false);
-            setPromptSubmitted(false);
-          })(response);
-        })
-        .then(() => {
-          setTriggerDisplay(!triggerDisplay);
-          clearInterval(setTime);
-          console.log("totalSeconds", totalSeconds);
-          setDisplayTimer(totalSeconds + "s");
-          setIntroVisible(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+          setGptReferences((gptReferences) => [
+            ...gptReferences,
+            ...newChatResponse,
+          ]);
+          setSpinnerVisible(false);
+          setPromptSubmitted(false);
+        })(response);
+      })
+      .then(() => {
+        setTriggerDisplay(!triggerDisplay);
+        clearInterval(setTime);
+        console.log("totalSeconds", totalSeconds);
+        setDisplayTimer(totalSeconds + "s");
+        setIntroVisible(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+  // o————————————————————————————————————o trigger request —>
+  //
+  if (formRef.current) {
+    formRef.current.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        makeRequest()
+      } else if (e.keyCode === 13) {
+        e.preventDefault();
+        makeRequest()
+      }
+    });
+  }
 
   return (
     <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
@@ -160,7 +172,7 @@ export default function Home() {
             contentEditable={true}
             suppressContentEditableWarning={true}
             onFocus={hidePlaceholder}
-            onKeyDown={submitPrompt}
+            // onKeyDown={makeRequest}
             tabIndex="0"
             ref={formRef}
           >
