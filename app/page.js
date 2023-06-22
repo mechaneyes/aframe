@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import axios from "axios";
 
@@ -62,7 +61,7 @@ export default function Home() {
     setPlaceholderVisible(false);
   };
 
-  // also, focus on input when user presses any key
+  // focus on input when first key is pressed
   //
   useEffect(() => {
     addEventListener("keydown", (event) => {
@@ -85,16 +84,14 @@ export default function Home() {
       document.getElementsByClassName("prompt-form__input")[0];
     inputElement.blur();
 
-    console.log('inputElement.innerHTML', inputElement.innerHTML);
+    console.log(inputElement.innerHTML);
 
     const newPrompt = {
       prompt: inputElement.innerHTML,
     };
 
     axios
-      .post("https://127.0.0.1:8000/api/prompt", newPrompt, {
-        // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
-        // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
+      .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +116,6 @@ export default function Home() {
               key={`${item.metadata.reviewid}-${index}`}
               className="response__reference"
             >
-              {/* <p>{item.page_content}</p> */}
               <a href={item.metadata.url}>{item.metadata.url}</a>
             </div>
           ));
@@ -136,7 +132,6 @@ export default function Home() {
       .then(() => {
         setTriggerDisplay(!triggerDisplay);
         clearInterval(setTime);
-        console.log("totalSeconds", totalSeconds);
         setDisplayTimer(totalSeconds + "s");
         setIntroVisible(false);
       })
@@ -147,17 +142,22 @@ export default function Home() {
 
   // o————————————————————————————————————o trigger request —>
   //
-  if (formRef.current) {
-    formRef.current.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.keyCode === 13) {
-        e.preventDefault();
-        makeRequest()
-      // } else if (e.keyCode === 13) {
-      //   e.preventDefault();
-      //   makeRequest()
-      }
-    });
-  }
+  useEffect(() => {
+    const inputElement =
+      document.getElementsByClassName("prompt-form__input")[0];
+    if (inputElement) {
+      const submitHandler = (e) => {
+        if (e.key === "Enter" || e.keyCode === 13) {
+          e.preventDefault();
+          makeRequest();
+
+          inputElement.removeEventListener("keydown", submitHandler);
+        }
+      };
+      inputElement.addEventListener("keydown", submitHandler);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
@@ -172,7 +172,6 @@ export default function Home() {
             contentEditable={true}
             suppressContentEditableWarning={true}
             onFocus={hidePlaceholder}
-            // onKeyDown={makeRequest}
             tabIndex="0"
             ref={formRef}
           >
@@ -224,14 +223,11 @@ export default function Home() {
           potentially writing pleasure.
         </p>
         <p>
-          This is an MVP, so please pardon the dust. Keep in mind the app is
-          fairly slow atm.
+          This is an MVP, so please pardon the dust. The app runs a bit slowly
+          atm.
         </p>
         <p>
-          So feel free to get creative in your prompting. I&apos;m repeatedly
-          and pleasantly surprised with the app&apos;s flexibility.
-        </p>
-        <p>
+          Feedback is welcome:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div className="introduction__image">
