@@ -92,7 +92,7 @@ export default function Home() {
     };
 
     axios
-      .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
+      .post("https://127.0.0.1:8000/api/prompt", newPrompt, {
         // .post("https://api.eyesee.digital:8000/api/prompt", newPrompt, {
         // .post("https://0.0.0.0:8000/api/prompt", newPrompt, {
         timeout: 90000,
@@ -149,12 +149,12 @@ export default function Home() {
   //
   if (formRef.current) {
     formRef.current.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || e.keyCode === 13) {
         e.preventDefault();
         makeRequest()
-      } else if (e.keyCode === 13) {
-        e.preventDefault();
-        makeRequest()
+      // } else if (e.keyCode === 13) {
+      //   e.preventDefault();
+      //   makeRequest()
       }
     });
   }
