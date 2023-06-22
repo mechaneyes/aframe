@@ -8,13 +8,14 @@
 }
 
 .thirdeyes {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 1rem;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+
+  @include bp('xsmall') {
+    padding: 0 2rem;
+  }
 
   h1 {
     margin: 0 0 1rem 0;
@@ -70,7 +71,11 @@
         width: 100%;
         max-width: 650px;
         margin: auto;
-        padding: 0 2rem;
+        padding: 0 1rem;
+
+        @include bp('xsmall') {
+          padding: 0 2rem;
+        }
 
         @media (min-width: 720px) {
             padding: 0;
@@ -125,7 +130,7 @@
     margin-top: calc(var(--prompt-form-height) + 1rem);
 
     h1 {
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
 
     &--hidden {
@@ -152,7 +157,7 @@
     }
   }
 
-  // o————————————————————————————————————o beep beep —>
+  // o————————————————————————————————————o spinner —>
   //
   .spinner {
     $ripple-position: 18px;
@@ -161,7 +166,7 @@
 
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 0;
 
     .timer {
       margin: 0;
@@ -179,7 +184,6 @@
     }
 
     &.lds-ripple {
-      //   display: inline-block;
       position: relative;
       width: $ripple-size-1;
       height: $ripple-size-1;
