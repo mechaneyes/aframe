@@ -20,6 +20,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker
 
 
 gunicorn api.index:app  --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:80
+gunicorn api.index:app  --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8000
 
 
 
