@@ -77,7 +77,7 @@ export default function Home() {
   const makeRequest = () => {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
-    setInterval(setTime, 1000);
+    const responseTimer = setInterval(setTime, 1000);
     setGptReferences([]);
 
     const inputElement =
@@ -137,8 +137,9 @@ export default function Home() {
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         setTriggerDisplay(!triggerDisplay);
-        clearInterval(setTime);
         setDisplayTimer(totalSeconds + "s");
+        clearInterval(responseTimer);
+        totalSeconds = 0;
         setIntroVisible(false);
       })
       .catch((error) => {
