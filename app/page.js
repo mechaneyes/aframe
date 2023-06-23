@@ -91,7 +91,9 @@ export default function Home() {
     };
 
     axios
-      .post("http://127.0.0.1:8000/api/prompt", newPrompt, {
+      // .post("http://127.0.0.1:5000/prompt", newPrompt, {
+      // .post("http://localhost:3000/api/prompt", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -100,36 +102,40 @@ export default function Home() {
       .then((response) => {
         console.log("responseJson", response);
 
-        setGptFreestyle(response.data[0]);
+        setGptFreestyle(response.data);
 
-        ((response) => {
-          const newResponses = response.data[1].filter((item) => {
-            if (!seenIds.has(item.metadata.reviewid)) {
-              seenIds.add(item.metadata.reviewid);
-              return true;
-            }
-            return false;
-          });
+        // setGptFreestyle(response.data[0]);
 
-          const newChatResponse = newResponses.map((item, index) => (
-            <div
-              key={`${item.metadata.reviewid}-${index}`}
-              className="response__reference"
-            >
-              <a href={item.metadata.url}>{item.metadata.url}</a>
-            </div>
-          ));
-          setSeenIds(seenIds);
+        // ((response) => {
+        //   const newResponses = response.data[1].filter((item) => {
+        //     if (!seenIds.has(item.metadata.reviewid)) {
+        //       seenIds.add(item.metadata.reviewid);
+        //       return true;
+        //     }
+        //     return false;
+        //   });
 
-          setGptReferences((gptReferences) => [
-            ...gptReferences,
-            ...newChatResponse,
-          ]);
-          setSpinnerVisible(false);
-          setPromptSubmitted(false);
-        })(response);
+        //   const newChatResponse = newResponses.map((item, index) => (
+        //     <div
+        //       key={`${item.metadata.reviewid}-${index}`}
+        //       className="response__reference"
+        //     >
+        //       <a href={item.metadata.url}>{item.metadata.url}</a>
+        //     </div>
+        //   ));
+        //   setSeenIds(seenIds);
+
+        //   setGptReferences((gptReferences) => [
+        //     ...gptReferences,
+        //     ...newChatResponse,
+        //   ]);
+        //   setSpinnerVisible(false);
+        //   setPromptSubmitted(false);
+        // })(response);
       })
       .then(() => {
+        setSpinnerVisible(false);
+        setPromptSubmitted(false);
         setTriggerDisplay(!triggerDisplay);
         clearInterval(setTime);
         setDisplayTimer(totalSeconds + "s");
@@ -243,6 +249,11 @@ export default function Home() {
       </section>
 
       <div className="response__container">
+        <h1 className="introduction__title">Third Eyes</h1>
+        <p>
+          Feedback is welcome:{" "}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+        </p>
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
