@@ -159,6 +159,7 @@ export default function Home() {
 
           inputElement.removeEventListener("keydown", submitHandler);
         }
+        inputElement.addEventListener("keydown", submitHandler);
       };
       inputElement.addEventListener("keydown", submitHandler);
     }
@@ -232,7 +233,7 @@ export default function Home() {
           This is an MVP, so please pardon the dust. The app runs a bit slowly
           atm.
         </p>
-        <p>
+        <p className="introduction__feedback">
           Feedback is welcome:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
@@ -248,9 +249,15 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="response__container">
+      <section
+        className={
+          introVisible
+            ? "response__container response__container--hidden"
+            : "response__container response__container--visible"
+        }
+      >
         <h1 className="introduction__title">Third Eyes</h1>
-        <p>
+        <p className="introduction__feedback">
           Feedback is welcome:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
@@ -261,7 +268,7 @@ export default function Home() {
         <br />
         <br />
         <div className="response response--references">{gptReferences}</div>
-      </div>
+      </section>
     </main>
   );
 }

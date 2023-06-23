@@ -1,6 +1,6 @@
-@import 'https://use.typekit.net/amb7lhn.css';
-@import './typography';
-@import 'mixins';
+@import "https://use.typekit.net/amb7lhn.css";
+@import "./typography";
+@import "mixins";
 
 :root {
   --prompt-form-height: auto;
@@ -13,7 +13,7 @@
     Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 
-  @include bp('xsmall') {
+  @include bp("xsmall") {
     padding: 0 2rem;
   }
 
@@ -36,15 +36,15 @@
     border-bottom: 1px solid white;
   }
 
-//   .image {
-//     &--full-width {
-//       width: 100%;
-//     }
+  //   .image {
+  //     &--full-width {
+  //       width: 100%;
+  //     }
 
-//     &--16x9 {
-//         aspect-ratio: 16 / 9;
-//     }
-//   }
+  //     &--16x9 {
+  //         aspect-ratio: 16 / 9;
+  //     }
+  //   }
 
   .prompt-form {
     display: flex;
@@ -65,23 +65,21 @@
     }
 
     &__centered {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 650px;
-        margin: auto;
-        padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 650px;
+      margin: auto;
+      padding: 0 1rem;
 
-        @include bp('xsmall') {
-          padding: 0 2rem;
-        }
+      @include bp("xsmall") {
+        padding: 0 2rem;
+      }
 
-        @media (min-width: 720px) {
-            padding: 0;
-        }
-
-        
+      @media (min-width: 720px) {
+        padding: 0;
+      }
     }
 
     &__input {
@@ -121,16 +119,17 @@
   }
 
   .hello {
-    padding-left: calc(var(--distance-from-left) - 0.8rem)
+    padding-left: calc(var(--distance-from-left) - 0.8rem);
   }
 
   .introduction {
     display: block;
+    width: 100%;
     max-width: 650px;
     margin-top: calc(var(--prompt-form-height) + 1rem);
 
     h1 {
-        margin-top: 0.5rem;
+      margin-top: 0.5rem;
     }
 
     &--hidden {
@@ -138,16 +137,21 @@
     }
 
     &__image {
-        margin-top: 2rem;
+      margin-top: 2rem;
     }
   }
 
   .response {
     &__container {
+      display: block;
       width: 100%;
       max-width: 650px;
       margin-top: calc(var(--prompt-form-height) + 1rem);
       padding-bottom: 2rem;
+
+      &--hidden {
+        display: none;
+      }
     }
 
     &__reference {
@@ -177,7 +181,7 @@
       &--visible {
         visibility: visible;
       }
-      
+
       &--hidden {
         visibility: hidden;
       }
