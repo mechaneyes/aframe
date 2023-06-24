@@ -227,12 +227,12 @@ export default function Home() {
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__description">
           Third Eyes allows you to query a knowledge base built from 18,393
-          Pitchfork reviews. It'll surface inspiration and references for your
+          Pitchfork reviews. It&apos;ll surface inspiration and references for your
           listening, and potentially writing pleasure.
         </p>
         <p>
           The app is built utilizing quite a few technologies including
-          Langchain, OpenAI's GPT-3.5 and Embeddings models, a Pinecone vector
+          Langchain, OpenAI&apos;s GPT-3.5 and Embeddings models, a Pinecone vector
           database and Next.js.
         </p>
         <p className="introduction__feedback">
