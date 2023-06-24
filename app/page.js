@@ -102,36 +102,36 @@ export default function Home() {
       .then((response) => {
         console.log("responseJson", response);
 
-        setGptFreestyle(response.data);
+        // setGptFreestyle(response.data);
 
-        // setGptFreestyle(response.data[0]);
+        setGptFreestyle(response.data[0]);
 
-        // ((response) => {
-        //   const newResponses = response.data[1].filter((item) => {
-        //     if (!seenIds.has(item.metadata.reviewid)) {
-        //       seenIds.add(item.metadata.reviewid);
-        //       return true;
-        //     }
-        //     return false;
-        //   });
+        ((response) => {
+          const newResponses = response.data[1].filter((item) => {
+            if (!seenIds.has(item.reviewid)) {
+              seenIds.add(item.reviewid);
+              return true;
+            }
+            return false;
+          });
 
-        //   const newChatResponse = newResponses.map((item, index) => (
-        //     <div
-        //       key={`${item.metadata.reviewid}-${index}`}
-        //       className="response__reference"
-        //     >
-        //       <a href={item.metadata.url}>{item.metadata.url}</a>
-        //     </div>
-        //   ));
-        //   setSeenIds(seenIds);
+          const newChatResponse = newResponses.map((item, index) => (
+            <div
+              key={`${item.reviewid}-${index}`}
+              className="response__reference"
+            >
+              <a href={item.url}>{item.title}</a>
+            </div>
+          ));
+          setSeenIds(seenIds);
 
-        //   setGptReferences((gptReferences) => [
-        //     ...gptReferences,
-        //     ...newChatResponse,
-        //   ]);
-        //   setSpinnerVisible(false);
-        //   setPromptSubmitted(false);
-        // })(response);
+          setGptReferences((gptReferences) => [
+            ...gptReferences,
+            ...newChatResponse,
+          ]);
+          setSpinnerVisible(false);
+          setPromptSubmitted(false);
+        })(response);
       })
       .then(() => {
         setSpinnerVisible(false);
@@ -226,13 +226,14 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__description">
-          Third Eyes allows you to query a knowledge base of 18,393 Pitchfork
-          reviews, surfacing inspiration and references for your listening, and
-          potentially writing pleasure.
+          Third Eyes allows you to query a knowledge base built from 18,393
+          Pitchfork reviews. It'll surface inspiration and references for your
+          listening, and potentially writing pleasure.
         </p>
         <p>
-          This is an MVP, so please pardon the dust. The app runs a bit slowly
-          atm.
+          The app is built utilizing quite a few technologies including
+          Langchain, OpenAI's GPT-3.5 and Embeddings models, a Pinecone vector
+          database and Next.js.
         </p>
         <p className="introduction__feedback">
           Feedback is welcome:{" "}
@@ -266,8 +267,7 @@ export default function Home() {
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
         ></div>
-        <br />
-        <br />
+        <h2>References</h2>
         <div className="response response--references">{gptReferences}</div>
       </section>
     </main>
