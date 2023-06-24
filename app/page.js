@@ -77,22 +77,22 @@ export default function Home() {
   const makeRequest = () => {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
-    const responseTimer = setInterval(setTime, 1000);
     setGptReferences([]);
+    const responseTimer = setInterval(setTime, 1000);
 
     const inputElement =
       document.getElementsByClassName("prompt-form__input")[0];
-    inputElement.blur();
 
-    console.log(inputElement.innerHTML);
+    inputElement.blur();
 
     const newPrompt = {
       prompt: inputElement.innerHTML,
     };
 
+    console.log(inputElement.innerHTML);
+
     axios
       // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-      // .post("http://localhost:3000/api/prompt", newPrompt, {
       .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
@@ -101,8 +101,6 @@ export default function Home() {
       })
       .then((response) => {
         console.log("responseJson", response);
-
-        // setGptFreestyle(response.data);
 
         setGptFreestyle(response.data[0]);
 
@@ -136,11 +134,11 @@ export default function Home() {
       .then(() => {
         setSpinnerVisible(false);
         setPromptSubmitted(false);
+        setIntroVisible(false);
         setTriggerDisplay(!triggerDisplay);
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
-        setIntroVisible(false);
       })
       .catch((error) => {
         console.log(error);
@@ -162,6 +160,7 @@ export default function Home() {
         }
         inputElement.addEventListener("keydown", submitHandler);
       };
+      // 🐝 TODO: one of these should come out
       inputElement.addEventListener("keydown", submitHandler);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -226,17 +225,16 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__description">
-          Third Eyes allows you to query a knowledge base built from 18,393
-          Pitchfork reviews. It&apos;ll surface inspiration and references for your
-          listening, and potentially writing pleasure.
+          Third Eyes allows you to interrogate a knowledge base built from
+          18,393 Pitchfork reviews. Use it to surface insights and references
+          for both industry needs and personal music discovery.
         </p>
         <p>
-          The app is built utilizing quite a few technologies including
-          Langchain, OpenAI&apos;s GPT-3.5 and Embeddings models, a Pinecone vector
-          database and Next.js.
+          Some of the technologies leveraged include Langchain, OpenAI&apos;s
+          GPT-3.5 and Embeddings models, Pinecone and Next.js.
         </p>
         <p className="introduction__feedback">
-          Feedback is welcome:{" "}
+          Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div className="introduction__image">
@@ -260,7 +258,7 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__feedback">
-          Feedback is welcome:{" "}
+          Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div
