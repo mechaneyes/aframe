@@ -19,7 +19,7 @@ export const metadata = {
       //   height: 600,
       // },
       {
-        url: 'https://nextjs.org/og-alt.png',
+        url: 'https://hearincolor.com/_next/image?url=%2Fthird-eyes-og.jpg&w=1200&q=75',
         width: 1200,
         height: 630,
         alt: 'ThirdEyes via HearInColor',
