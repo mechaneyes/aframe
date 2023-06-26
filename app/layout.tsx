@@ -4,6 +4,7 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata = {
   title: 'ThirdEyes',
   description: 'Interrogate Pitchfork Reviews via GPT-3.5',
@@ -13,11 +14,6 @@ export const metadata = {
     url: 'https://hearincolor.com',
     siteName: 'ThirdEyes',
     images: [
-      // {
-      //   url: 'https://nextjs.org/og.png',
-      //   width: 800,
-      //   height: 600,
-      // },
       {
         url: 'https://hearincolor.com/_next/image?url=%2Fthird-eyes-og.jpg&w=1200&q=75',
         width: 1200,

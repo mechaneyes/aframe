@@ -225,13 +225,13 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes</h1>
         <p className="introduction__description">
-          Third Eyes allows you to interrogate a knowledge base built from
-          18,393 Pitchfork reviews. Use it to surface insights and references
-          for both industry needs and personal music discovery.
+          Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
+          use it to surface insights and references for both industry needs and
+          personal music discovery.
         </p>
         <p>
-          Some of the technologies leveraged include Langchain, OpenAI&apos;s
-          GPT-3.5 and Embeddings models, Pinecone and Next.js.
+          Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
+          and Embeddings models, Pinecone and Next.js.
         </p>
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
