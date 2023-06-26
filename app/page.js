@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import axios from "axios";
 
@@ -237,6 +238,9 @@ export default function Home() {
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
+        <p>
+          <Link href="/about">About</Link>
+        </p>
         <div className="introduction__image">
           <Image
             src="/party-pic-1024px-1.0.1.jpg"
@@ -256,7 +260,9 @@ export default function Home() {
             : "response__container response__container--visible"
         }
       >
-        <h1 className="introduction__title">Third Eyes</h1>
+        <Link href="/">
+          <h1 className="introduction__title">Third Eyes</h1>
+        </Link>
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
