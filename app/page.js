@@ -46,7 +46,7 @@ export default function Home() {
     updateResponseContainerHeight();
   }, []);
 
-  // o————————————————————————————————————o timer —>
+  // o————————————————————————————————————o query timer —>
   //
   let totalSeconds = 0;
 
@@ -62,7 +62,24 @@ export default function Home() {
     setPlaceholderVisible(false);
   };
 
-  // focus on input when first key is pressed
+  // typewriter animation on load
+  //
+  useEffect(() => {
+    let i = 0;
+    const copy = "start your music exploration here: ";
+    const speed = 50;
+    function writeTyper() {
+      if (i < copy.length) {
+        document.querySelector(".hello__typewriter").innerHTML +=
+          copy.charAt(i);
+        i++;
+        setTimeout(writeTyper, speed);
+      }
+    }
+    writeTyper();
+  }, []);
+
+  // focus on input first keypress & || header click
   //
   useEffect(() => {
     addEventListener("keydown", (event) => {
@@ -71,6 +88,15 @@ export default function Home() {
         setFirstInput(false);
       }
     });
+
+    document
+      .querySelector(".prompt-form__centered")
+      .addEventListener("click", (event) => {
+        if (firstInput) {
+          formRef.current.focus();
+          setFirstInput(false);
+        }
+      });
   }, [firstInput]);
 
   // o————————————————————————————————————o api, waves hands —>
@@ -93,8 +119,8 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
+      .post("http://127.0.0.1:5000/prompt", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +211,8 @@ export default function Home() {
           >
             {placeholderVisible ? (
               <div className="hello">
-                hello<div className="prompt-form__cursor"></div>
+                <div className="hello__typewriter"></div>
+                <div className="prompt-form__cursor"></div>
               </div>
             ) : (
               content
