@@ -35,9 +35,9 @@ export default function Page() {
             While I&apos;m not a data scientist at this point, I&apos;ve
             successfully leveraged a lot of related technologies in service of
             Third Eyes&apos; production. I&apos;m concurrently immersed in
-            learning Python while keeping up with the latest developments in AI.
-            Once I feel I&apos;ve got a good grasp on Python, I&apos;ll be able
-            to dive deeper into the data science side of things.
+            learning Python, and once I feel I&apos;ve got a solid grasp on it,
+            I&apos;ll be able to dive deeper into the data science side of
+            things.
           </p>
           <p>
             The dataset used was built over the winter of 2016-2017, so
@@ -46,8 +46,8 @@ export default function Page() {
             <a href="https://www.kaggle.com/datasets/nolanbconaway/24169-pitchfork-reviews">
               24,169 Pitchfork Reviews
             </a>
-            . I plan on using the scraper he built to get the latest reviews
-            myself.
+            . I plan on using the scraper he built to get even more recent
+            reviews on my own.
           </p>
           <p>
             For more of the technical backstory check this WinterWerk post:{" "}

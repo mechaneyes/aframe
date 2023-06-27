@@ -3,15 +3,27 @@
 @import "mixins";
 
 :root {
-  --prompt-form-height: auto;
+  --prompt-form-height: 53px;
   --distance-from-left: auto;
 }
+
+$formaWeight: (
+  "thin": 200,
+  "xlight": 300,
+  "light": 400,
+  "regular": 500,
+  "medium": 600,
+  "bold": 700,
+) !default;
 
 .thirdeyes {
   padding: 0 1rem;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+  // font-family: "forma-djr-deck", sans-serif;
+  font-family: "noka", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 
   @include bp("xsmall") {
     padding: 0 2rem;
@@ -20,9 +32,7 @@
   h1 {
     margin: 0.5rem 0 1rem 0;
     font-size: 2.2rem;
-    font-family: "tachyon", sans-serif;
-    font-weight: 100;
-    font-style: normal;
+    font-weight: 300;
   }
 
   h2 {
@@ -32,8 +42,9 @@
 
   p {
     margin: 0 0 1rem 0;
-    // font-weight: 100;
+    font-weight: 300;
     font-size: 1.1rem;
+    letter-spacing: 0.09rem;
     line-height: 1.7rem;
   }
 
@@ -41,16 +52,8 @@
     border-bottom: 1px solid white;
   }
 
-  //   .image {
-  //     &--full-width {
-  //       width: 100%;
-  //     }
-
-  //     &--16x9 {
-  //         aspect-ratio: 16 / 9;
-  //     }
-  //   }
-
+  // o————————————————————————————————————o prompt form —>
+  //
   .prompt-form {
     display: flex;
     justify-content: space-between;
@@ -59,6 +62,8 @@
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 53px;
+    @include input-mono(100);
     font-size: 1rem;
     color: white;
     background-color: #414141;
@@ -66,6 +71,7 @@
     border-bottom: 1px solid white;
 
     &--submitted {
+      font-weight: 100;
       font-style: italic;
     }
 
@@ -128,6 +134,8 @@
     padding-left: calc(var(--distance-from-left) - 0.8rem);
   }
 
+  // o————————————————————————————————————o introduction —>
+  //
   .introduction {
     display: block;
     width: 100%;
@@ -143,6 +151,8 @@
     }
   }
 
+  // o————————————————————————————————————o returned —>
+  //
   .response {
     &__container {
       display: block;
@@ -250,6 +260,10 @@
   &--about {
     .response__container {
       margin-top: 69px;
+    }
+
+    .prompt-form {
+      font-family: "noka", sans-serif;
     }
   }
 }

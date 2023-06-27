@@ -24,3 +24,33 @@ $breakpoints: (
           + "Available breakpoints are: #{map-keys($breakpoints)}.";
   }
 }
+
+// o————————————————————————————————————o input mono weights —>
+//
+$inputWeight: (
+  "thin": 100,
+  "xlight": 200,
+  "light": 300,
+  "regular": 400,
+) !default;
+
+@mixin input-mono($inputWeight) {
+  font-family: "input-mono", monospace;
+  font-weight: $inputWeight;
+  font-style: normal;
+}
+
+$formaWeight: (
+  "thin": 200,
+  "xlight": 300,
+  "light": 400,
+  "regular": 500,
+  "medium": 600,
+  "bold": 700,
+) !default;
+
+@mixin forma($formaWeight) {
+  font-family: "forma-djr-deck", sans-serif;
+  font-weight: $formaWeight;
+  font-style: normal;
+}
