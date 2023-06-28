@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import axios from "axios";
 
 import "./styles/styles.scss";
@@ -66,7 +65,7 @@ export default function Home() {
   //
   useEffect(() => {
     let i = 0;
-    const copy = "start your music exploration here: ";
+    const copy = "start your exploration here: ";
     const speed = 50;
     function writeTyper() {
       if (i < copy.length) {
@@ -276,6 +275,7 @@ export default function Home() {
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
             alt="Party Pic"
+            priority
           />
         </div>
       </section>
