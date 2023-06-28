@@ -119,8 +119,8 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-        .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
+      .post("http://127.0.0.1:5000/prompt", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
