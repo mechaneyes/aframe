@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import axios from "axios";
 
-import "./styles/styles.scss";
+// import "./styles/styles.scss";
 
 export default function Home() {
   const [content, setContent] = useState([]);
