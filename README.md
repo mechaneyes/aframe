@@ -11,15 +11,16 @@
 
 # mechaneyes notes
 
-## fastapi-async-langchain 0.5.4
+## imaging
 
-https://pypi.org/project/fastapi-async-langchain/0.5.4/
+### stability api
+https://platform.stability.ai/rest-api#tag/v1generation/operation/textToImage
 
-https://github.com/ajndkr/lanarky/blob/main/examples/README.md
+https://api.stability.ai/docs#tag/v1generation/operation/textToImage
 
 <br >
 
-### Install dependencies:
+## Install dependencies:
 
 ```zsh
 pip install -r requirements.txt

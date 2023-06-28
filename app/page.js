@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
+import { stability } from "./stability";
+
 import "./styles/styles.scss";
 
 export default function Home() {
@@ -20,6 +22,24 @@ export default function Home() {
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
   const formRef = useRef(null);
+
+  useEffect(() => {
+    stability();
+
+    // imageKeys.forEach((key) => {
+    //   const url = sessionStorage.getItem(key);
+    //   const img = document.createElement("img");
+    //   img.src = url;
+    // });
+
+    const imageData = sessionStorage.getItem("v1_txt2img_0.png");
+    const url = `data:image/png;base64,${imageData}`;
+
+    const debaser = sessionStorage.getItem('debaser');
+    const img = document.createElement("img");
+    img.src = debaser;
+    document.querySelector('.introduction').appendChild(img);
+  }, []);
 
   // o————————————————————————————————————o form height —>
   //
@@ -250,7 +270,9 @@ export default function Home() {
             : "introduction introduction--hidden"
         }
       >
-        <h1 className="introduction__title">Third Eyes</h1>
+        <h1 className="introduction__title" onClick={() => stability()}>
+          Third Eyes
+        </h1>
         <p className="introduction__description">
           Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
           use it to surface insights and references for both industry needs and

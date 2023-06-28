@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   rewrites: async () => {
@@ -13,4 +15,17 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
+
+module.exports = {
+  ...nextConfig,
+  webpack: (config, options) => {
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+        resource.request = resource.request.replace(/^node:/, "");
+      })
+    );
+    config.resolve.fallback = { fs: false };
+    return config;
+  },
+};
