@@ -259,8 +259,9 @@ export default function Home() {
       >
         <h1 className="introduction__title">Third Eyes v Stability AI</h1>
         <p className="introduction__feedback">
-          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>
-          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>{" "}
+          &middot; {" "}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <p className="introduction__description">
           In this application, we&apos;re working with multiple Large Language
