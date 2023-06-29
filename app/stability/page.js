@@ -121,8 +121,8 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      .post("http://127.0.0.1:5000/img", newPrompt, {
-        // .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
+      // .post("http://127.0.0.1:5000/img", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/img", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -130,11 +130,13 @@ export default function Home() {
       })
       .then((response) => {
         // o————————————————————————————————————o stability —>
+        // 
         console.log("responseJson", JSON.parse(response.data[2]));
         const imagePrompts = JSON.parse(response.data[2]);
         stability(imagePrompts.img_description_1);
 
         // o————————————————————————————————————o copy —>
+        // 
         setGptFreestyle(response.data[0]);
 
         ((response) => {

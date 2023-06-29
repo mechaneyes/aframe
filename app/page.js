@@ -79,27 +79,27 @@ export default function Home() {
     writeTyper();
   }, []);
 
+  // o————————————————————————————————————o focus —>
+  // 
   // focus on input first keypress & || header click
   //
   useEffect(() => {
-    addEventListener("keydown", (event) => {
-      if (firstInput) {
-        // formRef.current.focus();
+    if (firstInput) {
+      addEventListener("keydown", (event) => {
+        setPlaceholderVisible(false);
         document.querySelector(".prompt-form__input").focus();
         setFirstInput(false);
-      }
-    });
+      });
 
-    document
-      .querySelector(".prompt-form__centered")
-      .addEventListener("click", (event) => {
-        if (firstInput) {
-          // formRef.current.focus();
+      document
+        .querySelector(".prompt-form__centered")
+        .addEventListener("click", (event) => {
+            setPlaceholderVisible(false);
           document.querySelector(".prompt-form__input").focus();
           setFirstInput(false);
-        }
-      });
-  }, [firstInput]);
+        });
+    }
+  }, []);
 
   // o————————————————————————————————————o api, waves hands —>
   //
@@ -190,6 +190,21 @@ export default function Home() {
       // 🐝 TODO: one of these should come out
       inputElement.addEventListener("keydown", submitHandler);
     }
+
+    const examplePrompts = document.querySelectorAll(
+      ".introduction__example-prompts li"
+    );
+    const promptInput = document.querySelector(".prompt-form__input");
+    if (promptInput) {
+      examplePrompts.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          const promptText = event.target.textContent;
+          promptInput.innerHTML = promptText;
+          setFirstInput(false);
+          makeRequest();
+        });
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -205,7 +220,6 @@ export default function Home() {
             }
             contentEditable={true}
             suppressContentEditableWarning={true}
-            onFocus={hidePlaceholder}
             tabIndex="0"
             ref={formRef}
           >
@@ -263,16 +277,17 @@ export default function Home() {
         <p className="introduction__description">
           Interrogate a knowledge base built from 18,393 Pitchfork reviews. Use
           it to surface insights and references for both industry needs and
-          personal music discovery. Enter your prompt up top.
+          personal music discovery. Enter your prompt up top to begin.
         </p>
-        <p>Interacting with LLMs takes time. "Patience Daniel-son"</p>
+        <p>Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>
+            <li>Dissect Radiohead's Kid A</li>
             <li>What impact did Frankie Knuckles have on music and culture?</li>
             <li>Tell me about the band, Neu!</li>
-            <li>Why do people listen to house music?</li>
-            <li>What was the Northern Soul scene all about?</li>
+            <li>Break down footwork for me</li>
+            <li>What is the history of the Roland TR-808?</li>
           </ul>
         </div>
         {/* <p>

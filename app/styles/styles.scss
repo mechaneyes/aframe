@@ -17,7 +17,7 @@ $formaWeight: (
 ) !default;
 
 .thirdeyes {
-  padding: 0 1rem;
+  padding: 0 1rem 1rem;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
   // font-family: "forma-djr-deck", sans-serif;
@@ -26,7 +26,7 @@ $formaWeight: (
   font-style: normal;
 
   @include bp("xsmall") {
-    padding: 0 2rem;
+    padding: 0 2rem 2rem;
   }
 
   h1 {
@@ -182,17 +182,19 @@ $formaWeight: (
       margin-bottom: 2rem;
 
       ul {
-        // margin-left: 16px;
-        // list-style-type: circle;
+        margin-left: 16px;
+        list-style-type: circle;
       }
 
       li {
+        margin-bottom: 0.3rem;
         font-weight: 300;
         letter-spacing: 0.1rem;
-        line-height: 1.5rem;
+        line-height: 1.4rem;
+        cursor: pointer;
 
         &::before {
-          content: "🔊 ";
+          // content: "🔊 ";
         }
       }
     }
@@ -323,10 +325,15 @@ $formaWeight: (
 
     .stability-image {
       display: block;
-      width: 50%;
-      margin: 0 1rem 0 0;
+      width: 100%;
+      margin: 0 0 1rem;
       padding-top: 8px;
       float: left;
+
+      @include bp("small") {
+        width: 50%;
+        margin: 0 1rem 0 0;
+      }
     }
   }
 }
