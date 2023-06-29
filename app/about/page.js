@@ -55,6 +55,9 @@ export default function Page() {
               https://winterwerk.one/posts/thirdeyes-mvp
             </a>
           </p>
+          <p>
+            <Link href="/">Home</Link> &middot;{" "} <Link href="/stability">Labs</Link>
+          </p>
         </div>
       </section>
     </main>

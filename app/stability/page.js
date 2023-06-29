@@ -3,10 +3,11 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import axios from "axios";
 
-// import "./styles/styles.scss";
+import { stability } from "./stability";
+
+import "../styles/styles.scss";
 
 export default function Home() {
   const [content, setContent] = useState([]);
@@ -84,7 +85,8 @@ export default function Home() {
   useEffect(() => {
     addEventListener("keydown", (event) => {
       if (firstInput) {
-        formRef.current.focus();
+        // formRef.current.focus();
+        document.querySelector(".prompt-form__input").focus();
         setFirstInput(false);
       }
     });
@@ -93,7 +95,8 @@ export default function Home() {
       .querySelector(".prompt-form__centered")
       .addEventListener("click", (event) => {
         if (firstInput) {
-          formRef.current.focus();
+          // formRef.current.focus();
+          document.querySelector(".prompt-form__input").focus();
           setFirstInput(false);
         }
       });
@@ -119,7 +122,7 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      .post("http://127.0.0.1:5000/prompt", newPrompt, {
+      .post("http://127.0.0.1:5000/img", newPrompt, {
         // .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
@@ -127,8 +130,12 @@ export default function Home() {
         },
       })
       .then((response) => {
-        console.log("responseJson", response);
+        // o————————————————————————————————————o stability —>
+        console.log("responseJson", JSON.parse(response.data[2]));
+        const imagePrompts = JSON.parse(response.data[2]);
+        stability(imagePrompts.img_description_1);
 
+        // o————————————————————————————————————o copy —>
         setGptFreestyle(response.data[0]);
 
         ((response) => {
@@ -194,7 +201,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
+    <main className="thirdeyes thirdeyes--stability flex min-h-screen flex-col items-center justify-between p-8">
       <div className="prompt-form">
         <div className="prompt-form__centered">
           <div
@@ -251,22 +258,20 @@ export default function Home() {
             : "introduction introduction--hidden"
         }
       >
-        <h1 className="introduction__title">Third Eyes</h1>
+        <h1 className="introduction__title">Third Eyes v Stability AI</h1>
         <p className="introduction__description">
-          Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
-          use it to surface insights and references for both industry needs and
-          personal music discovery.
+          An experiment in using GPT-3 to generate prompts which are then mashed
+          up with the Stability API to generate corresponding imagery.
         </p>
         <p>
-          Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
-          and Embeddings models, Pinecone and Next.js.
-        </p>
-        <p className="introduction__feedback">
-          Feedback is appreciated:{" "}
-          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          Querying LLMs is slow. First you wait while the app works with GPT-3.
+          Then you wait some more while it talks to Stability's API. After many
+          moons you're blessed with the generated image. Please channel your
+          inner sloth.
         </p>
         <p>
-          <Link href="/about">About</Link>
+          <Link href="/about">About</Link> &middot; <Link href="/">Home</Link>{" "}
+          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div className="introduction__image">
           <Image
@@ -288,8 +293,11 @@ export default function Home() {
         }
       >
         <Link href="/">
-          <h1 className="introduction__title">Third Eyes</h1>
+          <h1 className="introduction__title">Third Eyes v Stability AI</h1>
         </Link>
+        <p>
+          <Link href="/">Home</Link>
+        </p>
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>

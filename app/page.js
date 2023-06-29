@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import axios from "axios";
 
 import "./styles/styles.scss";
@@ -84,7 +83,8 @@ export default function Home() {
   useEffect(() => {
     addEventListener("keydown", (event) => {
       if (firstInput) {
-        formRef.current.focus();
+        // formRef.current.focus();
+        document.querySelector(".prompt-form__input").focus();
         setFirstInput(false);
       }
     });
@@ -93,7 +93,8 @@ export default function Home() {
       .querySelector(".prompt-form__centered")
       .addEventListener("click", (event) => {
         if (firstInput) {
-          formRef.current.focus();
+          // formRef.current.focus();
+          document.querySelector(".prompt-form__input").focus();
           setFirstInput(false);
         }
       });
@@ -127,8 +128,6 @@ export default function Home() {
         },
       })
       .then((response) => {
-        console.log("responseJson", response);
-
         setGptFreestyle(response.data[0]);
 
         ((response) => {
@@ -244,6 +243,8 @@ export default function Home() {
         </div>
       </div>
 
+      {/* // o————————————————————————————————————o introduction —> */}
+      {/* // */}
       <section
         className={
           introVisible
@@ -251,7 +252,9 @@ export default function Home() {
             : "introduction introduction--hidden"
         }
       >
-        <h1 className="introduction__title">Third Eyes</h1>
+        <h1 className="introduction__title" onClick={() => stability()}>
+          Third Eyes
+        </h1>
         <p className="introduction__description">
           Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
           use it to surface insights and references for both industry needs and
@@ -259,14 +262,14 @@ export default function Home() {
         </p>
         <p>
           Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
-          and Embeddings models, Pinecone and Next.js.
+          and Embeddings models, the Stability.ai API, Pinecone and Next.js.
         </p>
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <p>
-          <Link href="/about">About</Link>
+          <Link href="/about">About</Link> &middot;{" "} <Link href="/stability">Labs</Link>
         </p>
         <div className="introduction__image">
           <Image
@@ -280,6 +283,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* // o————————————————————————————————————o response —> */}
+      {/* // */}
       <section
         className={
           introVisible
@@ -287,9 +292,12 @@ export default function Home() {
             : "response__container response__container--visible"
         }
       >
-        <Link href="/">
-          <h1 className="introduction__title">Third Eyes</h1>
-        </Link>
+        <h1
+          className="introduction__title"
+          onClick={() => window.location.reload(false)}
+        >
+          Third Eyes
+        </h1>
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
