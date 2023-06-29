@@ -146,6 +146,10 @@ $formaWeight: (
       display: none;
     }
 
+    &__title {
+      cursor: pointer;
+    }
+
     &__image {
       margin-top: 2rem;
     }
@@ -256,6 +260,9 @@ $formaWeight: (
       }
     }
   }
+  .stability-image {
+    display: none;
+  }
 
   &--about {
     .response__container {
@@ -264,6 +271,21 @@ $formaWeight: (
 
     .prompt-form {
       font-family: "noka", sans-serif;
+    }
+  }
+
+  &--stability {
+    .introduction {
+      &__image {
+        img {
+          filter: invert(1);
+        }
+      }
+    }
+
+    .stability-image {
+      display: block;
+      margin-bottom: 2rem;
     }
   }
 }
