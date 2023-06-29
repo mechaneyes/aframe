@@ -23,7 +23,9 @@ export default function Page() {
           <h1 className="introduction__title">Third Eyes</h1>
         </Link>
         <p className="introduction__feedback">
-          Feedback: <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/">Home</Link> &middot; {""}
+          <Link href="/stability">Labs</Link> &middot; {""}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <h2>About</h2>
         <div className="response response--references">
@@ -54,9 +56,6 @@ export default function Page() {
             <a href="https://winterwerk.one/posts/thirdeyes-mvp">
               https://winterwerk.one/posts/thirdeyes-mvp
             </a>
-          </p>
-          <p>
-            <Link href="/">Home</Link> &middot;{" "} <Link href="/stability">Labs</Link>
           </p>
         </div>
       </section>

@@ -121,7 +121,7 @@ export default function Home() {
 
     axios
       // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-        .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -255,6 +255,14 @@ export default function Home() {
         <h1 className="introduction__title" onClick={() => stability()}>
           Third Eyes
         </h1>
+        <p className="introduction__feedback">
+          <Link href="/stability">Labs</Link> &middot; {" "}
+          <Link href="/about">About</Link> 
+        </p>
+        <p className="introduction__feedback">
+          Feedback is appreciated:{" "}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+        </p>
         <p className="introduction__description">
           Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
           use it to surface insights and references for both industry needs and
@@ -263,13 +271,6 @@ export default function Home() {
         <p>
           Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
           and Embeddings models, the Stability.ai API, Pinecone and Next.js.
-        </p>
-        <p className="introduction__feedback">
-          Feedback is appreciated:{" "}
-          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
-        </p>
-        <p>
-          <Link href="/about">About</Link> &middot;{" "} <Link href="/stability">Labs</Link>
         </p>
         <div className="introduction__image">
           <Image
@@ -299,8 +300,8 @@ export default function Home() {
           Third Eyes
         </h1>
         <p className="introduction__feedback">
-          Feedback is appreciated:{" "}
-          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link> 
+          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div
           className="response response--creative"

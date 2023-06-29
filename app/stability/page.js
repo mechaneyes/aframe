@@ -259,19 +259,29 @@ export default function Home() {
         }
       >
         <h1 className="introduction__title">Third Eyes v Stability AI</h1>
-        <p className="introduction__description">
-          An experiment in using GPT-3 to generate prompts which are then mashed
-          up with the Stability API to generate corresponding imagery.
-        </p>
-        <p>
-          Querying LLMs is slow. First you wait while the app works with GPT-3.
-          Then you wait some more while it talks to Stability's API. After many
-          moons you're blessed with the generated image. Please channel your
-          inner sloth.
-        </p>
-        <p>
-          <Link href="/about">About</Link> &middot; <Link href="/">Home</Link>{" "}
+        <p className="introduction__feedback">
+          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>
           &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+        </p>
+        <p className="introduction__description">
+          In this application, we're working with multiple Large Language Models
+          (LLMs) to generate the music-related information you're after. We take
+          that information and distill it into prompts that are used to generate
+          images, providing a visual dimension to the generated content.
+        </p>
+        <p>
+          We use OpenAI's GPT-3 (the technology powering ChatGPT) to generate
+          the prompts for the images. Each prompt is carefully crafted based on
+          your input and the content generated. These prompts are then handed
+          over to the Stability API, which uses them to create the corresponding
+          images.
+        </p>
+        <p>
+          Remember, great things take time. The process starts with extracting
+          meaningful prompts from the GPT-3 output, and it doesn't end until the
+          Stability API crafts the final images. It might feel like many moons
+          have passed, so channel your inner sloth, sit back, and enjoy the
+          process.
         </p>
         <div className="introduction__image">
           <Image
@@ -295,12 +305,9 @@ export default function Home() {
         <Link href="/">
           <h1 className="introduction__title">Third Eyes v Stability AI</h1>
         </Link>
-        <p>
-          <Link href="/">Home</Link>
-        </p>
         <p className="introduction__feedback">
-          Feedback is appreciated:{" "}
-          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link> {'  '}
+          &middot; &nbsp; {'  '}<a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div
           className="response response--creative"

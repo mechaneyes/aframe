@@ -50,6 +50,10 @@ $formaWeight: (
 
   a {
     border-bottom: 1px solid white;
+
+    &:hover {
+      color: white;
+    }
   }
 
   // o————————————————————————————————————o prompt form —>
@@ -130,8 +134,23 @@ $formaWeight: (
     }
   }
 
+  // o————————————————————————————————————o randos —>
+  //
   .hello {
     padding-left: calc(var(--distance-from-left) - 0.8rem);
+  }
+
+  .introduction__feedback {
+    color: #9e9e9e;
+  }
+
+  // o————————————————————————————————————o header —>
+  //
+  .header {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    margin-top: calc(var(--prompt-form-height) + 1rem);
   }
 
   // o————————————————————————————————————o introduction —>
@@ -167,11 +186,6 @@ $formaWeight: (
 
       &--hidden {
         display: none;
-      }
-
-      .introduction__feedback {
-        margin-bottom: 1.4rem;
-        color: #9e9e9e;
       }
     }
 
@@ -277,6 +291,7 @@ $formaWeight: (
   &--stability {
     .introduction {
       &__image {
+        
         img {
           filter: invert(1);
         }
@@ -285,7 +300,10 @@ $formaWeight: (
 
     .stability-image {
       display: block;
-      margin-bottom: 2rem;
+      width: 50%;
+      margin: 0 1rem 2rem 0;
+      padding-top: 10px;
+      float: left;
     }
   }
 }
