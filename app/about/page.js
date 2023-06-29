@@ -12,9 +12,7 @@ export default function Page() {
       <section className="prompt-form">
         <div className="prompt-form__centered">
           <div className="prompt-form__input">
-            <div className="hello">
-              <Link href="/">Home</Link>
-            </div>
+            <div className="hello">{/* <Link href="/">Home</Link> */}</div>
           </div>
         </div>
       </section>
@@ -30,29 +28,29 @@ export default function Page() {
         <h2>About</h2>
         <div className="response response--references">
           <p>
-            Welcome. I&apos;m Ray Weitzenberg. Third Eyes is my first experiment
-            with building an AI leveraged application.
+            Welcome. I&apos;m Ray Weitzenberg, the creator of Third Eyes. This
+            application represents my first experiment with harnessing the power
+            of AI to generate music-related content and accompanying images.
           </p>
           <p>
-            While I&apos;m not a data scientist at this point, I&apos;ve
-            successfully leveraged a lot of related technologies in service of
-            Third Eyes&apos; production. I&apos;m concurrently immersed in
-            learning Python, and once I feel I&apos;ve got a solid grasp on it,
-            I&apos;ll be able to dive deeper into the data science side of
-            things.
+            While I may not hold the title of data scientist (yet!), the journey
+            of creating Third Eyes has allowed me to gain invaluable experience
+            with a variety of related technologies. I&apos;m currently immersing
+            myself in the world of Python, and I&apos;m eager to delve deeper
+            into data science once I&apos;ve tamed the snake.
           </p>
           <p>
-            The dataset used was built over the winter of 2016-2017, so
-            it&apos;s not the most current. Nolan Conaway, who built the
-            dataset, has a more recent version,{" "}
-            <a href="https://www.kaggle.com/datasets/nolanbconaway/24169-pitchfork-reviews">
-              24,169 Pitchfork Reviews
-            </a>
-            . I plan on using the scraper he built to get even more recent
-            reviews on my own.
+            The content generated in Third Eyes stems from a dataset built
+            during the winter of 2016-2017. Although it might not be the most
+            current, it&apos;s been a fantastic starting point for this project.
+            Nolan Conaway, who created the dataset has open sourced the scraper
+            he wrote to retrieve the content. I&apos;m looking forward to
+            utilizing his scraper to incorporate even more, and the most recent
+            reviews into Third Eyes.
           </p>
           <p>
-            For more of the technical backstory check this WinterWerk post:{" "}
+            For a more technical deep dive into the making of Third Eyes, check
+            out this post on WinterWerk:{" "}
             <a href="https://winterwerk.one/posts/thirdeyes-mvp">
               https://winterwerk.one/posts/thirdeyes-mvp
             </a>

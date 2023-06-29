@@ -59,6 +59,7 @@ export default function Home() {
   //
   const hidePlaceholder = () => {
     setPlaceholderVisible(false);
+    document.querySelector(".prompt-form__input").focus();
   };
 
   // typewriter animation on load

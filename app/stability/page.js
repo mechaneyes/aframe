@@ -53,14 +53,13 @@ export default function Home() {
 
   const setTime = () => {
     ++totalSeconds;
-    // secondsLabel.innerHTML = pad(totalSeconds % 60);
-    // minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
   };
 
   // o————————————————————————————————————o placeholder —>
   //
   const hidePlaceholder = () => {
     setPlaceholderVisible(false);
+    document.querySelector(".prompt-form__input").focus();
   };
 
   // typewriter animation on load
