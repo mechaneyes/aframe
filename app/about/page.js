@@ -50,10 +50,11 @@ export default function Page() {
           </p>
           <p>
             For a more technical deep dive into the making of Third Eyes, check
-            out this post on WinterWerk:{" "}
+            out{"  "}
             <a href="https://winterwerk.one/posts/thirdeyes-mvp">
-              https://winterwerk.one/posts/thirdeyes-mvp
+              this post on WinterWerk
             </a>
+            .
           </p>
         </div>
       </section>

@@ -257,18 +257,28 @@ export default function Home() {
           Third Eyes
         </h1>
         <p className="introduction__feedback">
-          <Link href="/stability">Labs</Link> &middot; {" "}
-          <Link href="/about">About</Link> 
+          <Link href="/stability">Labs</Link> &middot;{" "}
+          <Link href="/about">About</Link>
         </p>
         <p className="introduction__description">
-          Interrogate a knowledge base built from 18,393 Pitchfork reviews. And
-          use it to surface insights and references for both industry needs and
-          personal music discovery.
+          Interrogate a knowledge base built from 18,393 Pitchfork reviews. Use
+          it to surface insights and references for both industry needs and
+          personal music discovery. Enter your prompt up top.
         </p>
-        <p>
+        <p>Interacting with LLMs takes time. "Patience Daniel-son"</p>
+        <div className="introduction__example-prompts">
+          <h3>Example Prompts</h3>
+          <ul>
+            <li>What impact did Frankie Knuckles have on music and culture?</li>
+            <li>Tell me about the band, Neu!</li>
+            <li>Why do people listen to house music?</li>
+            <li>What was the Northern Soul scene all about?</li>
+          </ul>
+        </div>
+        {/* <p>
           Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
           and Embeddings models, the Stability.ai API, Pinecone and Next.js.
-        </p>
+        </p> */}
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
@@ -301,8 +311,9 @@ export default function Home() {
           Third Eyes
         </h1>
         <p className="introduction__feedback">
-          <Link href="/stability">Labs</Link> &middot; {" "} <Link href="/about">About</Link> 
-          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/stability">Labs</Link> &middot;{" "}
+          <Link href="/about">About</Link> &middot;{" "}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div
           className="response response--creative"

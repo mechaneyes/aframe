@@ -24,7 +24,7 @@ export async function stability(image_prompt: string) {
         ],
         cfg_scale: 7,
         clip_guidance_preset: "FAST_BLUE",
-        height: 512,
+        height: 320,
         width: 512,
         samples: 1,
         steps: 30,

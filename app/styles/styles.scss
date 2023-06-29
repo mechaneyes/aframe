@@ -40,6 +40,11 @@ $formaWeight: (
     font-size: 1.5rem;
   }
 
+  h3 {
+    margin: 2rem 0 0.5rem 0;
+    font-size: 1.3rem;
+  }
+
   p {
     margin: 0 0 1rem 0;
     font-weight: 300;
@@ -172,6 +177,25 @@ $formaWeight: (
     &__image {
       margin-top: 2rem;
     }
+
+    &__example-prompts {
+      margin-bottom: 2rem;
+
+      ul {
+        // margin-left: 16px;
+        // list-style-type: circle;
+      }
+
+      li {
+        font-weight: 300;
+        letter-spacing: 0.1rem;
+        line-height: 1.5rem;
+
+        &::before {
+          content: "🔊 ";
+        }
+      }
+    }
   }
 
   // o————————————————————————————————————o returned —>
@@ -291,7 +315,6 @@ $formaWeight: (
   &--stability {
     .introduction {
       &__image {
-        
         img {
           filter: invert(1);
         }
@@ -301,8 +324,8 @@ $formaWeight: (
     .stability-image {
       display: block;
       width: 50%;
-      margin: 0 1rem 2rem 0;
-      padding-top: 10px;
+      margin: 0 1rem 0 0;
+      padding-top: 8px;
       float: left;
     }
   }
