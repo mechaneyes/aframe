@@ -264,24 +264,25 @@ export default function Home() {
           &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <p className="introduction__description">
-          In this application, we're working with multiple Large Language Models
-          (LLMs) to generate the music-related information you're after. We take
-          that information and distill it into prompts that are used to generate
-          images, providing a visual dimension to the generated content.
+          In this application, we&apos;re working with multiple Large Language
+          Models (LLMs) to generate the music-related information you&apos;re
+          after. We take that information and distill it into prompts that are
+          used to generate images, providing a visual dimension to the generated
+          content.
         </p>
         <p>
-          We use OpenAI's GPT-3 (the technology powering ChatGPT) to generate
-          the prompts for the images. Each prompt is carefully crafted based on
-          your input and the content generated. These prompts are then handed
-          over to the Stability API, which uses them to create the corresponding
-          images.
+          We use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to
+          generate the prompts for the images. Each prompt is carefully crafted
+          based on your input and the content generated. These prompts are then
+          handed over to the Stability API, which uses them to create the
+          corresponding images.
         </p>
         <p>
           Remember, great things take time. The process starts with extracting
-          meaningful prompts from the GPT-3 output, and it doesn't end until the
-          Stability API crafts the final images. It might feel like many moons
-          have passed, so channel your inner sloth, sit back, and enjoy the
-          process.
+          meaningful prompts from the GPT-3 output, and it doesn&apos;t end
+          until the Stability API crafts the final images. It might feel like
+          many moons have passed, so channel your inner sloth, sit back, and
+          enjoy the process.
         </p>
         <div className="introduction__image">
           <Image
@@ -306,8 +307,10 @@ export default function Home() {
           <h1 className="introduction__title">Third Eyes v Stability AI</h1>
         </Link>
         <p className="introduction__feedback">
-          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link> {'  '}
-          &middot; &nbsp; {'  '}<a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>{" "}
+          {"  "}
+          &middot; &nbsp; {"  "}
+          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
         </p>
         <div
           className="response response--creative"
