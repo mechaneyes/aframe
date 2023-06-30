@@ -46,7 +46,7 @@ export default function Page() {
             </a>{" "}
             and was built during the winter of 2016-2017. Although it might not
             be the most current, it&apos;s been a fantastic starting point for
-            this project. I'm actively working to build a dataset incorporating
+            this project. I&apos;m actively working to build a dataset incorporating
             even more, and the most recent, reviews into Third Eyes.
           </p>
           {/* <p>
