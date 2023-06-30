@@ -99,6 +99,7 @@ export default function Home() {
           setFirstInput(false);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // o————————————————————————————————————o api, waves hands —>
@@ -283,7 +284,7 @@ export default function Home() {
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>
-            <li>Dissect Radiohead's Kid A</li>
+            <li>Dissect Radiohead&apos;s Kid A</li>
             <li>What impact did Frankie Knuckles have on music and culture?</li>
             <li>Tell me about the band, Neu!</li>
             <li>Break down footwork for me</li>

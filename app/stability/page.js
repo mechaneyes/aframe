@@ -130,13 +130,13 @@ export default function Home() {
       })
       .then((response) => {
         // o————————————————————————————————————o stability —>
-        // 
+        //
         console.log("responseJson", JSON.parse(response.data[2]));
         const imagePrompts = JSON.parse(response.data[2]);
         stability(imagePrompts.img_description_1);
 
         // o————————————————————————————————————o copy —>
-        // 
+        //
         setGptFreestyle(response.data[0]);
 
         ((response) => {
@@ -272,18 +272,17 @@ export default function Home() {
           content.
         </p>
         <p>
-          We use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to
-          generate the prompts for the images. Each prompt is carefully crafted
-          based on your input and the content generated. These prompts are then
-          handed over to the Stability API, which uses them to create the
+          Building on your prompt and the initial response returned, we again
+          use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to generate
+          the prompts for the images. Each prompt is carefully crafted based on
+          your input and the content previously generated. These prompts are
+          then handed over to the Stability API, which uses them to create the
           corresponding images.
         </p>
         <p>
-          Remember, great things take time. The process starts with extracting
-          meaningful prompts from the GPT-3 output, and it doesn&apos;t end
-          until the Stability API crafts the final images. It might feel like
-          many moons have passed, so channel your inner sloth, sit back, and
-          enjoy the process.
+          Remember, great things take time. Waiting for the app&apos;s response
+          may feel like the passing of many moons, so channel your inner sloth,
+          sit back, and trust the process.
         </p>
         <div className="introduction__image">
           <Image
