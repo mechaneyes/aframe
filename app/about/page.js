@@ -35,26 +35,31 @@ export default function Page() {
           <p>
             While I may not hold the title of data scientist (yet!), the journey
             of creating Third Eyes has allowed me to gain invaluable experience
-            with a variety of related technologies. I&apos;m currently immersing
-            myself in the world of Python, and I&apos;m eager to delve deeper
-            into data science once I&apos;ve tamed the snake.
+            with a variety of related technologies. I&apos;m currently immersed
+            in the world of Python, and I&apos;m eager to delve deeper into data
+            science once I&apos;ve tamed the snake.
           </p>
           <p>
-            The content generated in Third Eyes stems from a dataset built
-            during the winter of 2016-2017. Although it might not be the most
-            current, it&apos;s been a fantastic starting point for this project.
-            Nolan Conaway, who created the dataset has open sourced the scraper
-            he wrote to retrieve the content. I&apos;m looking forward to
-            utilizing his scraper to incorporate even more, and the most recent
-            reviews into Third Eyes.
+            The content generated in Third Eyes stems from a{" "}
+            <a href="https://www.kaggle.com/datasets/nolanbconaway/pitchfork-data">
+              dataset of 18,393 Pitchfork reviews
+            </a>{" "}
+            and was built during the winter of 2016-2017. Although it might not
+            be the most current, it&apos;s been a fantastic starting point for
+            this project. I'm actively working to build a dataset incorporating
+            even more, and the most recent, reviews into Third Eyes.
           </p>
-          <p>
-            For a more technical deep dive into the making of Third Eyes, check
-            out{"  "}
+          {/* <p>
+            For a bit of a technical deep dive into the making of Third Eyes,
+            check out{"  "}
             <a href="https://winterwerk.one/posts/thirdeyes-mvp">
               this post on WinterWerk
             </a>
             .
+          </p> */}
+          <p>
+            Any and all feedback is more than welcome:{" "}
+            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
           </p>
         </div>
       </section>

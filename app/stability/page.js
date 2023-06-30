@@ -267,22 +267,23 @@ export default function Home() {
         <p className="introduction__description">
           In this application, we&apos;re working with multiple Large Language
           Models (LLMs) to generate the music-related information you&apos;re
-          after. We take that information and distill it into prompts that are
-          used to generate images, providing a visual dimension to the generated
-          content.
+          after. We take the information first returned in response to your
+          prompt and distill it into still more prompts used to generate images,
+          providing a visual dimension to the generated content.
         </p>
         <p>
-          Building on your prompt and the initial response returned, we again
-          use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to generate
-          the prompts for the images. Each prompt is carefully crafted based on
-          your input and the content previously generated. These prompts are
-          then handed over to the Stability API, which uses them to create the
+          To begin, we hit OpenAI&apos;s GPT-3 (the technology powering ChatGPT)
+          to generate the text based response to your prompt. That response is
+          used to again hit GPT-3 in order to generate still more prompts, now
+          for the images. Each of those is carefully crafted based on your input
+          and the content first generated. They are then handed over to the
+          Stability API (Stable Diffusion), which uses them to create the
           corresponding images.
         </p>
         <p>
           Remember, great things take time. Waiting for the app&apos;s response
-          may feel like the passing of many moons, so channel your inner sloth,
-          sit back, and trust the process.
+          may feel like the passing of many moons, so please sit back and trust
+          the process.
         </p>
         <div className="introduction__image">
           <Image

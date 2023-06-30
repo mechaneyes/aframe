@@ -279,7 +279,7 @@ export default function Home() {
             <li>Dissect Radiohead&apos;s Kid A</li>
             <li>What impact did Frankie Knuckles have on music and culture?</li>
             <li>Tell me about the band, Neu!</li>
-            <li>Break down footwork for me</li>
+            <li>Tell me about music that incorporates NASA mission sounds</li>
             <li>What is the history of the Roland TR-808?</li>
           </ul>
         </div>
