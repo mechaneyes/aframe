@@ -6,13 +6,15 @@ const inter = Inter({ subsets: ['latin'] })
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata = {
-  title: 'ThirdEyes',
+  title: 'Third Eyes',
   description: 'Interrogate Pitchfork Reviews via GPT-3.5',
+  url: 'https://hearincolor.com',
+  siteName: 'Third Eyes',
   openGraph: {
-    title: 'ThirdEyes',
+    title: 'Third Eyes',
     description: 'Interrogate Pitchfork Reviews via GPT-3.5',
     url: 'https://hearincolor.com',
-    siteName: 'ThirdEyes',
+    siteName: 'Third Eyes',
     images: [
       {
         url: 'https://hearincolor.com/_next/image?url=%2Fthird-eyes-og.jpg&w=1200&q=75',
@@ -21,7 +23,8 @@ export const metadata = {
         alt: 'ThirdEyes via HearInColor',
       },
     ],
-
+    locale: 'en_US',
+    type: 'website',
   },
 }
 

@@ -8,7 +8,6 @@ import axios from "axios";
 import "./styles/styles.scss";
 
 export default function Home() {
-  const [content, setContent] = useState([]);
   const [triggerDisplay, setTriggerDisplay] = useState(false);
   const [gptFreestyle, setGptFreestyle] = useState([]);
   const [gptReferences, setGptReferences] = useState([]);
@@ -57,11 +56,6 @@ export default function Home() {
 
   // o————————————————————————————————————o placeholder —>
   //
-  const hidePlaceholder = () => {
-    setPlaceholderVisible(false);
-    document.querySelector(".prompt-form__input").focus();
-  };
-
   // typewriter animation on load
   //
   useEffect(() => {
@@ -80,24 +74,22 @@ export default function Home() {
   }, []);
 
   // o————————————————————————————————————o focus —>
-  // 
+  //
   // focus on input first keypress & || header click
   //
   useEffect(() => {
+    const handlePromptFocus = (event) => {
+      document.querySelector(".prompt-form__input").focus();
+      setFirstInput(false);
+      setPlaceholderVisible(false);
+    };
+
     if (firstInput) {
-      addEventListener("keydown", (event) => {
-        setPlaceholderVisible(false);
-        document.querySelector(".prompt-form__input").focus();
-        setFirstInput(false);
-      });
+      addEventListener("keydown", handlePromptFocus);
 
       document
         .querySelector(".prompt-form__centered")
-        .addEventListener("click", (event) => {
-            setPlaceholderVisible(false);
-          document.querySelector(".prompt-form__input").focus();
-          setFirstInput(false);
-        });
+        .addEventListener("click", handlePromptFocus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -108,6 +100,7 @@ export default function Home() {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
     setGptReferences([]);
+
     const responseTimer = setInterval(setTime, 1000);
 
     const inputElement =
@@ -188,7 +181,6 @@ export default function Home() {
         }
         inputElement.addEventListener("keydown", submitHandler);
       };
-      // 🐝 TODO: one of these should come out
       inputElement.addEventListener("keydown", submitHandler);
     }
 
@@ -201,8 +193,8 @@ export default function Home() {
         item.addEventListener("click", (event) => {
           const promptText = event.target.textContent;
           promptInput.innerHTML = promptText;
-          setFirstInput(false);
           makeRequest();
+          setFirstInput(false);
         });
       });
     }
@@ -230,7 +222,7 @@ export default function Home() {
                 <div className="prompt-form__cursor"></div>
               </div>
             ) : (
-              content
+              ""
             )}
           </div>
           <div
