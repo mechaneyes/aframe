@@ -40,14 +40,20 @@ export default function Page() {
             science once I&apos;ve tamed the snake.
           </p>
           <p>
+            Some technologies leveraged in Third Eyes include Langchain,
+            OpenAI&apos;s GPT-3.5 and Embeddings models, the Stability.ai API,
+            Pinecone and Next.js.
+          </p>
+          <p>
             The content generated in Third Eyes stems from a{" "}
             <a href="https://www.kaggle.com/datasets/nolanbconaway/pitchfork-data">
               dataset of 18,393 Pitchfork reviews
             </a>{" "}
             and was built during the winter of 2016-2017. Although it might not
             be the most current, it&apos;s been a fantastic starting point for
-            this project. I&apos;m actively working to build a dataset incorporating
-            even more, and the most recent, reviews into Third Eyes.
+            this project. I&apos;m actively working to build a dataset
+            incorporating even more, and the most recent, reviews into Third
+            Eyes.
           </p>
           {/* <p>
             For a bit of a technical deep dive into the making of Third Eyes,

@@ -175,6 +175,10 @@ $formaWeight: (
       cursor: pointer;
     }
 
+    &__disclaimer {
+      font-style: italic;
+    }
+
     &__image {
       margin-top: 2rem;
     }
@@ -193,10 +197,6 @@ $formaWeight: (
         letter-spacing: 0.1rem;
         line-height: 1.4rem;
         cursor: pointer;
-
-        &::before {
-          // content: "🔊 ";
-        }
       }
     }
   }
@@ -331,10 +331,10 @@ $formaWeight: (
       padding-top: 8px;
       float: left;
 
-      @include bp("small") {
-        width: 50%;
-        margin: 0 1rem 0 0;
-      }
+      // @include bp("small") {
+      //   width: 50%;
+      //   margin: 0 1rem 0 0;
+      // }
     }
   }
 }

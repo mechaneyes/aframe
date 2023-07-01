@@ -268,25 +268,25 @@ export default function Home() {
           <Link href="/about">About</Link>
         </p>
         <p className="introduction__description">
-          Interrogate a knowledge base built from 18,393 Pitchfork reviews. Use
-          it to surface insights and references for both industry needs and
-          personal music discovery. Enter your prompt up top to begin.
+          Use GPT-3 (the tech powering ChatGPT) to interrogate a knowledge base
+          built from 18,393 Pitchfork reviews. Third Eyes can surface insights
+          and references for both industry needs and personal music discovery.
+          Enter your prompt up top to begin.
         </p>
-        <p>Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
+        <p className="introduction__disclaimer">
+          Note: Interacting with LLMs takes time. Patience, Daniel-son.
+        </p>
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>
             <li>Dissect Radiohead&apos;s Kid A</li>
             <li>What impact did Frankie Knuckles have on music and culture?</li>
-            <li>Tell me about the band, Neu!</li>
+            <li>Introduce me to the band, Neu!</li>
             <li>Tell me about music that incorporates NASA mission sounds</li>
             <li>What is the history of the Roland TR-808?</li>
+            <li>Give me a 20 song playlist of outstanding Detroit techno</li>
           </ul>
         </div>
-        {/* <p>
-          Some technologies leveraged include Langchain, OpenAI&apos;s GPT-3.5
-          and Embeddings models, the Stability.ai API, Pinecone and Next.js.
-        </p> */}
         <p className="introduction__feedback">
           Feedback is appreciated:{" "}
           <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
