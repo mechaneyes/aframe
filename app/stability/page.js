@@ -79,15 +79,14 @@ export default function Home() {
   //
   // focus on input first keypress & || header click
   //
+  const handlePromptFocus = (event) => {
+    document.querySelector(".prompt-form__input").focus();
+    setFirstInput(false);
+    setPlaceholderVisible(false);
+    removeEventListener("keydown", handlePromptFocus);
+  };
+
   useEffect(() => {
-    const handlePromptFocus = (event) => {
-      document.querySelector(".prompt-form__input").focus();
-      setFirstInput(false);
-      setPlaceholderVisible(false);
-
-      removeEventListener("keydown", handlePromptFocus);
-    };
-
     if (firstInput) {
       addEventListener("keydown", handlePromptFocus);
       document
@@ -103,6 +102,7 @@ export default function Home() {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
     setGptReferences([]);
+    removeEventListener("keydown", handlePromptFocus);
 
     const responseTimer = setInterval(setTime, 1000);
 
