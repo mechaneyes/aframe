@@ -28,9 +28,9 @@ export default function Page() {
         <h2>About</h2>
         <div className="response response--references">
           <p>
-            Welcome. I&apos;m Ray Weitzenberg, the creator of Third Eyes. This
-            application represents my first experiment with harnessing the power
-            of AI to generate music-related content and accompanying images.
+            Welcome. I&apos;m Ray Weitzenberg. This application represents my
+            first experiment with harnessing the power of AI to generate
+            music-related content and accompanying images.
           </p>
           <p>
             While I may not hold the title of data scientist (yet!), the journey
@@ -52,8 +52,8 @@ export default function Page() {
             and was built during the winter of 2016-2017. Although it might not
             be the most current, it&apos;s been a fantastic starting point for
             this project. I&apos;m actively working to build a dataset
-            incorporating even more, and the most recent, reviews into Third
-            Eyes.
+            incorporating even more, more varied and the most recent content
+            into Third Eyes.
           </p>
           {/* <p>
             For a bit of a technical deep dive into the making of Third Eyes,
