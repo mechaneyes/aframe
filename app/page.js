@@ -77,15 +77,15 @@ export default function Home() {
   //
   // focus on input first keypress & || header click
   //
+  const handlePromptFocus = (event) => {
+    document.querySelector(".prompt-form__input").focus();
+    setFirstInput(false);
+    setPlaceholderVisible(false);
+
+    removeEventListener("keydown", handlePromptFocus);
+  };
+
   useEffect(() => {
-    const handlePromptFocus = (event) => {
-      document.querySelector(".prompt-form__input").focus();
-      setFirstInput(false);
-      setPlaceholderVisible(false);
-
-      removeEventListener("keydown", handlePromptFocus);
-    };
-
     if (firstInput) {
       addEventListener("keydown", handlePromptFocus);
       document
@@ -188,6 +188,9 @@ export default function Home() {
     const examplePrompts = document.querySelectorAll(
       ".introduction__example-prompts li"
     );
+
+    // o————————————————————————————————————o trigger with example prompt —>
+    //
     const promptInput = document.querySelector(".prompt-form__input");
     if (promptInput) {
       examplePrompts.forEach((item) => {
@@ -198,6 +201,8 @@ export default function Home() {
           setFirstInput(false);
         });
       });
+
+      removeEventListener("keydown", handlePromptFocus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
