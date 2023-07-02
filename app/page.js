@@ -270,8 +270,9 @@ export default function Home() {
           <Link href="/about">About</Link>
         </p>
         <p className="introduction__description">
-          Interrogate a knowledge base built from 18,393 Pitchfork reviews. Use
-          it to surface insights and references for both industry needs and
+          Use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to
+          interrogate a knowledge base built from 18,393 Pitchfork reviews. The
+          app will surface insights and references for both industry needs and
           personal music discovery. Enter your prompt up top to begin.
         </p>
         <p>Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
@@ -279,7 +280,9 @@ export default function Home() {
           <h3>Example Prompts</h3>
           <ul>
             <li>Introduce me to ambient music</li>
-            <li>What&apos;s Frankie Knuckles&apos;s impact on music and culture?</li>
+            <li>
+              What&apos;s Frankie Knuckles&apos;s impact on music and culture?
+            </li>
             {/* <li>What is the history of the Roland TR-808?</li> */}
             <li>Give me a 20 song playlist of outstanding Detroit techno</li>
             <li>Dissect Radiohead&apos;s Kid A</li>
