@@ -10,7 +10,6 @@ import { stability } from "./stability";
 import "../styles/styles.scss";
 
 export default function Home() {
-  const [content, setContent] = useState([]);
   const [triggerDisplay, setTriggerDisplay] = useState(false);
   const [gptFreestyle, setGptFreestyle] = useState([]);
   const [gptReferences, setGptReferences] = useState([]);
@@ -53,15 +52,12 @@ export default function Home() {
 
   const setTime = () => {
     ++totalSeconds;
+    // secondsLabel.innerHTML = pad(totalSeconds % 60);
+    // minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
   };
 
   // o————————————————————————————————————o placeholder —>
   //
-  const hidePlaceholder = () => {
-    setPlaceholderVisible(false);
-    document.querySelector(".prompt-form__input").focus();
-  };
-
   // typewriter animation on load
   //
   useEffect(() => {
@@ -79,27 +75,27 @@ export default function Home() {
     writeTyper();
   }, []);
 
+  // o————————————————————————————————————o focus —>
+  //
   // focus on input first keypress & || header click
   //
   useEffect(() => {
-    addEventListener("keydown", (event) => {
-      if (firstInput) {
-        // formRef.current.focus();
-        document.querySelector(".prompt-form__input").focus();
-        setFirstInput(false);
-      }
-    });
+    const handlePromptFocus = (event) => {
+      document.querySelector(".prompt-form__input").focus();
+      setFirstInput(false);
+      setPlaceholderVisible(false);
 
-    document
-      .querySelector(".prompt-form__centered")
-      .addEventListener("click", (event) => {
-        if (firstInput) {
-          // formRef.current.focus();
-          document.querySelector(".prompt-form__input").focus();
-          setFirstInput(false);
-        }
-      });
-  }, [firstInput]);
+      removeEventListener("keydown", handlePromptFocus);
+    };
+
+    if (firstInput) {
+      addEventListener("keydown", handlePromptFocus);
+      document
+        .querySelector(".prompt-form__centered")
+        .addEventListener("click", handlePromptFocus);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // o————————————————————————————————————o api, waves hands —>
   //
@@ -107,6 +103,7 @@ export default function Home() {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
     setGptReferences([]);
+
     const responseTimer = setInterval(setTime, 1000);
 
     const inputElement =
@@ -195,7 +192,6 @@ export default function Home() {
         }
         inputElement.addEventListener("keydown", submitHandler);
       };
-      // 🐝 TODO: one of these should come out
       inputElement.addEventListener("keydown", submitHandler);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -213,7 +209,6 @@ export default function Home() {
             }
             contentEditable={true}
             suppressContentEditableWarning={true}
-            onFocus={hidePlaceholder}
             tabIndex="0"
             ref={formRef}
           >
@@ -223,7 +218,7 @@ export default function Home() {
                 <div className="prompt-form__cursor"></div>
               </div>
             ) : (
-              content
+              <></>
             )}
           </div>
           <div

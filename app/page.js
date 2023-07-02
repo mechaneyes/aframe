@@ -82,11 +82,12 @@ export default function Home() {
       document.querySelector(".prompt-form__input").focus();
       setFirstInput(false);
       setPlaceholderVisible(false);
+
+      removeEventListener("keydown", handlePromptFocus);
     };
 
     if (firstInput) {
       addEventListener("keydown", handlePromptFocus);
-
       document
         .querySelector(".prompt-form__centered")
         .addEventListener("click", handlePromptFocus);
@@ -222,7 +223,7 @@ export default function Home() {
                 <div className="prompt-form__cursor"></div>
               </div>
             ) : (
-              ""
+              <></>
             )}
           </div>
           <div
