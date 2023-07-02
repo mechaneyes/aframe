@@ -278,11 +278,12 @@ export default function Home() {
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>
+            <li>Introduce me to ambient music</li>
+            <li>What&apos;s Frankie Knuckles&apos;s impact on music and culture?</li>
+            {/* <li>What is the history of the Roland TR-808?</li> */}
+            <li>Give me a 20 song playlist of outstanding Detroit techno</li>
             <li>Dissect Radiohead&apos;s Kid A</li>
-            <li>What's Frankie Knuckles's impact on music and culture?</li>
-            <li>Tell me about the band, Neu!</li>
             <li>Tell me about music that incorporates NASA mission sounds</li>
-            <li>What is the history of the Roland TR-808?</li>
           </ul>
         </div>
         {/* <p>
