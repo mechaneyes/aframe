@@ -127,8 +127,8 @@ export default function Home() {
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
-      .post("https://thirdeyes-flask-dev.vercel.app/image", newPrompt, {
-        // .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
+      // .post("https://thirdeyes-flask-dev.vercel.app/image", newPrompt, {
+        .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
