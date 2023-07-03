@@ -52,13 +52,18 @@ $formaWeight: (
     letter-spacing: 0.09rem;
     line-height: 1.7rem;
   }
-
+  
   a {
+    color: #24c6ff;
     border-bottom: 1px solid #24c6ff;
 
     &:hover {
       color: white;
       border-bottom: 1px solid white;
+    }
+
+    h1 {
+      color: white;
     }
   }
 
