@@ -35,12 +35,12 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
+    <main className="thirdeyes flex min-h-screen flex-col items-center p-8">
       <PromptForm formRef={formRef} />
       <Header page="about" />
 
-      <section className="response__container response__container--visible">
-        <div className="response response--references">
+      <section className="introduction introduction--visible">
+        <div className="introduction__description">
           <p>
             Welcome. I&apos;m Ray Weitzenberg. This application represents my
             first experiment with harnessing the power of AI to generate
