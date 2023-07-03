@@ -40,12 +40,19 @@ const Nav = (props) => {
           >
             <Link href="/about">About</Link>
           </li>{" "}
+          <span
+            className={`nav__item nav__item--middot ${
+              page == "home" ? "nav__item--hidden" : ""
+            }`}
+          >
+            &middot;
+          </span>
           <li
             className={`nav__item nav__item--email ${
               page == "home" ? "nav__item--hidden" : ""
             }`}
           >
-            &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
           </li>
         </ul>
       </nav>

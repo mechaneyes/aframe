@@ -131,6 +131,10 @@ $formaWeight: (
       }
     }
 
+    .before-cursor {
+      @include input-mono(500);
+    }
+
     &__cursor {
       display: inline-block;
       background: white;
@@ -225,7 +229,7 @@ $formaWeight: (
       width: 100%;
       max-width: 650px;
       margin-top: 1.6rem;
-      padding-bottom: 2rem;
+      padding-bottom: 0;
 
       &--hidden {
         display: none;

@@ -127,8 +127,8 @@ export default function Home() {
 
     axios
       // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-      // .post("http://localhost:3001/prose", newPrompt, {
-      .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+      .post("http://localhost:3001/prose", newPrompt, {
+        // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
         // .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
         timeout: 90000,
         headers: {
@@ -152,7 +152,9 @@ export default function Home() {
               key={`${item.reviewid}-${index}`}
               className="response__reference"
             >
-              <a href={item.url} target="_blank">{item.title}</a>
+              <a href={item.url} target="_blank">
+                {item.title}
+              </a>
             </div>
           ));
           setSeenIds(seenIds);
@@ -264,6 +266,7 @@ export default function Home() {
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
             alt="Party Pic"
+            priority
           />
         </div>
       </section>

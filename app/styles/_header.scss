@@ -12,6 +12,7 @@ nav {
 
   ul {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
   }
 
@@ -22,6 +23,15 @@ nav {
               color: white;
             }
         }
+
+        &--middot {
+          display: none;
+          
+          @include bp("xsmall") {
+            display: block;
+          }
+        }
+
       &--active {
         a {
             color: #b4b4b4;
