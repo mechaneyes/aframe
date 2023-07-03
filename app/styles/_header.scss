@@ -1,0 +1,41 @@
+.header {
+  &__title {
+    color: white;
+  }
+}
+
+nav {
+  font-weight: 300;
+  font-size: 1.1rem;
+  letter-spacing: 0.09rem;
+  line-height: 1.7rem;
+
+  ul {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav {
+    &__item {
+        a {
+            &:hover {
+              color: white;
+            }
+        }
+      &--active {
+        a {
+            color: #b4b4b4;
+            cursor: default;
+
+            &:hover {
+              color: #b4b4b4;
+            }
+        }
+      }
+
+      &--hidden {
+        display: none;
+      }
+    }
+  }
+}

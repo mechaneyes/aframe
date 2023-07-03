@@ -1,31 +1,21 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+
+import PromptForm from "/components/PromptForm/PromptForm";
+import Header from "/components/Header/Header";
 
 import "../styles/styles.scss";
 
 export default function Page() {
   return (
     <main className="thirdeyes thirdeyes--about flex min-h-screen flex-col items-center justify-between p-8">
-      <section className="prompt-form">
-        <div className="prompt-form__centered">
-          <div className="prompt-form__input">
-            <div className="hello">{/* <Link href="/">Home</Link> */}</div>
-          </div>
-        </div>
-      </section>
+      <PromptForm />
+      <Header page="about" />
+
       <section className="response__container response__container--visible">
-        <Link href="/">
-          <h1 className="introduction__title">Third Eyes</h1>
-        </Link>
-        <p className="introduction__feedback">
-          <Link href="/">Home</Link> &middot; {""}
-          <Link href="/stability">Labs</Link> &middot; {""}
-          <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
-        </p>
-        <h2>About</h2>
         <div className="response response--references">
           <p>
             Welcome. I&apos;m Ray Weitzenberg. This application represents my

@@ -6,6 +6,8 @@ import Link from "next/link";
 import axios from "axios";
 
 import { stability } from "./stability";
+import PromptForm from "/components/PromptForm/PromptForm";
+import Header from "/components/Header/Header";
 
 import "../styles/styles.scss";
 
@@ -21,6 +23,14 @@ export default function Home() {
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
   const formRef = useRef(null);
+
+  let promptFormProps = {
+    placeholderVisible,
+    promptSubmitted,
+    spinnerVisible,
+    formRef,
+    displayTimer,
+  };
 
   // o————————————————————————————————————o form height —>
   //
@@ -199,53 +209,8 @@ export default function Home() {
 
   return (
     <main className="thirdeyes thirdeyes--stability flex min-h-screen flex-col items-center justify-between p-8">
-      <div className="prompt-form">
-        <div className="prompt-form__centered">
-          <div
-            className={
-              promptSubmitted
-                ? "prompt-form__input prompt-form--submitted"
-                : "prompt-form__input"
-            }
-            contentEditable={true}
-            suppressContentEditableWarning={true}
-            tabIndex="0"
-            ref={formRef}
-          >
-            {placeholderVisible ? (
-              <div className="hello">
-                <div className="hello__typewriter"></div>
-                <div className="prompt-form__cursor"></div>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
-          <div
-            className={
-              spinnerVisible
-                ? "spinner spinner--visible lds-ripple"
-                : "spinner spinner--hidden"
-            }
-          >
-            {spinnerVisible ? (
-              <>
-                <div></div>
-                <div></div>
-              </>
-            ) : (
-              <p
-                className={
-                  spinnerVisible
-                    ? "timer timer--hidden"
-                    : "timer timer--visible"
-                }
-                dangerouslySetInnerHTML={{ __html: displayTimer }}
-              ></p>
-            )}
-          </div>
-        </div>
-      </div>
+      <PromptForm {...promptFormProps} />
+      <Header page="stability" />
 
       <section
         className={
@@ -254,11 +219,6 @@ export default function Home() {
             : "introduction introduction--hidden"
         }
       >
-        <h1 className="introduction__title">Third Eyes v Stability AI</h1>
-        <p className="introduction__feedback">
-          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>{" "}
-          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
-        </p>
         <p className="introduction__description">
           In this experiment I&apos;m stringing together multiple Large Language
           Models (LLMs) to generate the information you didn&apos;t know you
