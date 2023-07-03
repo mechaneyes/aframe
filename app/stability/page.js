@@ -62,8 +62,6 @@ export default function Home() {
 
   const setTime = () => {
     ++totalSeconds;
-    // secondsLabel.innerHTML = pad(totalSeconds % 60);
-    // minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
   };
 
   // o————————————————————————————————————o placeholder —>
@@ -129,7 +127,8 @@ export default function Home() {
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
+      .post("https://thirdeyes-flask-dev.vercel.app/image", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
