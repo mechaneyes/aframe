@@ -117,7 +117,7 @@ $formaWeight: (
       width: 100%;
       height: auto;
       min-height: 52px;
-      padding: 0.8rem 0;
+      padding: 0.8rem 0 0.8rem 5px;
       font-size: 1.1rem;
 
       &:focus {
@@ -319,12 +319,13 @@ $formaWeight: (
   }
 
   &--about {
-    .response__container {
-      margin-top: 1.6rem;
+    .prompt-form {
+      pointer-events: none;
+      cursor: default;
     }
 
-    .prompt-form {
-      font-family: "noka", sans-serif;
+    .before-cursor {
+      display: none;
     }
   }
 

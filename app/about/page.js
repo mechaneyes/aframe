@@ -35,7 +35,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="thirdeyes flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes thirdeyes--about flex min-h-screen flex-col items-center p-8">
       <PromptForm formRef={formRef} />
       <Header page="about" />
 

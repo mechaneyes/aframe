@@ -10,6 +10,7 @@ const PromptForm = (props) => {
   return (
     <section className="prompt-form">
       <div className="prompt-form__centered">
+        <span className="before-cursor"> %{" "}</span>
         <div
           className={
             promptSubmitted
