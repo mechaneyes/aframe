@@ -260,13 +260,6 @@ export default function Home() {
             : "response__container response__container--visible"
         }
       >
-        <Link href="/">
-          <h1 className="introduction__title">Third Eyes v Stability AI</h1>
-        </Link>
-        <p className="introduction__feedback">
-          <Link href="/">Home</Link> &middot; <Link href="/about">About</Link>{" "}
-          &middot; <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
-        </p>
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}

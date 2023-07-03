@@ -2,8 +2,6 @@ import Link from "next/link";
 
 const Nav = (props) => {
   let page = props.page;
-  console.log("page", page);
-
   let pageTitle = "Third Eyes";
 
   if (page == "stability") {
@@ -15,7 +13,7 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="header">
+    <section className="header">
       <h1 className="header__title">{pageTitle}</h1>
       <nav className="nav">
         <ul>
@@ -51,7 +49,7 @@ const Nav = (props) => {
           </li>
         </ul>
       </nav>
-    </div>
+    </section>
   );
 };
 

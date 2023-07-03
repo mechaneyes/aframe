@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-
+import { useEffect, useRef } from "react";
 
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
@@ -10,9 +8,35 @@ import Header from "/components/Header/Header";
 import "../styles/styles.scss";
 
 export default function Page() {
+  const formRef = useRef(null);
+
+  // o————————————————————————————————————o form height —>
+  //
+  // height of prompt form grows as user types. using a css
+  // variable this pushes the chat responses down
+  //
+  useEffect(() => {
+    const root = document.documentElement;
+    const promptForm = document.querySelector(".prompt-form");
+
+    function updateResponseContainerHeight() {
+      const promptFormHeight = promptForm.offsetHeight;
+      root.style.setProperty("--prompt-form-height", `${promptFormHeight}px`);
+    }
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        updateResponseContainerHeight();
+      }
+    });
+    resizeObserver.observe(formRef.current);
+
+    updateResponseContainerHeight();
+  }, []);
+
   return (
-    <main className="thirdeyes thirdeyes--about flex min-h-screen flex-col items-center justify-between p-8">
-      <PromptForm />
+    <main className="thirdeyes flex min-h-screen flex-col items-center justify-between p-8">
+      <PromptForm formRef={formRef} />
       <Header page="about" />
 
       <section className="response__container response__container--visible">
