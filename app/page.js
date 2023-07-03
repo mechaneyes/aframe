@@ -129,7 +129,7 @@ export default function Home() {
       // .post("http://127.0.0.1:5000/prompt", newPrompt, {
       // .post("http://localhost:3001/prose", newPrompt, {
       // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/prompt", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
