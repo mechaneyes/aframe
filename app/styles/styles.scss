@@ -2,6 +2,7 @@
 @import "./typography";
 @import "mixins";
 @import "header";
+@import "prompt-form";
 
 :root {
   --prompt-form-height: 53px;
@@ -69,108 +70,6 @@ $formaWeight: (
     }
   }
 
-  // o————————————————————————————————————o prompt form —>
-  //
-  .prompt-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 53px;
-    @include input-mono(100);
-    font-size: 1rem;
-    color: white;
-    background-color: #414141;
-    overflow: hidden;
-    border-bottom: 1px solid white;
-
-    &--submitted {
-      font-weight: 100;
-      font-style: italic;
-    }
-
-    &__centered {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: 650px;
-      margin: auto;
-      padding: 0 1rem;
-
-      @include bp("xsmall") {
-        padding: 0 2rem;
-      }
-
-      @media (min-width: 720px) {
-        padding: 0;
-      }
-    }
-
-    &__input {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      width: 100%;
-      height: auto;
-      min-height: 52px;
-      padding: 0.8rem 0 0.8rem 5px;
-      font-size: 1.1rem;
-
-      &:focus {
-        outline: none;
-      }
-
-      div {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-      }
-    }
-
-    .before-cursor {
-      @include input-mono(500);
-    }
-
-    &__cursor {
-      display: inline-block;
-      background: white;
-      line-height: 1rem;
-      margin-left: 1px;
-      animation: blink-animation 0.95s steps(2, start) infinite;
-      width: 1px;
-      height: 1.35rem;
-    }
-
-    @keyframes blink-animation {
-      to {
-        visibility: hidden;
-      }
-    }
-  }
-
-  // o————————————————————————————————————o randos —>
-  //
-  .hello {
-    padding-left: calc(var(--distance-from-left) - 0.8rem);
-  }
-
-  .introduction__feedback {
-    color: #24c6ff;
-  }
-
-  // o————————————————————————————————————o header —>
-  //
-  .header {
-    display: block;
-    width: 100%;
-    max-width: 650px;
-    margin-top: calc(var(--prompt-form-height) + 1rem);
-  }
-
   // o————————————————————————————————————o introduction —>
   //
   .introduction {
@@ -221,7 +120,7 @@ $formaWeight: (
     }
   }
 
-  // o————————————————————————————————————o returned —>
+  // o————————————————————————————————————o response —>
   //
   .response {
     &__container {
@@ -245,79 +144,6 @@ $formaWeight: (
     }
   }
 
-  // o————————————————————————————————————o spinner —>
-  //
-  .spinner {
-    $ripple-position: 18px;
-    $ripple-size-2: 36px;
-    $ripple-size-1: 40px;
-
-    display: flex;
-    align-items: center;
-    margin-right: 0;
-
-    .timer {
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    .timer {
-      &--visible {
-        visibility: visible;
-      }
-
-      &--hidden {
-        visibility: hidden;
-      }
-    }
-
-    &.lds-ripple {
-      position: relative;
-      width: $ripple-size-1;
-      height: $ripple-size-1;
-    }
-    &.lds-ripple div {
-      position: absolute;
-      border: 2px solid #fff;
-      opacity: 1;
-      border-radius: 50%;
-      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-    }
-    &.lds-ripple div:nth-child(2) {
-      animation-delay: -0.5s;
-    }
-
-    @keyframes lds-ripple {
-      0% {
-        top: $ripple-position;
-        left: $ripple-position;
-        width: 0;
-        height: 0;
-        opacity: 0;
-      }
-      4.9% {
-        top: $ripple-position;
-        left: $ripple-position;
-        width: 0;
-        height: 0;
-        opacity: 0;
-      }
-      5% {
-        top: $ripple-position;
-        left: $ripple-position;
-        width: 0;
-        height: 0;
-        opacity: 1;
-      }
-      100% {
-        top: 0px;
-        left: 0px;
-        width: $ripple-size-2;
-        height: $ripple-size-2;
-        opacity: 0;
-      }
-    }
-  }
   .stability-image {
     display: none;
   }
@@ -348,11 +174,16 @@ $formaWeight: (
       margin: 0 0 1rem;
       padding-top: 8px;
       float: left;
-
-      // @include bp("small") {
-      //   width: 50%;
-      //   margin: 0 1rem 0 0;
-      // }
     }
+  }
+
+  // o————————————————————————————————————o randos —>
+  //
+  .hello {
+    padding-left: calc(var(--distance-from-left) - 0.8rem);
+  }
+
+  .introduction__feedback {
+    color: #24c6ff;
   }
 }

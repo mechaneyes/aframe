@@ -1,9 +1,18 @@
+// o————————————————————————————————————o header —>
+//
 .header {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  margin-top: calc(var(--prompt-form-height) + 1rem);
+
   &__title {
     color: white;
   }
 }
 
+// o————————————————————————————————————o nav —>
+//
 nav {
   font-weight: 300;
   font-size: 1.1rem;
