@@ -1,0 +1,21 @@
+.chat-container {
+    width: 100%;
+    max-width: 650px;
+}
+
+.rce-container-mbox {
+    margin-bottom: 1rem;
+}
+
+.rce-mbox {
+    max-width: 80%;
+    margin-left: 0;
+
+    &.rce-mbox-right {
+        margin-right: 0;
+    }
+}
+
+.rce-mbox-text {
+    color: black;
+}
