@@ -49,10 +49,16 @@ export async function stability(image_prompt: string) {
   const url = `data:image/png;base64,${theBase}`;
   const stabilityImg = document.querySelector(".stability-image");
 
+  const displayedPrompt = document.createElement("p");
+  displayedPrompt.classList.add("displayed-prompt")
+
   if (stabilityImg) {
     if (url) {
       stabilityImg.setAttribute("src", url);
       stabilityImg.setAttribute("style", "display: block;");
+      
+      displayedPrompt.innerHTML = `Prompt: ${image_prompt}`;
+      stabilityImg.after(displayedPrompt)
     }
   }
 }

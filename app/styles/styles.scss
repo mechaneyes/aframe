@@ -1,5 +1,5 @@
 @import "https://use.typekit.net/amb7lhn.css";
-@import "./typography";
+@import "typography";
 @import "mixins";
 @import "header";
 @import "prompt-form";
@@ -20,10 +20,8 @@ $formaWeight: (
 
 .thirdeyes {
   padding: 0 1rem 1rem;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-    Helvetica, Arial, "Lucida Grande", sans-serif;
-  // font-family: "forma-djr-deck", sans-serif;
-  font-family: "noka", sans-serif;
+  font-family: "noka", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
   font-style: normal;
 
@@ -144,10 +142,8 @@ $formaWeight: (
     }
   }
 
-  .stability-image {
-    display: none;
-  }
-
+  // o————————————————————————————————————o about —>
+  //
   &--about {
     .prompt-form {
       pointer-events: none;
@@ -159,6 +155,8 @@ $formaWeight: (
     }
   }
 
+  // o————————————————————————————————————o stability —>
+  //
   &--stability {
     .introduction {
       &__image {
@@ -167,14 +165,19 @@ $formaWeight: (
         }
       }
     }
+  }
 
-    .stability-image {
-      display: block;
-      width: 100%;
-      margin: 0 0 1rem;
-      padding-top: 8px;
-      float: left;
-    }
+  .stability-image {
+    display: block;
+    width: 100%;
+    margin: 0 0 0.5rem;
+    padding-top: 8px;
+    float: left;
+  }
+
+  .displayed-prompt {
+    font-size: 0.8rem;
+    line-height: 1.3rem;
   }
 
   // o————————————————————————————————————o randos —>
