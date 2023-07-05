@@ -204,6 +204,10 @@ export default function Chat() {
     <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
+        <p className="chat-info">
+          Simple chat ATM. You'll soon be able to center your conversation
+          around the music related info cooked into the app.
+        </p>
         <Header page="chat" />
       </section>
 

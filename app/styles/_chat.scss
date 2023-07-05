@@ -17,7 +17,12 @@
     // border: 1px solid #ccc;
 
     .header {
-        margin: 68px 0 auto;
+        margin: 68px 0 0;
+        padding-bottom: 1.5rem;
+    }
+
+    .chat-info {
+        margin-bottom: auto;
         padding-bottom: 1.5rem;
     }
 }
@@ -29,12 +34,16 @@
 .rce-mbox {
     max-width: 80%;
     margin-left: 0;
+    padding: 15px 15px 8px;
+    border: 1px solid #8b8b8b;
     border-radius: 10px;
+    background-color: #151515;
 
     &.rce-mbox-right {
         margin-right: 0;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
+        background-color: #2f2f2f;
     }
 
     svg {
@@ -42,7 +51,17 @@
     }
 }
 
+.rce-mbox-title {
+    color: #35a6ce;
+}
+
 .rce-mbox-text {
     font-size: 1rem;
+    letter-spacing: 0.06rem;
     color: black;
+    color: white;
+}
+
+.rce-mbox-time {
+    color: #6c6c6c;
 }
