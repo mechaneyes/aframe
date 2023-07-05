@@ -25,21 +25,15 @@ export default function Home() {
   const [firstInput, setFirstInput] = useState(true);
   const [messageListData, setMessageListData] = useState([
     {
-      position: "right",
-      type: "text",
-      title: "Kursat",
-      text: "Give me a message list example !",
-      date: new Date(),
-    },
-    {
       position: "left",
       type: "text",
       title: "Third Eyes",
-      text: "That's all.",
+      text: "Welcome. What's on your mind?",
       date: new Date(),
     },
   ]);
   const formRef = useRef(null);
+  const bottomOfPage = true;
 
   let promptFormProps = {
     placeholderVisible,
@@ -47,11 +41,12 @@ export default function Home() {
     spinnerVisible,
     formRef,
     displayTimer,
+    bottomOfPage,
   };
 
-  function handleSendMessage(theMessage, position) {
+  function handleNewMessage(theMessage, position) {
     let title;
-    position === "left" ? title = "Third Eyes" : title = "Yoo";
+    position === "left" ? (title = "Third Eyes") : (title = "Yoo");
 
     const newMessage = {
       position: position,
@@ -61,7 +56,10 @@ export default function Home() {
       date: new Date(),
     };
 
-    setMessageListData(prevMessageListData => [...prevMessageListData, newMessage]);
+    setMessageListData((prevMessageListData) => [
+      ...prevMessageListData,
+      newMessage,
+    ]);
     console.log("messageListData", messageListData);
   }
 
@@ -151,7 +149,7 @@ export default function Home() {
       document.getElementsByClassName("prompt-form__input")[0];
     inputElement.blur();
 
-    handleSendMessage(inputElement.innerHTML, "right");
+    handleNewMessage(inputElement.innerHTML, "right");
 
     const newPrompt = {
       prompt: inputElement.innerHTML,
@@ -173,7 +171,7 @@ export default function Home() {
         console.log("response", response);
         setSpinnerVisible(false);
         setPromptSubmitted(false);
-        handleSendMessage(response.data, "left");
+        handleNewMessage(response.data, "left");
       })
       .then(() => {
         setIntroVisible(false);
@@ -199,6 +197,8 @@ export default function Home() {
           makeRequest();
 
           inputElement.removeEventListener("keydown", submitHandler);
+          inputElement.innerHTML = "";
+          inputElement.focus();
         }
         inputElement.addEventListener("keydown", submitHandler);
       };
@@ -209,12 +209,13 @@ export default function Home() {
 
   return (
     <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
-      <PromptForm {...promptFormProps} />
       <Header page="chat" />
 
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
       </section>
+
+      <PromptForm {...promptFormProps} />
     </main>
   );
 }

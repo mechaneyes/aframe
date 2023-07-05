@@ -1,6 +1,19 @@
+// https://stackoverflow.com/a/44051405/4811066
 .chat-container {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+    position: fixed;
+    bottom: 66px;
     width: 100%;
+    height: 100%;
     max-width: 650px;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: auto;
+    max-height: calc(100vh - 90px);
+    // border: 1px solid #ccc;
 }
 
 .rce-container-mbox {

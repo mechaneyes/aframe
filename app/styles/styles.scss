@@ -20,6 +20,8 @@ $formaWeight: (
 ) !default;
 
 .thirdeyes {
+  position: relative;
+  height: 100vh;
   padding: 0 1rem 1rem;
   font-family: "noka", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -179,6 +181,12 @@ $formaWeight: (
   .displayed-prompt {
     font-size: 0.8rem;
     line-height: 1.3rem;
+  }
+
+  // o————————————————————————————————————o chat —>
+  //
+  &--chat {
+    padding-bottom: 0;
   }
 
   // o————————————————————————————————————o randos —>

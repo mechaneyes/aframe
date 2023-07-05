@@ -5,12 +5,17 @@ const PromptForm = (props) => {
     spinnerVisible,
     displayTimer,
     formRef,
+    bottomOfPage,
   } = props;
 
   return (
-    <section className="prompt-form">
+    <section
+      className={`${
+        bottomOfPage ? "prompt-form prompt-form--bottom" : "prompt-form"
+      }`}
+    >
       <div className="prompt-form__centered">
-        <span className="before-cursor"> %{" "}</span>
+        <span className="before-cursor"> % </span>
         <div
           className={
             promptSubmitted
