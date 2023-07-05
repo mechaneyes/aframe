@@ -13,21 +13,21 @@
   transform: translateX(-50%);
   overflow-y: auto;
   max-height: calc(100vh - 54px);
-    padding: 0 1rem 1rem;
+  padding: 0 1rem 1rem;
   // border: 1px solid #ccc;
-
-  @include bp("xsmall") {
-    padding: 0;
-  }
 
   .header {
     margin: 68px 0 0;
-    padding-bottom: 1.5rem;
+    padding-bottom: 40px;
   }
 
   .chat-info {
     margin-bottom: auto;
-    padding-bottom: 1.5rem;
+    padding-bottom: 40px;
+
+    @include bp("xsmall") {
+        padding-bottom: 80px;
+    }
   }
 }
 

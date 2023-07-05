@@ -158,7 +158,7 @@ export default function Chat() {
       // .post("http://127.0.0.1:5000/image", newPrompt, {
       //   .post("http://localhost:3001/chat", newPrompt, {
       // .post("https://thirdeyes-flask-dev.vercel.app/chat", newPrompt, {
-          .post("https://third-eyes-flask.vercel.app/chat", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/chat", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -206,8 +206,9 @@ export default function Chat() {
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
         <p className="chat-info">
-          Simple chat ATM. You&apos;ll soon be able to center your conversation
-          around the music related info cooked into the app.
+          This is currently a simple chat interface between you and GPT-3.5.
+          Coming soon your conversation will be localized around the factually
+          correct music info baked into the app.
         </p>
         <Header page="chat" />
       </section>
