@@ -43,7 +43,7 @@ export default function Page() {
         <div className="introduction__description">
           <p>
             Welcome. I&apos;m Ray Weitzenberg. This application represents my
-            first experiment with harnessing the power of AI to generate
+            first experiment with utilizing the leverage AI affords to generate
             music-related content and accompanying images.
           </p>
           <p>
@@ -54,7 +54,7 @@ export default function Page() {
             science once I&apos;ve tamed the snake.
           </p>
           <p>
-            Some technologies leveraged in Third Eyes include Langchain,
+            Some technologies employed in Third Eyes include Langchain,
             OpenAI&apos;s GPT-3.5 and Embeddings models, the Stability.ai API,
             Pinecone and Next.js.
           </p>

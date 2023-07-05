@@ -33,7 +33,7 @@ const PromptForm = (props) => {
               <div className="prompt-form__cursor"></div>
             </div>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
         <div

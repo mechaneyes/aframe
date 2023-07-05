@@ -10,8 +10,6 @@ import Header from "/components/Header/Header";
 import "../styles/styles.scss";
 
 export default function Chat() {
-  const [triggerDisplay, setTriggerDisplay] = useState(false);
-  const [gptReferences, setGptReferences] = useState([]);
   const [placeholderVisible, setPlaceholderVisible] = useState(true);
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
@@ -134,7 +132,6 @@ export default function Chat() {
   const makeRequest = () => {
     setSpinnerVisible(true);
     setPromptSubmitted(true);
-    setGptReferences([]);
     removeEventListener("keydown", handlePromptFocus);
 
     const responseTimer = setInterval(setTime, 1000);
@@ -153,8 +150,8 @@ export default function Chat() {
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
-      .post("http://localhost:3001/chat", newPrompt, {
-        // .post("https://thirdeyes-flask-dev.vercel.app/image", newPrompt, {
+      //   .post("http://localhost:3001/chat", newPrompt, {
+      .post("https://thirdeyes-flask-dev.vercel.app/chat", newPrompt, {
         //   .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
         timeout: 90000,
         headers: {
@@ -162,13 +159,11 @@ export default function Chat() {
         },
       })
       .then((response) => {
-        console.log("response", response);
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         handleNewMessage(response.data, "left");
       })
       .then(() => {
-        setTriggerDisplay(!triggerDisplay);
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;

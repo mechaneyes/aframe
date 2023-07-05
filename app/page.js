@@ -4,9 +4,11 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import { atom, useAtom } from "jotai";
 
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
+import { firstInputAtom } from "/services/state-jotai.js";
 
 import "./styles/styles.scss";
 
@@ -20,7 +22,7 @@ export default function Home() {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [displayTimer, setDisplayTimer] = useState("");
-  const [firstInput, setFirstInput] = useState(true);
+  const [firstInput, setFirstInput] = useAtom(firstInputAtom);
   const formRef = useRef(null);
 
   let promptFormProps = {
@@ -88,9 +90,11 @@ export default function Home() {
   //
   const handlePromptFocus = (event) => {
     document.querySelector(".prompt-form__input").focus();
-    setFirstInput(false);
     setPlaceholderVisible(false);
     removeEventListener("keydown", handlePromptFocus);
+    document
+      .querySelector(".prompt-form__centered")
+      .removeEventListener("click", handlePromptFocus);
   };
 
   useEffect(() => {
@@ -100,6 +104,8 @@ export default function Home() {
       document
         .querySelector(".prompt-form__centered")
         .addEventListener("click", handlePromptFocus);
+
+      setFirstInput(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -128,8 +134,8 @@ export default function Home() {
     axios
       // .post("http://127.0.0.1:5000/prompt", newPrompt, {
       // .post("http://localhost:3001/prose", newPrompt, {
-      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
