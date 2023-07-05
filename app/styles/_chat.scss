@@ -8,12 +8,17 @@
     width: 100%;
     height: 100%;
     max-width: 650px;
-    bottom: 60px;
+    bottom: 53px;
     left: 50%;
     transform: translateX(-50%);
     overflow-y: auto;
-    max-height: calc(100vh - 90px);
+    max-height: calc(100vh - 54px);
     // border: 1px solid #ccc;
+
+    .header {
+        margin: 68px 0 auto;
+        padding-bottom: 1.5rem;
+    }
 }
 
 .rce-container-mbox {
@@ -23,12 +28,20 @@
 .rce-mbox {
     max-width: 80%;
     margin-left: 0;
+    border-radius: 10px;
 
     &.rce-mbox-right {
         margin-right: 0;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    svg {
+        display: none;
     }
 }
 
 .rce-mbox-text {
+    font-size: 1rem;
     color: black;
 }

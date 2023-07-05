@@ -1,4 +1,6 @@
 @import "https://use.typekit.net/amb7lhn.css";
+// @import 'react-chat-elements/dist/main.css';
+@import "react-chat-elements";
 @import "typography";
 @import "mixins";
 @import "header";
@@ -23,8 +25,7 @@ $formaWeight: (
   position: relative;
   height: 100vh;
   padding: 0 1rem 1rem;
-  font-family: "noka", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-  Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "noka", sans-serif;
   font-weight: 400;
   font-style: normal;
 
@@ -187,6 +188,12 @@ $formaWeight: (
   //
   &--chat {
     padding-bottom: 0;
+
+    // .header {
+    //   position: relative;
+    //   top: 69px;
+    //   margin: 0;
+    // }
   }
 
   // o————————————————————————————————————o randos —>

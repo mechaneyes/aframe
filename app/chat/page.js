@@ -1,26 +1,20 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import axios from "axios";
 
 import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
 
-import "react-chat-elements/dist/main.css";
 import "../styles/styles.scss";
 
-export default function Home() {
+export default function Chat() {
   const [triggerDisplay, setTriggerDisplay] = useState(false);
-  const [gptFreestyle, setGptFreestyle] = useState([]);
   const [gptReferences, setGptReferences] = useState([]);
-  const [seenIds, setSeenIds] = useState(new Set());
   const [placeholderVisible, setPlaceholderVisible] = useState(true);
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
-  const [introVisible, setIntroVisible] = useState(true);
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
   const [messageListData, setMessageListData] = useState([
@@ -174,7 +168,6 @@ export default function Home() {
         handleNewMessage(response.data, "left");
       })
       .then(() => {
-        setIntroVisible(false);
         setTriggerDisplay(!triggerDisplay);
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
@@ -209,10 +202,9 @@ export default function Home() {
 
   return (
     <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
-      <Header page="chat" />
-
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
+        <Header page="chat" />
       </section>
 
       <PromptForm {...promptFormProps} />
