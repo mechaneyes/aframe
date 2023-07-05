@@ -8,6 +8,10 @@ const Nav = (props) => {
     pageTitle = "Third Eyes v Stability AI";
   }
 
+  if (page == "chat") {
+    pageTitle = "Third Chat";
+  }
+
   if (page == "about") {
     pageTitle = "About Third Eyes";
   }
@@ -31,6 +35,14 @@ const Nav = (props) => {
             }`}
           >
             <Link href="/stability">Stability</Link>
+          </li>{" "}
+          &middot;{" "}
+          <li
+            className={`nav__item nav__item--chat ${
+              page == "chat" ? "nav__item--active" : ""
+            }`}
+          >
+            <Link href="/chat">Chat</Link>
           </li>{" "}
           &middot;{" "}
           <li
