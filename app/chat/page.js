@@ -157,8 +157,8 @@ export default function Chat() {
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
       //   .post("http://localhost:3001/chat", newPrompt, {
-      .post("https://thirdeyes-flask-dev.vercel.app/chat", newPrompt, {
-        //   .post("https://third-eyes-flask.vercel.app/image", newPrompt, {
+      // .post("https://thirdeyes-flask-dev.vercel.app/chat", newPrompt, {
+          .post("https://third-eyes-flask.vercel.app/chat", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
