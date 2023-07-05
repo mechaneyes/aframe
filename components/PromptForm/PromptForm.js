@@ -22,18 +22,27 @@ const PromptForm = (props) => {
               ? "prompt-form__input prompt-form--submitted"
               : "prompt-form__input"
           }
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          tabIndex="0"
           ref={formRef}
         >
           {placeholderVisible ? (
-            <div className="hello">
-              <div className="hello__typewriter"></div>
-              <div className="prompt-form__cursor"></div>
+            <div
+              className="prompt-form__inner"
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              tabIndex="0"
+            >
+              <div className="hello">
+                <div className="hello__typewriter"></div>
+                <div className="prompt-form__cursor"></div>
+              </div>
             </div>
           ) : (
-            <div></div>
+            <div
+              className="prompt-form__inner"
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              tabIndex="0"
+            ></div>
           )}
         </div>
         <div

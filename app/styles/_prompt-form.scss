@@ -56,14 +56,14 @@
     padding: 0.8rem 0 0.8rem 11px;
     font-size: 1.1rem;
 
-    &:focus {
-      outline: none;
-    }
-
     div {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 

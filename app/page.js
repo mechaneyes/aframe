@@ -2,9 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import axios from "axios";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
@@ -89,8 +88,10 @@ export default function Home() {
   // focus on input first keypress & || header click
   //
   const handlePromptFocus = (event) => {
-    document.querySelector(".prompt-form__input").focus();
     setPlaceholderVisible(false);
+    const focusOnMe = document.querySelector(".prompt-form__inner");
+    focusOnMe.focus();
+
     removeEventListener("keydown", handlePromptFocus);
     document
       .querySelector(".prompt-form__centered")
@@ -100,7 +101,6 @@ export default function Home() {
   useEffect(() => {
     if (firstInput) {
       addEventListener("keydown", handlePromptFocus);
-
       document
         .querySelector(".prompt-form__centered")
         .addEventListener("click", handlePromptFocus);
@@ -121,7 +121,7 @@ export default function Home() {
     const responseTimer = setInterval(setTime, 1000);
 
     const inputElement =
-      document.getElementsByClassName("prompt-form__input")[0];
+      document.getElementsByClassName("prompt-form__inner")[0];
 
     inputElement.blur();
 
@@ -191,7 +191,7 @@ export default function Home() {
   //
   useEffect(() => {
     const inputElement =
-      document.getElementsByClassName("prompt-form__input")[0];
+      document.getElementsByClassName("prompt-form__inner")[0];
     if (inputElement) {
       const submitHandler = (e) => {
         if (e.key === "Enter" || e.keyCode === 13) {
@@ -205,22 +205,26 @@ export default function Home() {
       inputElement.addEventListener("keydown", submitHandler);
     }
 
+    // when clicking on example prompts
+    // 
     const examplePrompts = document.querySelectorAll(
       ".introduction__example-prompts li"
     );
-    const promptInput = document.querySelector(".prompt-form__input");
-    if (promptInput) {
-      examplePrompts.forEach((item) => {
-        item.addEventListener("click", (event) => {
-          const promptText = event.target.textContent;
+    examplePrompts.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        const promptText = event.target.textContent;
+        setPlaceholderVisible(false);
+        setTimeout(() => {
+          const promptInput = document.querySelector(".prompt-form__inner");
           promptInput.innerHTML = promptText;
           makeRequest();
           setFirstInput(false);
-        });
+        }, 100);
       });
-    }
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [placeholderVisible]);
 
   return (
     <main className="thirdeyes flex min-h-screen flex-col items-center p-8">
