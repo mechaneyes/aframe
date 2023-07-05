@@ -200,7 +200,7 @@ export default function Chat() {
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
         <p className="chat-info">
-          Simple chat ATM. You'll soon be able to center your conversation
+          Simple chat ATM. You&apos;ll soon be able to center your conversation
           around the music related info cooked into the app.
         </p>
         <Header page="chat" />
