@@ -99,14 +99,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (firstInput) {
-      addEventListener("keydown", handlePromptFocus);
-      document
-        .querySelector(".prompt-form__centered")
-        .addEventListener("click", handlePromptFocus);
-
-      setFirstInput(false);
-    }
+    addEventListener("keydown", handlePromptFocus);
+    document
+      .querySelector(".prompt-form__centered")
+      .addEventListener("click", handlePromptFocus);
+      
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -89,8 +89,9 @@ export default function Home() {
   //
   const handlePromptFocus = (event) => {
     setPlaceholderVisible(false);
-    const focusOnMe = document.querySelector(".prompt-form__inner");
-    focusOnMe.focus();
+
+    const focusOnForm = document.querySelector(".prompt-form__inner");
+    focusOnForm.focus();
 
     removeEventListener("keydown", handlePromptFocus);
     document
@@ -99,14 +100,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (firstInput) {
       addEventListener("keydown", handlePromptFocus);
       document
         .querySelector(".prompt-form__centered")
         .addEventListener("click", handlePromptFocus);
-
-      setFirstInput(false);
-    }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
