@@ -111,10 +111,14 @@ export default function Chat() {
   // focus on input first keypress & || header click
   //
   const handlePromptFocus = (event) => {
-    document.querySelector(".prompt-form__input").focus();
-    setFirstInput(false);
     setPlaceholderVisible(false);
+    const focusOnMe = document.querySelector(".prompt-form__inner");
+    focusOnMe.focus();
+
     removeEventListener("keydown", handlePromptFocus);
+    document
+      .querySelector(".prompt-form__centered")
+      .removeEventListener("click", handlePromptFocus);
   };
 
   useEffect(() => {
@@ -123,6 +127,8 @@ export default function Chat() {
       document
         .querySelector(".prompt-form__centered")
         .addEventListener("click", handlePromptFocus);
+
+      setFirstInput(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -137,7 +143,7 @@ export default function Chat() {
     const responseTimer = setInterval(setTime, 1000);
 
     const inputElement =
-      document.getElementsByClassName("prompt-form__input")[0];
+      document.getElementsByClassName("prompt-form__inner")[0];
     inputElement.blur();
 
     handleNewMessage(inputElement.innerHTML, "right");
@@ -177,7 +183,7 @@ export default function Chat() {
   //
   useEffect(() => {
     const inputElement =
-      document.getElementsByClassName("prompt-form__input")[0];
+      document.getElementsByClassName("prompt-form__inner")[0];
     if (inputElement) {
       const submitHandler = (e) => {
         if (e.key === "Enter" || e.keyCode === 13) {

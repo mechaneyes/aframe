@@ -192,7 +192,7 @@ export default function Home() {
   useEffect(() => {
     const inputElement =
       document.getElementsByClassName("prompt-form__inner")[0];
-    if (inputElement) {
+    if (!placeholderVisible) {
       const submitHandler = (e) => {
         if (e.key === "Enter" || e.keyCode === 13) {
           e.preventDefault();
