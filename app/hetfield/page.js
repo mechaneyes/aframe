@@ -203,16 +203,11 @@ export default function Hetfield() {
   }, []);
 
   return (
-    <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes thirdeyes--hetfield flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
         <VerticalLinearStepper />
-        <p className="chat-info">
-          This is currently a simple chat interface between you and GPT-3.5.
-          Coming soon your conversation will be localized around the factually
-          correct music info baked into the app.
-        </p>
-        <Header page="chat" />
+        <Header />
       </section>
 
       <PromptForm {...promptFormProps} />

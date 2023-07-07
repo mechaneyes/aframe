@@ -31,12 +31,7 @@
 .thirdeyes {
   position: relative;
   padding: 0 1rem 1rem;
-  font-family: "noka", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 300;
-  letter-spacing: 0.09rem;
-  line-height: 1.7rem;
-  font-style: normal;
+  @include noka(300);
 
   @include bp("xsmall") {
     padding: 0 2rem 2rem;
@@ -72,6 +67,11 @@
     h1 {
       color: white;
     }
+  }
+
+  .MuiTypography-root {
+    @include noka(300);
+    font-size: 1rem;
   }
 
   nav {
@@ -122,12 +122,16 @@
     color: #24c6ff;
   }
 
+  .MuiStepper-root {
+    margin-bottom: 32px;
+  }
+
   .MuiStepLabel {
     &-iconContainer {
       display: flex;
       align-items: center;
       height: 26px;
-      // width: 26px;
+      padding-right: 12px;
     }
 
     &-labelContainer {
@@ -135,6 +139,11 @@
         display: flex;
         align-items: center;
       }
+    }
+
+    &-label {
+      @include noka(500);
+      font-size: 1.1rem;
     }
   }
 
@@ -155,12 +164,13 @@
 
   .MuiStepContent {
     &-root {
-      margin-left: 13px;
+      margin-left: 14px;
+      padding-left: 24px;
     }
   }
 
   .MuiStepConnector-line {
-    margin-left: 1px;
+    margin-left: 2px;
   }
 
   // o————————————————————————————————————o introduction —>
