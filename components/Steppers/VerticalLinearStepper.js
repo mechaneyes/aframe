@@ -7,12 +7,19 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import { thirdEyesTheme } from "/components/themes/thirdEyesTheme";
 
 const steps = [
   {
     label: "Select Projects",
     description: `Currently, the only style guide I shared with you is for
      Hetfield, but eventually there will be other projects with other style guides.`,
+    buttons: [
+      { buttonLabel: "Hetfield", buttonValue: "hetfield" },
+      { buttonLabel: "Ulrich", buttonValue: "ulrich" },
+    ],
   },
   {
     label: "Select Work Type",
@@ -29,6 +36,16 @@ const steps = [
 
 export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
+  const [buttonStates, setButtonStates] = useState(
+    Array(steps.length).fill(Array(2).fill(false))
+  );
+
+  const handleButtonClick = (stepIndex, buttonIndex) => {
+    const newButtonStates = [...buttonStates];
+    newButtonStates[stepIndex][buttonIndex] =
+      !newButtonStates[stepIndex][buttonIndex];
+    setButtonStates(newButtonStates);
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,43 +60,56 @@ export default function VerticalLinearStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel>{step.label}</StepLabel>
-            <StepContent>
-              <Typography>{step.description}</Typography>
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? "Finish" : "Continue"}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </Box>
+    <ThemeProvider theme={thirdEyesTheme}>
+      <Box sx={{ maxWidth: 400 }}>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((step, stepIndex) => (
+            <Step key={step.label}>
+              <StepLabel>{step.label}</StepLabel>
+              <StepContent>
+                <Typography>{step.description}</Typography>
+                <Box sx={{ mb: 2 }}>
+                  <div className="buttons--parameters">
+                    {step.buttons &&
+                      step.buttons.map((button, buttonIndex) => (
+                        <Button
+                          key={buttonIndex}
+                          onClick={() =>
+                            handleButtonClick(stepIndex, buttonIndex)
+                          }
+                          sx={{ mt: 1, mr: 1 }}
+                          variant={
+                            buttonStates[stepIndex][buttonIndex]
+                              ? "selected"
+                              : "outlined"
+                          }
+                        >
+                          {button.buttonLabel}
+                        </Button>
+                      ))}
+                  </div>
+                  <div>
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                    </Button>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                  </div>
+                </Box>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+    </ThemeProvider>
   );
 }

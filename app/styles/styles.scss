@@ -1,16 +1,10 @@
 @import "https://use.typekit.net/amb7lhn.css";
-// @import 'react-chat-elements/dist/main.css';
 @import "react-chat-elements";
 @import "typography";
 @import "mixins";
 @import "header";
 @import "prompt-form";
 @import "chat";
-
-:root {
-  --prompt-form-height: 53px;
-  --distance-from-left: auto;
-}
 
 // $formaWeight: (
 //   "thin": 200,
@@ -27,6 +21,11 @@
 //   "semibold": 600,
 //   "bold": 800,
 // ) !default;
+
+:root {
+  --prompt-form-height: 53px;
+  --distance-from-left: auto;
+}
 
 .thirdeyes {
   position: relative;
@@ -82,6 +81,8 @@
     }
   }
 
+  // o————————————————————————————————————o material buttons —>
+  //
   .MuiButton-root {
     padding: 4px 16px;
     @include stratum1(700);
@@ -89,10 +90,15 @@
     color: white;
     border: 2px solid #24c6ff;
     border-radius: 5px;
+    transition-property: border-color;
+    transition-duration: 0.3s;
 
     &:hover {
       color: white;
+      border-color: tomato;
       background-color: transparent;
+      transition-property: border-color;
+      transition-duration: 0.3s;
     }
 
     &.MuiButton-contained {
@@ -120,6 +126,22 @@
   .Mui-active {
     height: 25px;
     color: #24c6ff;
+  }
+
+  .Mui-selected {
+    color: black;
+    background-color: tomato;
+    border-color: tomato;
+
+    &:hover {
+      border-color: #24c6ff;
+    }
+  }
+
+  // o————————————————————————————————————o material stepper —>
+  //
+  .MuiBox-root {
+    max-width: 450px;
   }
 
   .MuiStepper-root {
@@ -171,6 +193,10 @@
 
   .MuiStepConnector-line {
     margin-left: 2px;
+  }
+
+  .buttons--parameters {
+    margin-bottom: 20px;
   }
 
   // o————————————————————————————————————o introduction —>
