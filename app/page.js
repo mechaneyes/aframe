@@ -100,11 +100,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-      addEventListener("keydown", handlePromptFocus);
-      document
-        .querySelector(".prompt-form__centered")
-        .addEventListener("click", handlePromptFocus);
-        
+    addEventListener("keydown", handlePromptFocus);
+    document
+      .querySelector(".prompt-form__centered")
+      .addEventListener("click", handlePromptFocus);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -130,10 +130,10 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      // .post("http://127.0.0.1:5000/prompt", newPrompt, {
-      // .post("http://localhost:3001/prose", newPrompt, {
-      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-        .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      .post("http://127.0.0.1:5000/prose", newPrompt, {
+        // .post("http://localhost:3001/prose", newPrompt, {
+        // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -204,7 +204,7 @@ export default function Home() {
     }
 
     // when clicking on example prompts
-    // 
+    //
     const examplePrompts = document.querySelectorAll(
       ".introduction__example-prompts li"
     );
