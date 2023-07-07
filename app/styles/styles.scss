@@ -12,14 +12,21 @@
   --distance-from-left: auto;
 }
 
-$formaWeight: (
-  "thin": 200,
-  "xlight": 300,
-  "light": 400,
-  "regular": 500,
-  "medium": 600,
-  "bold": 700,
-) !default;
+// $formaWeight: (
+//   "thin": 200,
+//   "xlight": 300,
+//   "light": 400,
+//   "regular": 500,
+//   "medium": 600,
+//   "bold": 700,
+// ) !default;
+
+// $nokaWeight: (
+//   "light": 300,
+//   "medium": 500,
+//   "semibold": 600,
+//   "bold": 800,
+// ) !default;
 
 .thirdeyes {
   position: relative;
@@ -73,6 +80,87 @@ $formaWeight: (
         line-height: 1.7rem;
       }
     }
+  }
+
+  .MuiButton-root {
+    padding: 4px 16px;
+    @include stratum1(700);
+    font-size: 1rem;
+    color: white;
+    border: 2px solid #24c6ff;
+    border-radius: 5px;
+
+    &:hover {
+      color: white;
+      background-color: transparent;
+    }
+
+    &.MuiButton-contained {
+      color: black;
+      border-color: #24c6ff;
+      background-color: #24c6ff;
+      transition-property: background-color, border-color;
+      transition-duration: 0.3s;
+
+      &:hover {
+        border-color: tomato;
+        background-color: tomato;
+        transition-property: background-color, border-color;
+        transition-duration: 0.3s;
+      }
+    }
+  }
+
+  .Mui-disabled {
+    color: transparent;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .Mui-active {
+    height: 25px;
+    color: #24c6ff;
+  }
+
+  .MuiStepLabel {
+    &-iconContainer {
+      display: flex;
+      align-items: center;
+      height: 26px;
+      // width: 26px;
+    }
+
+    &-labelContainer {
+      span {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .MuiSvgIcon-root {
+    width: 28px;
+    height: 26px;
+    overflow: visible;
+
+    circle {
+      stroke: #24c6ff;
+      stroke-width: 2px;
+    }
+
+    &.Mui-completed {
+      color: #24c6ff;
+    }
+  }
+
+  .MuiStepContent {
+    &-root {
+      margin-left: 13px;
+    }
+  }
+
+  .MuiStepConnector-line {
+    margin-left: 1px;
   }
 
   // o————————————————————————————————————o introduction —>

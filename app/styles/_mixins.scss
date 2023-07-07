@@ -54,3 +54,31 @@ $formaWeight: (
   font-weight: $formaWeight;
   font-style: normal;
 }
+
+$nokaWeight: (
+  "light": 300,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 800,
+) !default;
+
+@mixin noka($nokaWeight) {
+  font-family: "noka", sans-serif;
+  font-weight: $nokaWeight;
+  font-style: normal;
+  letter-spacing: 0.09rem;
+}
+
+$stratum1Weight: (
+  "light": 300,
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
+) !default;
+
+@mixin stratum1($stratum1Weight) {
+  font-family: "stratum-1-web", sans-serif;
+  font-weight: $stratum1Weight;
+  font-style: normal;
+  // letter-spacing: 0.09rem;
+}

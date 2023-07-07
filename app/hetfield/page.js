@@ -6,6 +6,7 @@ import axios from "axios";
 import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
+import VerticalLinearStepper from "/components/Steppers/VerticalLinearStepper";
 
 import "../styles/styles.scss";
 
@@ -205,6 +206,7 @@ export default function Hetfield() {
     <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
         <MessageList dataSource={messageListData} />
+        <VerticalLinearStepper />
         <p className="chat-info">
           This is currently a simple chat interface between you and GPT-3.5.
           Coming soon your conversation will be localized around the factually
