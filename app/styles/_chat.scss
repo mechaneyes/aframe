@@ -17,7 +17,7 @@
   // border: 1px solid #ccc;
 
   .header {
-    margin: 68px 0 0;
+    margin: 68px 0 auto;
     padding-bottom: 40px;
   }
 
@@ -29,6 +29,11 @@
         padding-bottom: 80px;
     }
   }
+}
+
+.the-conversation {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .rce-container-mbox {

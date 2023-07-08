@@ -53,6 +53,11 @@
     font-size: 1.3rem;
   }
 
+  h4 {
+    margin: 2rem 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+
   p {
     margin: 0 0 1rem 0;
   }
@@ -117,6 +122,31 @@
     }
   }
 
+  .buttons--parameters {
+    .MuiButton-root {
+      padding: 4px 16px;
+      @include stratum1(700);
+      font-size: 1rem;
+      color: white;
+      border: 2px solid tomato;
+      border-radius: 5px;
+      transition-property: border-color;
+      transition-duration: 0.3s;
+
+      &:hover {
+        color: white;
+        border-color: tomato;
+        background-color: tomato;
+        transition-property: border-color;
+        transition-duration: 0.3s;
+      }
+
+      &.Mui-selected {
+        background-color: tomato;
+      }
+    }
+  }
+
   .Mui-disabled {
     color: transparent;
     border: 0;
@@ -140,6 +170,35 @@
 
   // o————————————————————————————————————o material stepper —>
   //
+  .parameters {
+    &--selection {
+      margin-bottom: 64px;
+    }
+
+    &--selected {
+      margin-bottom: 57px;
+
+      h4 {
+        font-weight: 500;
+      }
+
+      ul {
+        margin-bottom: 16px;
+      }
+
+      li {
+        font-size: 1rem;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      .MuiPaper-root {
+        padding-left: 38px;
+      }
+    }
+  }
   .MuiBox-root {
     max-width: 450px;
   }
@@ -197,6 +256,11 @@
 
   .buttons--parameters {
     margin-bottom: 20px;
+  }
+
+  .MuiPaper-root {
+    color: white;
+    background: none;
   }
 
   // o————————————————————————————————————o introduction —>

@@ -19,6 +19,7 @@ const steps = [
     buttons: [
       { buttonLabel: "Hetfield", buttonValue: "hetfield" },
       { buttonLabel: "Ulrich", buttonValue: "ulrich" },
+      { buttonLabel: "Hammett", buttonValue: "hammett" },
     ],
   },
   {
@@ -62,53 +63,107 @@ export default function VerticalLinearStepper() {
   return (
     <ThemeProvider theme={thirdEyesTheme}>
       <Box sx={{ maxWidth: 400 }}>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((step, stepIndex) => (
-            <Step key={step.label}>
-              <StepLabel>{step.label}</StepLabel>
-              <StepContent>
-                <Typography>{step.description}</Typography>
-                <Box sx={{ mb: 2 }}>
-                  <div className="buttons--parameters">
-                    {step.buttons &&
-                      step.buttons.map((button, buttonIndex) => (
-                        <Button
-                          key={buttonIndex}
-                          onClick={() =>
-                            handleButtonClick(stepIndex, buttonIndex)
-                          }
-                          sx={{ mt: 1, mr: 1 }}
-                          variant={
-                            buttonStates[stepIndex][buttonIndex]
-                              ? "selected"
-                              : "outlined"
-                          }
-                        >
-                          {button.buttonLabel}
-                        </Button>
-                      ))}
-                  </div>
-                  <div>
-                    <Button
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      Back
-                    </Button>
-                  </div>
-                </Box>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
+        <div className="parameters parameters--selection">
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step, stepIndex) => (
+              <Step key={step.label}>
+                <StepLabel>{step.label}</StepLabel>
+                <StepContent>
+                  <Typography>{step.description}</Typography>
+                  <Box sx={{ mb: 2 }}>
+                    <div className="buttons--parameters">
+                      {step.buttons &&
+                        step.buttons.map((button, buttonIndex) => (
+                          <Button
+                            key={buttonIndex}
+                            onClick={() =>
+                              handleButtonClick(stepIndex, buttonIndex)
+                            }
+                            sx={{ mt: 1, mr: 1 }}
+                            variant={
+                              buttonStates[stepIndex][buttonIndex]
+                                ? "selected"
+                                : "outlined"
+                            }
+                          >
+                            {button.buttonLabel}
+                          </Button>
+                        ))}
+                    </div>
+                    <div>
+                      <Button
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      </Button>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                    </div>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {activeStep === steps.length && (
+          <div className="parameters parameters--selected">
+            <Paper square elevation={2} sx={{ p: 3 }}>
+              <h4>Config complete. You&apos;ve selected:</h4>
+              <ul>
+                {buttonStates.map((step, stepIndex) => {
+                  const selectedButtons =
+                    steps[stepIndex].buttons &&
+                    steps[stepIndex].buttons.filter(
+                      (_, buttonIndex) => buttonStates[stepIndex][buttonIndex]
+                    );
+
+                  return (
+                    <li key={stepIndex}>
+                      {steps[stepIndex].label.replace("Select ", "")}:{" "}
+                      {steps[stepIndex].buttons ? (
+                        <>
+                          {selectedButtons.map((button, buttonIndex) => (
+                            <span key={buttonIndex}>
+                              {buttonStates[stepIndex][buttonIndex]}
+                              {console.log("buttonIndex", buttonIndex)}
+                              {button.buttonLabel}
+                              {buttonIndex < selectedButtons.length - 1 && ", "}
+                            </span>
+                          ))}
+                        </>
+                      ) : (
+                        <span key={stepIndex}>
+                          {steps[stepIndex].label === "Select Work Type"
+                            ? "Essential Album Review Notes"
+                            : "Philip Sherburne"}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div>
+                <Button
+                  variant="contained"
+                  onClick={() => console.log("submit")}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Next
+                </Button>
+                <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                  Edit
+                </Button>
+              </div>
+            </Paper>
+          </div>
+        )}
       </Box>
     </ThemeProvider>
   );

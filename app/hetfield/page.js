@@ -7,6 +7,8 @@ import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
 import VerticalLinearStepper from "/components/Steppers/VerticalLinearStepper";
+import OutlineCard from "/components/Chat/OutlineCard";
+import ChatCard from "/components/Chat/ChatCard";
 
 import "../styles/styles.scss";
 
@@ -16,15 +18,7 @@ export default function Hetfield() {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
-  const [messageListData, setMessageListData] = useState([
-    {
-      position: "left",
-      type: "text",
-      title: "Third Eyes",
-      text: "Welcome. What's on your mind?",
-      date: new Date(),
-    },
-  ]);
+  const [chatComponents, setChatComponents] = useState([]);
   const formRef = useRef(null);
   const bottomOfPage = true;
 
@@ -37,23 +31,32 @@ export default function Hetfield() {
     bottomOfPage,
   };
 
-  function handleNewMessage(theMessage, position) {
-    let title;
-    position === "left" ? (title = "Third Eyes") : (title = "Yoo");
+  function handlePrompt(response) {
+    console.log("response", response);
+    const newChatComponent = (
+      <div className="chat-component" key={chatComponents.length}>
+        <p>{response}</p>
+      </div>
+    );
 
-    const newMessage = {
-      position: position,
-      title: title,
-      type: "text",
-      text: theMessage,
-      date: new Date(),
-    };
-
-    setMessageListData((prevMessageListData) => [
-      ...prevMessageListData,
-      newMessage,
+    setChatComponents((prevChatComponents) => [
+      ...prevChatComponents,
+      newChatComponent,
     ]);
-    console.log("messageListData", messageListData);
+  }
+
+  function handleResponse(response) {
+    console.log("response", response);
+    const newChatComponent = (
+      <div className="chat-component" key={chatComponents.length}>
+        <p>{response}</p>
+      </div>
+    );
+
+    setChatComponents((prevChatComponents) => [
+      ...prevChatComponents,
+      newChatComponent,
+    ]);
   }
 
   // o————————————————————————————————————o form height —>
@@ -147,11 +150,11 @@ export default function Hetfield() {
       document.getElementsByClassName("prompt-form__inner")[0];
     inputElement.blur();
 
-    handleNewMessage(inputElement.innerHTML, "right");
-
     const newPrompt = {
       prompt: inputElement.innerHTML,
     };
+
+    handlePrompt(inputElement.innerHTML);
 
     console.log(inputElement.innerHTML);
 
@@ -166,11 +169,9 @@ export default function Hetfield() {
         },
       })
       .then((response) => {
+        handleResponse(response.data);
         setSpinnerVisible(false);
         setPromptSubmitted(false);
-        handleNewMessage(response.data, "left");
-      })
-      .then(() => {
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
@@ -205,7 +206,7 @@ export default function Hetfield() {
   return (
     <main className="thirdeyes thirdeyes--hetfield flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
-        <MessageList dataSource={messageListData} />
+        <div className="the-conversation">{chatComponents}</div>
         <VerticalLinearStepper />
         <Header />
       </section>
