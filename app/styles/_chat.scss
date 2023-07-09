@@ -33,7 +33,33 @@
 
 .the-conversation {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+
+  .MuiPaper-root.chat-card {
+    width: 80%;
+    margin-bottom: 24px;
+    padding: 16px 16px 24px;
+    border-color: white;
+    border-radius: 16px;
+  
+    h5 {
+      color: #24c6ff;
+      margin-bottom: 4px;
+    }
+  
+    p {
+      margin: 0;
+    }
+
+    &--0 {
+      background-color: #0f0f0f;
+    }
+
+    &--1 {
+      align-self: flex-end;
+      background-color: #272727;
+    }
+  }
 }
 
 .rce-container-mbox {

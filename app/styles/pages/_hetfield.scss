@@ -1,0 +1,99 @@
+// o————————————————————————————————————o material stepper —>
+//
+.parameters {
+  &--selection {
+    margin-bottom: 64px;
+  }
+
+  &--selected {
+    margin-bottom: 57px;
+
+    h4 {
+      font-weight: 500;
+    }
+
+    ul {
+      margin-bottom: 16px;
+    }
+
+    li {
+      font-size: 1rem;
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    .MuiPaper-root {
+      padding-left: 0;
+    }
+  }
+}
+.MuiBox-root {
+  max-width: 450px;
+}
+
+.MuiStepper-root {
+  margin-bottom: 32px;
+}
+
+.MuiStepLabel {
+  &-iconContainer {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    padding-right: 12px;
+  }
+
+  &-labelContainer {
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-label {
+    @include noka(500);
+    font-size: 1.1rem;
+  }
+}
+
+.MuiSvgIcon-root {
+  width: 28px;
+  height: 26px;
+  overflow: visible;
+
+  circle {
+    stroke: #24c6ff;
+    stroke-width: 2px;
+  }
+
+  &.Mui-completed {
+    color: #24c6ff;
+  }
+}
+
+.Mui-active .MuiStepIcon-text {
+    font-size: 0.8rem;
+    fill: black;
+}
+
+.MuiStepContent {
+  &-root {
+    margin-left: 14px;
+    padding-left: 24px;
+  }
+}
+
+.MuiStepConnector-line {
+  margin-left: 2px;
+}
+
+.buttons--parameters {
+  margin-bottom: 20px;
+}
+
+.MuiPaper-root {
+  color: white;
+  background: none;
+}

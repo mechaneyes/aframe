@@ -40,6 +40,7 @@ export default function VerticalLinearStepper() {
   const [buttonStates, setButtonStates] = useState(
     Array(steps.length).fill(Array(2).fill(false))
   );
+  const [confirmedSelections, setConfirmedSelections] = useState(false);
 
   const handleButtonClick = (stepIndex, buttonIndex) => {
     const newButtonStates = [...buttonStates];
@@ -58,60 +59,63 @@ export default function VerticalLinearStepper() {
 
   const handleReset = () => {
     setActiveStep(0);
+    setConfirmedSelections(false);
   };
 
   return (
     <ThemeProvider theme={thirdEyesTheme}>
       <Box sx={{ maxWidth: 400 }}>
-        <div className="parameters parameters--selection">
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((step, stepIndex) => (
-              <Step key={step.label}>
-                <StepLabel>{step.label}</StepLabel>
-                <StepContent>
-                  <Typography>{step.description}</Typography>
-                  <Box sx={{ mb: 2 }}>
-                    <div className="buttons--parameters">
-                      {step.buttons &&
-                        step.buttons.map((button, buttonIndex) => (
-                          <Button
-                            key={buttonIndex}
-                            onClick={() =>
-                              handleButtonClick(stepIndex, buttonIndex)
-                            }
-                            sx={{ mt: 1, mr: 1 }}
-                            variant={
-                              buttonStates[stepIndex][buttonIndex]
-                                ? "selected"
-                                : "outlined"
-                            }
-                          >
-                            {button.buttonLabel}
-                          </Button>
-                        ))}
-                    </div>
-                    <div>
-                      <Button
-                        variant="contained"
-                        onClick={handleNext}
-                        sx={{ mt: 1, mr: 1 }}
-                      >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                      </Button>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mt: 1, mr: 1 }}
-                      >
-                        Back
-                      </Button>
-                    </div>
-                  </Box>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-        </div>
+        {activeStep !== steps.length && (
+          <div className="parameters parameters--selection">
+            <Stepper activeStep={activeStep} orientation="vertical">
+              {steps.map((step, stepIndex) => (
+                <Step key={step.label}>
+                  <StepLabel>{step.label}</StepLabel>
+                  <StepContent>
+                    <Typography>{step.description}</Typography>
+                    <Box sx={{ mb: 2 }}>
+                      <div className="buttons--parameters">
+                        {step.buttons &&
+                          step.buttons.map((button, buttonIndex) => (
+                            <Button
+                              key={buttonIndex}
+                              onClick={() =>
+                                handleButtonClick(stepIndex, buttonIndex)
+                              }
+                              sx={{ mt: 1, mr: 1 }}
+                              variant={
+                                buttonStates[stepIndex][buttonIndex]
+                                  ? "selected"
+                                  : "outlined"
+                              }
+                            >
+                              {button.buttonLabel}
+                            </Button>
+                          ))}
+                      </div>
+                      <div>
+                        <Button
+                          variant="contained"
+                          onClick={handleNext}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
+                          Next
+                        </Button>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
+                          Back
+                        </Button>
+                      </div>
+                    </Box>
+                  </StepContent>
+                </Step>
+              ))}
+            </Stepper>
+          </div>
+        )}
         {activeStep === steps.length && (
           <div className="parameters parameters--selected">
             <Paper square elevation={2} sx={{ p: 3 }}>
@@ -149,15 +153,24 @@ export default function VerticalLinearStepper() {
                   );
                 })}
               </ul>
+              <p>
+                By confirming your selected settings will be applied to the
+                config.
+              </p>
               <div>
                 <Button
                   variant="contained"
-                  onClick={() => console.log("submit")}
+                  className={confirmedSelections ? "confirmed" : ""}
+                  onClick={() => setConfirmedSelections(true)}
                   sx={{ mt: 1, mr: 1 }}
                 >
-                  Next
+                  {confirmedSelections ? "Confirmed" : "Confirm"}
                 </Button>
-                <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                <Button
+                  className={confirmedSelections ? "confirmed--hidden" : ""}
+                  onClick={handleReset}
+                  sx={{ mt: 1, mr: 1 }}
+                >
                   Edit
                 </Button>
               </div>

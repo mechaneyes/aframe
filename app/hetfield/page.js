@@ -3,11 +3,9 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
 import VerticalLinearStepper from "/components/Steppers/VerticalLinearStepper";
-import OutlineCard from "/components/Chat/OutlineCard";
 import ChatCard from "/components/Chat/ChatCard";
 
 import "../styles/styles.scss";
@@ -21,6 +19,10 @@ export default function Hetfield() {
   const [chatComponents, setChatComponents] = useState([]);
   const formRef = useRef(null);
   const bottomOfPage = true;
+  const [messages, setMessages] = useState([]);
+  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [displayedTime, setDisplayedTime] = useState(Date.now());
+  const [newCardAdded, setNewCardAdded] = useState(0);
 
   let promptFormProps = {
     placeholderVisible,
@@ -31,32 +33,43 @@ export default function Hetfield() {
     bottomOfPage,
   };
 
-  function handlePrompt(response) {
-    console.log("response", response);
-    const newChatComponent = (
-      <div className="chat-component" key={chatComponents.length}>
-        <p>{response}</p>
-      </div>
-    );
+  // o————————————————————————————————————o chat —>
+  //
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 1000);
 
-    setChatComponents((prevChatComponents) => [
-      ...prevChatComponents,
-      newChatComponent,
-    ]);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  function addMessage(text, position) {
+    const newMessage = {
+      text,
+      position,
+      date: new Date(),
+      initTime: Date.now(),
+      newCardAdded: true,
+    };
+
+    setMessages((prevMessages) => {
+      const updatedMessages = prevMessages.map((message) => ({
+        ...message,
+        newCardAdded: false,
+      }));
+
+      return [...updatedMessages, newMessage];
+    });
   }
 
-  function handleResponse(response) {
-    console.log("response", response);
-    const newChatComponent = (
-      <div className="chat-component" key={chatComponents.length}>
-        <p>{response}</p>
-      </div>
-    );
+  // Prompt form handler
+  function handlePrompt(response) {
+    addMessage(response, 1);
+  }
 
-    setChatComponents((prevChatComponents) => [
-      ...prevChatComponents,
-      newChatComponent,
-    ]);
+  // Response handler
+  function handleResponse(response) {
+    addMessage(response, 0);
   }
 
   // o————————————————————————————————————o form height —>
@@ -155,6 +168,7 @@ export default function Hetfield() {
     };
 
     handlePrompt(inputElement.innerHTML);
+    setNewCardAdded((prevNewCardAdded) => prevNewCardAdded + 1);
 
     console.log(inputElement.innerHTML);
 
@@ -175,6 +189,7 @@ export default function Hetfield() {
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
+        setNewCardAdded((prevNewCardAdded) => prevNewCardAdded + 1);
       })
       .catch((error) => {
         console.log(error);
@@ -206,7 +221,18 @@ export default function Hetfield() {
   return (
     <main className="thirdeyes thirdeyes--hetfield flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
-        <div className="the-conversation">{chatComponents}</div>
+        <div className="the-conversation">
+          {messages.map((message, index) => (
+            <ChatCard
+              key={index}
+              text={message.text}
+              position={message.position}
+              date={message.date}
+              initTime={displayedTime}
+              newCardAdded={message.newCardAdded}
+            />
+          ))}
+        </div>
         <VerticalLinearStepper />
         <Header />
       </section>
