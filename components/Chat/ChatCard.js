@@ -21,17 +21,14 @@ const ChatCard = (props) => {
   const seconds = timeDiff % 60;
 
   useEffect(() => {
-    setUpdatedNewCardAdded(newCardAdded)
-    setDisplayedSeconds(seconds)
-    console.log('displayedSeconds', displayedSeconds)
-  }, [newCardAdded])
+    setUpdatedNewCardAdded(newCardAdded);
+    setDisplayedSeconds(seconds);
+    // eslint-disable-next-line
+  }, [newCardAdded]);
 
   return (
     <>
-      <Card
-        variant="outlined"
-        className={`chat-card chat-card--${position}`}
-      >
+      <Card variant="outlined" className={`chat-card chat-card--${position}`}>
         <h5>{position === 0 ? "Third Eyes" : "Human"}</h5>
         <p>{text}</p>
         {/* <p>
