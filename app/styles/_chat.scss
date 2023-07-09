@@ -17,7 +17,7 @@
   // border: 1px solid #ccc;
 
   .header {
-    margin: 68px 0 auto;
+    margin: 68px 0 0;
     padding-bottom: 40px;
   }
 
@@ -31,6 +31,14 @@
   }
 }
 
+// .thirdeyes--hetfield {
+//   .chat-container {
+//     .header {
+//       margin: 68px 0 auto;
+//     }
+//   }
+// }
+
 .the-conversation {
   display: flex;
   flex-direction: column;
@@ -39,7 +47,7 @@
     width: 80%;
     margin-bottom: 24px;
     padding: 16px 16px 24px;
-    border-color: white;
+    border-color: #9b9b9b;
     border-radius: 16px;
   
     h5 {
@@ -49,6 +57,7 @@
   
     p {
       margin: 0;
+      color: white;
     }
 
     &--0 {
@@ -59,6 +68,10 @@
       align-self: flex-end;
       background-color: #272727;
     }
+  } 
+  
+  + .MuiBox-root {
+    margin-bottom: auto;
   }
 }
 

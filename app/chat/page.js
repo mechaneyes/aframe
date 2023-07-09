@@ -6,6 +6,7 @@ import axios from "axios";
 import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
+import ChatCard from "/components/Chat/ChatCard";
 
 import "../styles/styles.scss";
 
@@ -15,17 +16,12 @@ export default function Chat() {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
-  const [messageListData, setMessageListData] = useState([
-    {
-      position: "left",
-      type: "text",
-      title: "Third Eyes",
-      text: "Welcome. What's on your mind?",
-      date: new Date(),
-    },
-  ]);
   const formRef = useRef(null);
   const bottomOfPage = true;
+  const [messages, setMessages] = useState([]);
+  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [displayedTime, setDisplayedTime] = useState(Date.now());
+  const [newCardAdded, setNewCardAdded] = useState(0);
 
   let promptFormProps = {
     placeholderVisible,
@@ -36,23 +32,43 @@ export default function Chat() {
     bottomOfPage,
   };
 
-  function handleNewMessage(theMessage, position) {
-    let title;
-    position === "left" ? (title = "Third Eyes") : (title = "Yoo");
+  // o————————————————————————————————————o chat —>
+  //
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 1000);
 
+    return () => clearInterval(intervalId);
+  }, []);
+
+  function addMessage(text, position) {
     const newMessage = {
-      position: position,
-      title: title,
-      type: "text",
-      text: theMessage,
+      text,
+      position,
       date: new Date(),
+      initTime: Date.now(),
+      newCardAdded: true,
     };
 
-    setMessageListData((prevMessageListData) => [
-      ...prevMessageListData,
-      newMessage,
-    ]);
-    console.log("messageListData", messageListData);
+    setMessages((prevMessages) => {
+      const updatedMessages = prevMessages.map((message) => ({
+        ...message,
+        newCardAdded: false,
+      }));
+
+      return [...updatedMessages, newMessage];
+    });
+  }
+
+  // Prompt form handler
+  function handlePrompt(response) {
+    addMessage(response, 1);
+  }
+
+  // Response handler
+  function handleResponse(response) {
+    addMessage(response, 0);
   }
 
   // o————————————————————————————————————o form height —>
@@ -146,13 +162,14 @@ export default function Chat() {
       document.getElementsByClassName("prompt-form__inner")[0];
     inputElement.blur();
 
-    handleNewMessage(inputElement.innerHTML, "right");
-
     const newPrompt = {
       prompt: inputElement.innerHTML,
     };
 
     console.log(inputElement.innerHTML);
+
+    handlePrompt(inputElement.innerHTML);
+    setNewCardAdded((prevNewCardAdded) => prevNewCardAdded + 1);
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
@@ -165,14 +182,13 @@ export default function Chat() {
         },
       })
       .then((response) => {
+        handleResponse(response.data);
         setSpinnerVisible(false);
         setPromptSubmitted(false);
-        handleNewMessage(response.data, "left");
-      })
-      .then(() => {
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
+        setNewCardAdded((prevNewCardAdded) => prevNewCardAdded + 1);
       })
       .catch((error) => {
         console.log(error);
@@ -204,11 +220,26 @@ export default function Chat() {
   return (
     <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
       <section className="chat-container">
-        <MessageList dataSource={messageListData} />
+        <div className="the-conversation">
+          {messages.map((message, index) => (
+            <ChatCard
+              key={index}
+              text={message.text}
+              position={message.position}
+              date={message.date}
+              initTime={displayedTime}
+              newCardAdded={message.newCardAdded}
+            />
+          ))}
+        </div>
         <p className="chat-info">
-          This is currently a simple chat interface between you and GPT-3.5.
           Coming soon your conversation will be localized around the factually
-          correct music info baked into the app.
+          correct music info baked into this app.
+        </p>
+        <p>
+          This is currently a simple chat interface between you and GPT-4. It's
+          identical to what you find with ChatGPT, though your conversation here
+          isn't shared back with OpenAI.
         </p>
         <Header page="chat" />
       </section>

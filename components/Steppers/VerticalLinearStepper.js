@@ -154,8 +154,8 @@ export default function VerticalLinearStepper() {
                 })}
               </ul>
               <p>
-                By confirming your selected settings will be applied to the
-                config.
+                By confirming, your selected settings will be applied to the
+                app config.
               </p>
               <div>
                 <Button

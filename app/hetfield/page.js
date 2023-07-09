@@ -16,7 +16,6 @@ export default function Hetfield() {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
   const [firstInput, setFirstInput] = useState(true);
-  const [chatComponents, setChatComponents] = useState([]);
   const formRef = useRef(null);
   const bottomOfPage = true;
   const [messages, setMessages] = useState([]);
@@ -167,10 +166,10 @@ export default function Hetfield() {
       prompt: inputElement.innerHTML,
     };
 
+    console.log(inputElement.innerHTML);
+
     handlePrompt(inputElement.innerHTML);
     setNewCardAdded((prevNewCardAdded) => prevNewCardAdded + 1);
-
-    console.log(inputElement.innerHTML);
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
