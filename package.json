@@ -1,13 +1,10 @@
 {
-  "name": "nextjs-fastapi",
-  "version": "0.1.0",
+  "name": "hearincolor",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.index:app --reload",
     "dev": "next dev",
-    "dev-old": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build",
-    "start-with-api": "concurrently \"next start\" \"pip3 install -r requirements.txt && python3 -m uvicorn api.index:app --reload\"",
     "start": "next start",
     "lint": "next lint"
   },
@@ -33,7 +30,6 @@
     "node-fs": "^0.1.7",
     "postcss": "8.4.23",
     "react": "18.2.0",
-    "react-chat-elements": "^11.0.1",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.11",
     "tailwindcss": "3.3.2",

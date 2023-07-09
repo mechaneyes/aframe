@@ -1,4 +1,0 @@
-torch --no-cache-dir fastapi==0.95.2 --no-cache-dir "uvicorn[standard]" --no-cache-dir
-lanarky --no-cache-dir langchain --no-cache-dir openai --no-cache-dir tiktoken --no-cache-dir faiss-cpu --no-cache-dir
-gradio --no-cache-dir "pinecone-client[grpc]" --no-cache-dir llama-index --no-cache-dir ipython --no-cache-dir 
-prompt_engineering --no-cache-dir

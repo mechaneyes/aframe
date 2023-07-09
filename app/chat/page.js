@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-import { MessageList } from "react-chat-elements";
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
 import ChatCard from "/components/Chat/ChatCard";
@@ -238,8 +237,8 @@ export default function Chat() {
         </p>
         <p>
           This is currently a simple chat interface between you and GPT-4. It's
-          identical to what you find with ChatGPT, though your conversation here
-          isn't shared back with OpenAI.
+          identical to what you find with ChatGPT. Though unlike ChatGPT, your
+          conversation here isn't shared with OpenAI.
         </p>
         <Header page="chat" />
       </section>

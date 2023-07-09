@@ -27,28 +27,28 @@ nav {
 
   .nav {
     &__item {
-        a {
-            &:hover {
-              color: white;
-            }
+      a {
+        &:hover {
+          color: white;
         }
+      }
 
-        &--middot {
-          display: none;
-          
-          @include bp("xsmall") {
-            display: block;
-          }
+      &--middot {
+        display: none;
+
+        @media screen and (min-width: 576px) {
+          display: block;
         }
+      }
 
       &--active {
         a {
-            color: #b4b4b4;
-            cursor: default;
+          color: #b4b4b4;
+          cursor: default;
 
-            &:hover {
-              color: #b4b4b4;
-            }
+          &:hover {
+            color: #b4b4b4;
+          }
         }
       }
 
