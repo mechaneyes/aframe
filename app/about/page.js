@@ -44,7 +44,7 @@ export default function Page() {
           <p>
             Welcome. I&apos;m Ray Weitzenberg. This application represents my
             first experiment with utilizing the leverage AI affords to generate
-            music-related content and accompanying images.
+            music-focused information.
           </p>
           <p>
             While I may not hold the title of data scientist (yet!), the journey
@@ -54,9 +54,9 @@ export default function Page() {
             science once I&apos;ve tamed the snake.
           </p>
           <p>
-            Some technologies employed in Third Eyes include Langchain,
-            OpenAI&apos;s GPT-3.5 and Embeddings models, the Stability.ai API,
-            Pinecone and Next.js.
+            Some technologies employed in Third Eyes include OpenAI&apos;s
+            GPT-4, GPT-3.5 and Embeddings models, Langchain, the Stability.ai
+            API, Pinecone and Next.js.
           </p>
           <p>
             The content generated in Third Eyes stems from a{" "}
@@ -66,8 +66,8 @@ export default function Page() {
             and was built during the winter of 2016-2017. Although it might not
             be the most current, it&apos;s been a fantastic starting point for
             this project. I&apos;m actively working to build a dataset
-            incorporating even more, more varied and the most recent content
-            into Third Eyes.
+            incorporating even more, more varied, and the most recent data into
+            Third Eyes.
           </p>
           {/* <p>
             For a bit of a technical deep dive into the making of Third Eyes,

@@ -3,9 +3,7 @@
 import { Metadata } from "next";
 import {
   ThemeProvider,
-  createMuiTheme,
-  makeStyles,
-} from "@material-ui/core/styles";
+} from "@mui/material/styles";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { thirdEyesTheme } from "../themes/thirdEyesTheme";
@@ -13,13 +11,6 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const theme = createMuiTheme();
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // some CSS that accesses the theme
-  },
-}));
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata: Metadata = {
@@ -52,7 +43,7 @@ export default function LayoutClient({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={thirdEyesTheme}>
         <body className={inter.className}>{children}</body>
       </ThemeProvider>
       <Analytics />
