@@ -1,3 +1,4 @@
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google'
 
