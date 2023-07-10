@@ -130,10 +130,10 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      .post("http://127.0.0.1:5000/prose", newPrompt, {
-        // .post("http://localhost:3001/prose", newPrompt, {
-        // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-        // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      // .post("http://127.0.0.1:5000/prose", newPrompt, {
+      // .post("http://localhost:3001/prose", newPrompt, {
+      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -252,9 +252,9 @@ export default function Home() {
             <li>
               What&apos;s Frankie Knuckles&apos;s impact on music and culture?
             </li>
-            {/* <li>What is the history of the Roland TR-808?</li> */}
             <li>Give me a 20 song playlist of outstanding Detroit techno</li>
             <li>Dissect Radiohead&apos;s Kid A</li>
+            <li>What is the history of the Roland TB-303?</li>
             <li>Tell me about music that incorporates NASA mission sounds</li>
           </ul>
         </div>
