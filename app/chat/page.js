@@ -236,9 +236,9 @@ export default function Chat() {
           correct music info baked into this app.
         </p>
         <p>
-          This is currently a simple chat interface between you and GPT-4. It's
+          This is currently a simple chat interface between you and GPT-4. It&apos;s
           identical to what you find with ChatGPT. Though unlike ChatGPT, your
-          conversation here isn't shared with OpenAI.
+          conversation here isn&apos;t shared with OpenAI.
         </p>
         <Header page="chat" />
       </section>

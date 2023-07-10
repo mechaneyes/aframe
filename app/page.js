@@ -156,7 +156,7 @@ export default function Home() {
               key={`${item.reviewid}-${index}`}
               className="response__reference"
             >
-              <a href={item.url} target="_blank">
+              <a href={item.url} target="_blank" rel="noreferrer">
                 {item.title}
               </a>
             </div>
