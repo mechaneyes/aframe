@@ -130,10 +130,10 @@ export default function Home() {
     console.log(inputElement.innerHTML);
 
     axios
-      // .post("http://127.0.0.1:5000/prose", newPrompt, {
-      // .post("http://localhost:3001/prose", newPrompt, {
-      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      .post("http://127.0.0.1:5000/prose", newPrompt, {
+        // .post("http://localhost:3001/prose", newPrompt, {
+        // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+        // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export default function Home() {
               key={`${item.reviewid}-${index}`}
               className="response__reference"
             >
-              <a href={item.url} target="_blank" rel="noreferrer">
+              <a href={item.url} target="_blank">
                 {item.title}
               </a>
             </div>
