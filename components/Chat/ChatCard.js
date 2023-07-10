@@ -23,7 +23,8 @@ const ChatCard = (props) => {
   useEffect(() => {
     setUpdatedNewCardAdded(newCardAdded)
     setDisplayedSeconds(seconds)
-    console.log('displayedSeconds', displayedSeconds)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newCardAdded])
 
   return (

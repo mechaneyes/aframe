@@ -7,9 +7,9 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { ThemeProvider } from "@material-ui/core/styles";
+// import { ThemeProvider } from "@material-ui/core/styles";
 
-import { thirdEyesTheme } from "/components/themes/thirdEyesTheme";
+// import { thirdEyesTheme } from "/components/themes/thirdEyesTheme";
 
 const steps = [
   {
@@ -63,121 +63,119 @@ export default function VerticalLinearStepper() {
   };
 
   return (
-    <ThemeProvider theme={thirdEyesTheme}>
-      <Box sx={{ maxWidth: 400 }}>
-        {activeStep !== steps.length && (
-          <div className="parameters parameters--selection">
-            <Stepper activeStep={activeStep} orientation="vertical">
-              {steps.map((step, stepIndex) => (
-                <Step key={step.label}>
-                  <StepLabel>{step.label}</StepLabel>
-                  <StepContent>
-                    <Typography>{step.description}</Typography>
-                    <Box sx={{ mb: 2 }}>
-                      <div className="buttons--parameters">
-                        {step.buttons &&
-                          step.buttons.map((button, buttonIndex) => (
-                            <Button
-                              key={buttonIndex}
-                              onClick={() =>
-                                handleButtonClick(stepIndex, buttonIndex)
-                              }
-                              sx={{ mt: 1, mr: 1 }}
-                              variant={
-                                buttonStates[stepIndex][buttonIndex]
-                                  ? "selected"
-                                  : "outlined"
-                              }
-                            >
-                              {button.buttonLabel}
-                            </Button>
-                          ))}
-                      </div>
-                      <div>
-                        <Button
-                          variant="contained"
-                          onClick={handleNext}
-                          sx={{ mt: 1, mr: 1 }}
-                        >
-                          Next
-                        </Button>
-                        <Button
-                          disabled={activeStep === 0}
-                          onClick={handleBack}
-                          sx={{ mt: 1, mr: 1 }}
-                        >
-                          Back
-                        </Button>
-                      </div>
-                    </Box>
-                  </StepContent>
-                </Step>
-              ))}
-            </Stepper>
-          </div>
-        )}
-        {activeStep === steps.length && (
-          <div className="parameters parameters--selected">
-            <Paper square elevation={2} sx={{ p: 3 }}>
-              <h4>Config complete. You&apos;ve selected:</h4>
-              <ul>
-                {buttonStates.map((step, stepIndex) => {
-                  const selectedButtons =
-                    steps[stepIndex].buttons &&
-                    steps[stepIndex].buttons.filter(
-                      (_, buttonIndex) => buttonStates[stepIndex][buttonIndex]
-                    );
-
-                  return (
-                    <li key={stepIndex}>
-                      {steps[stepIndex].label.replace("Select ", "")}:{" "}
-                      {steps[stepIndex].buttons ? (
-                        <>
-                          {selectedButtons.map((button, buttonIndex) => (
-                            <span key={buttonIndex}>
-                              {buttonStates[stepIndex][buttonIndex]}
-                              {console.log("buttonIndex", buttonIndex)}
-                              {button.buttonLabel}
-                              {buttonIndex < selectedButtons.length - 1 && ", "}
-                            </span>
-                          ))}
-                        </>
-                      ) : (
-                        <span key={stepIndex}>
-                          {steps[stepIndex].label === "Select Work Type"
-                            ? "Essential Album Review Notes"
-                            : "Philip Sherburne"}
-                        </span>
-                      )}
-                    </li>
+    <Box sx={{ maxWidth: 400 }}>
+      {activeStep !== steps.length && (
+        <div className="parameters parameters--selection">
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step, stepIndex) => (
+              <Step key={step.label}>
+                <StepLabel>{step.label}</StepLabel>
+                <StepContent>
+                  <Typography>{step.description}</Typography>
+                  <Box sx={{ mb: 2 }}>
+                    <div className="buttons--parameters">
+                      {step.buttons &&
+                        step.buttons.map((button, buttonIndex) => (
+                          <Button
+                            key={buttonIndex}
+                            onClick={() =>
+                              handleButtonClick(stepIndex, buttonIndex)
+                            }
+                            sx={{ mt: 1, mr: 1 }}
+                            variant={
+                              buttonStates[stepIndex][buttonIndex]
+                                ? "selected"
+                                : "outlined"
+                            }
+                          >
+                            {button.buttonLabel}
+                          </Button>
+                        ))}
+                    </div>
+                    <div>
+                      <Button
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Next
+                      </Button>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                    </div>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+      )}
+      {activeStep === steps.length && (
+        <div className="parameters parameters--selected">
+          <Paper square elevation={2} sx={{ p: 3 }}>
+            <h4>Config complete. You&apos;ve selected:</h4>
+            <ul>
+              {buttonStates.map((step, stepIndex) => {
+                const selectedButtons =
+                  steps[stepIndex].buttons &&
+                  steps[stepIndex].buttons.filter(
+                    (_, buttonIndex) => buttonStates[stepIndex][buttonIndex]
                   );
-                })}
-              </ul>
-              <p>
-                By confirming, your selected settings will be applied to the
-                app config.
-              </p>
-              <div>
-                <Button
-                  variant="contained"
-                  className={confirmedSelections ? "confirmed" : ""}
-                  onClick={() => setConfirmedSelections(true)}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  {confirmedSelections ? "Confirmed" : "Confirm"}
-                </Button>
-                <Button
-                  className={confirmedSelections ? "confirmed--hidden" : ""}
-                  onClick={handleReset}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  Edit
-                </Button>
-              </div>
-            </Paper>
-          </div>
-        )}
-      </Box>
-    </ThemeProvider>
+
+                return (
+                  <li key={stepIndex}>
+                    {steps[stepIndex].label.replace("Select ", "")}:{" "}
+                    {steps[stepIndex].buttons ? (
+                      <>
+                        {selectedButtons.map((button, buttonIndex) => (
+                          <span key={buttonIndex}>
+                            {buttonStates[stepIndex][buttonIndex]}
+                            {console.log("buttonIndex", buttonIndex)}
+                            {button.buttonLabel}
+                            {buttonIndex < selectedButtons.length - 1 && ", "}
+                          </span>
+                        ))}
+                      </>
+                    ) : (
+                      <span key={stepIndex}>
+                        {steps[stepIndex].label === "Select Work Type"
+                          ? "Essential Album Review Notes"
+                          : "Philip Sherburne"}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            <p>
+              By confirming, your selected settings will be applied to the app
+              config.
+            </p>
+            <div>
+              <Button
+                variant="contained"
+                className={confirmedSelections ? "confirmed" : ""}
+                onClick={() => setConfirmedSelections(true)}
+                sx={{ mt: 1, mr: 1 }}
+              >
+                {confirmedSelections ? "Confirmed" : "Confirm"}
+              </Button>
+              <Button
+                className={confirmedSelections ? "confirmed--hidden" : ""}
+                onClick={handleReset}
+                sx={{ mt: 1, mr: 1 }}
+              >
+                Edit
+              </Button>
+            </div>
+          </Paper>
+        </div>
+      )}
+    </Box>
   );
 }
