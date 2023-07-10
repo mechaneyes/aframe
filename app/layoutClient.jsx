@@ -1,6 +1,5 @@
 "use client";
 
-import { Metadata } from "next";
 import {
   ThemeProvider,
 } from "@mui/material/styles";
@@ -13,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-export const metadata: Metadata = {
+export const metadata = {
   title: "Third Eyes",
   description: "Interrogate Pitchfork Reviews via GPT-3.5",
   url: "https://hearincolor.com",
@@ -36,11 +35,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LayoutClient({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function LayoutClient({ children }) {
   return (
     <html lang="en">
       <ThemeProvider theme={thirdEyesTheme}>

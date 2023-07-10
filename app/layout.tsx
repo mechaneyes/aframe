@@ -1,6 +1,6 @@
 "use client";
 
-import LayoutClient from "./layoutClient";
+import LayoutClient from "./layoutClient.jsx";
 
 export default function RootLayout({
   children,
