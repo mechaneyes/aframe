@@ -40,11 +40,11 @@
   display: flex;
   flex-direction: column;
 
-  .MuiPaper-root.chat-card {
+  .chat-card {
     width: 80%;
     margin-bottom: 24px;
     padding: 16px 16px 24px;
-    border-color: #9b9b9b;
+    border: 1px solid #9b9b9b;
     border-radius: 16px;
 
     h5 {

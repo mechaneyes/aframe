@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
 
 const ChatCard = (props) => {
   const { text, position, date, initTime, newCardAdded } = props;
@@ -29,8 +28,7 @@ const ChatCard = (props) => {
 
   return (
     <>
-      <Card
-        variant="outlined"
+      <div
         className={`chat-card chat-card--${position}`}
       >
         <h5>{position === 0 ? "Third Eyes" : "Human"}</h5>
@@ -40,7 +38,7 @@ const ChatCard = (props) => {
             ? `${seconds} seconds ago`
             : `${minutes} minutes, ${seconds} seconds ago`}
         </p> */}
-      </Card>
+      </div>
     </>
   );
 };
