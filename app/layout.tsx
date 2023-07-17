@@ -8,12 +8,12 @@ const inter = Inter({ subsets: ['latin'] })
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata = {
   title: 'Aframe',
-  description: 'Interrogate Pitchfork Reviews via GPT-3.5',
+  description: 'Interrogate Pitchfork Reviews via GPT-4',
   url: 'https://aframe.fm/',
   siteName: 'Aframe',
   openGraph: {
     title: 'Aframe',
-    description: 'Interrogate Pitchfork Reviews via GPT-3.5',
+    description: 'Interrogate Pitchfork Reviews via GPT-4',
     url: 'https://aframe.fm/',
     siteName: 'Aframe',
     images: [

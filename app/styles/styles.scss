@@ -214,6 +214,13 @@ body {
       margin-top: 2rem;
     }
 
+    &__call-to-action {
+      margin: 2rem 0;
+      @include noka(500);
+      color: #8bd3fa;
+      // text-align: center;
+    }
+
     &__example-prompts {
       margin-bottom: 2rem;
 

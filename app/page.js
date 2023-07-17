@@ -242,8 +242,9 @@ export default function Home() {
           Use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to
           interrogate a knowledge base built from 18,393 Pitchfork reviews. The
           app will surface insights and references for both industry needs and
-          personal music discovery. Enter your prompt up top to begin.
+          personal music discovery.
         </p>
+        <p className="introduction__call-to-action">Enter your prompt up top to begin.</p>
         <p>Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
