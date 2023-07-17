@@ -7,21 +7,21 @@ const inter = Inter({ subsets: ['latin'] })
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata = {
-  title: 'Third Eyes',
+  title: 'Aframe',
   description: 'Interrogate Pitchfork Reviews via GPT-3.5',
-  url: 'https://hearincolor.com',
-  siteName: 'Third Eyes',
+  url: 'https://aframe.fm/',
+  siteName: 'Aframe',
   openGraph: {
-    title: 'Third Eyes',
+    title: 'Aframe',
     description: 'Interrogate Pitchfork Reviews via GPT-3.5',
-    url: 'https://hearincolor.com',
-    siteName: 'Third Eyes',
+    url: 'https://aframe.fm/',
+    siteName: 'Aframe',
     images: [
       {
-        url: 'https://hearincolor.com/_next/image?url=%2Fthird-eyes-og.jpg&w=1200&q=75',
+        url: 'https://aframe.fm/_next/image?url=%2Fthird-eyes-og.jpg&w=1200&q=75',
         width: 1200,
         height: 630,
-        alt: 'ThirdEyes via HearInColor',
+        alt: 'Aframe via HearInColor',
       },
     ],
     locale: 'en_US',

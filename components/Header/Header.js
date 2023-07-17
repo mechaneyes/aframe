@@ -2,18 +2,18 @@ import Link from "next/link";
 
 const Nav = (props) => {
   let page = props.page;
-  let pageTitle = "Third Eyes";
+  let pageTitle = "Aframe";
 
   if (page == "stability") {
-    pageTitle = "Third Eyes v Stability AI";
+    pageTitle = "Aframe v Stability AI";
   }
 
   if (page == "chat") {
-    pageTitle = "Third Chat";
+    pageTitle = "Aframe";
   }
 
   if (page == "about") {
-    pageTitle = "About Third Eyes";
+    pageTitle = "About Aframe";
   }
 
   return (

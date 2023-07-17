@@ -42,12 +42,12 @@ export default function Page() {
       <section className="introduction introduction--visible">
         <div className="introduction__description">
           <p>
-            Welcome. I&apos;m Ray Weitzenberg. Third Eyes is my first experiment
+            Welcome. I&apos;m Ray Weitzenberg. Aframe is my first experiment
             utilizing AI to generate music-focused information.
           </p>
           <p>
             While I may not hold the title of data scientist (yet!), the journey
-            of creating Third Eyes has allowed me to gain invaluable experience
+            of creating Aframe has allowed me to gain invaluable experience
             with a number of technologies in the ecosystem. I&apos;m currently
             immersed in the world of Python, and I&apos;m eager to delve deeper
             into data science once I&apos;ve tamed the snake.
@@ -58,7 +58,7 @@ export default function Page() {
             Next.js and Material Design.
           </p>
           <p>
-            The content generated in Third Eyes stems from a{" "}
+            The content generated in Aframe stems from a{" "}
             <a href="https://www.kaggle.com/datasets/nolanbconaway/pitchfork-data">
               dataset of 18,393 Pitchfork reviews
             </a>{" "}
@@ -69,7 +69,7 @@ export default function Page() {
             Eyes.
           </p>
           {/* <p>
-            For a bit of a technical deep dive into the making of Third Eyes,
+            For a bit of a technical deep dive into the making of Aframe,
             check out{"  "}
             <a href="https://winterwerk.one/posts/thirdeyes-mvp">
               this post on WinterWerk

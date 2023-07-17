@@ -31,7 +31,7 @@ const ChatCard = (props) => {
       <div
         className={`chat-card chat-card--${position}`}
       >
-        <h5>{position === 0 ? "Third Eyes" : "Human"}</h5>
+        <h5>{position === 0 ? "Aframe" : "Human"}</h5>
         <p>{text}</p>
         {/* <p>
           {minutes === 0
