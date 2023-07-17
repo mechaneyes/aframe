@@ -70,7 +70,7 @@ export default function Home() {
   //
   useEffect(() => {
     let i = 0;
-    const copy = "start your exploration here: ";
+    const copy = "start exploring here: ";
     const speed = 50;
     function writeTyper() {
       if (i < copy.length) {
