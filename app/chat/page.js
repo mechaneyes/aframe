@@ -236,6 +236,9 @@ export default function Chat() {
           baked into Hear in Color.
         </p>
         <p>
+          I used this page to experimnent with the UI you&apos;ll trigger below.
+        </p>
+        <p>
           This is currently a simple chat interface between you and GPT-4.
           It&apos;s identical to what you find with ChatGPT, though unlike
           ChatGPT, your conversation here isn&apos;t shared with OpenAI.

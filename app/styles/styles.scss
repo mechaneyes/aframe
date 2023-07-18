@@ -17,6 +17,7 @@
 // ) !default;
 
 // $nokaWeight: (
+//   "hairline": 100,
 //   "light": 300,
 //   "medium": 500,
 //   "semibold": 600,
@@ -93,6 +94,7 @@ body {
   nav {
     ul {
       li {
+        color: white;
         line-height: 1.7rem;
       }
     }
@@ -212,8 +214,8 @@ body {
       margin-bottom: 1.5rem;
     }
 
-    &__disclaimer {
-      font-style: italic;
+    &__note {
+      // font-weight: 100;
     }
 
     &__image {
@@ -223,7 +225,7 @@ body {
     &__call-to-action {
       margin: 2rem 0;
       @include noka(500);
-      color: #8bd3fa;
+      // color: #8bd3fa;
       // text-align: center;
     }
 
@@ -238,6 +240,7 @@ body {
 
       li {
         margin-bottom: 0.9rem;
+        color: #24c6ff;
         font-weight: 300;
         letter-spacing: 0.1rem;
         line-height: 1.4rem;
@@ -330,6 +333,6 @@ body {
   }
 
   .introduction__feedback {
-    color: #24c6ff;
+    // color: #24c6ff;
   }
 }

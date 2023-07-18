@@ -245,7 +245,7 @@ export default function Home() {
           personal music discovery.
         </p>
         <p className="introduction__call-to-action">Enter your prompt up top to begin.</p>
-        <p>Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
+        <p className="introduction__note">Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>

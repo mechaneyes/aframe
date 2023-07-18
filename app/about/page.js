@@ -42,43 +42,38 @@ export default function Page() {
       <section className="introduction introduction--visible">
         <div className="introduction__description">
           <p>
-            Welcome. I&apos;m Ray Weitzenberg. Aframe is my first experiment
-            utilizing AI to generate music-focused information.
+            Hello! I&apos;m Ray Weitzenberg and welcome to Aframe - an
+            exploration into the intersection of AI and music data.
           </p>
           <p>
-            While I may not hold the title of data scientist (yet!), the journey
-            of creating Aframe has allowed me to gain invaluable experience
-            with a number of technologies in the ecosystem. I&apos;m currently
-            immersed in the world of Python, and I&apos;m eager to delve deeper
-            into data science once I&apos;ve tamed the snake.
+            Although I don&apos;t officially wear the &apos;data scientist&apos;
+            badge yet, the experience I&apos;ve gained during the creation of
+            Aframe has proven to be invaluable. Currently, I&apos;m navigating
+            the vast Python landscape with an eager mind set to venture further
+            into data science once I have mastered this programming language.
           </p>
           <p>
-            Some technologies employed here include OpenAI&apos;s GPT-4, GPT-3.5
-            and Embeddings models, Langchain, the Stability.ai API, Pinecone,
-            Next.js and Material Design.
-          </p>
-          <p>
-            The content generated in Aframe stems from a{" "}
+            Aframe&apos;s content is derived from an initial{" "}
             <a href="https://www.kaggle.com/datasets/nolanbconaway/pitchfork-data">
               dataset of 18,393 Pitchfork reviews
             </a>{" "}
-            and was built during the winter of 2016-2017. Although it might not
-            be the most current data, it&apos;s been a fantastic starting point
-            for this project. Under construction is a dataset incorporating even
-            more, more varied, and the most recent data to leverage in Third
-            Eyes.
+            , accumulated during the frosty winter of 2016-2017. Though this
+            data may not be the most recent, it provided a robust launching pad
+            for this project. I&apos;m also excited to share that the expansion
+            of our dataset is underway. This includes a variety of more
+            contemporary and diverse music data to further power Aframe.
           </p>
-          {/* <p>
-            For a bit of a technical deep dive into the making of Aframe,
-            check out{"  "}
-            <a href="https://winterwerk.one/posts/thirdeyes-mvp">
-              this post on WinterWerk
-            </a>
-            .
-          </p> */}
           <p>
-            Any and all feedback is welcome:{" "}
-            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>
+            For the heavy lifting, I&apos;ve utilized state-of-the-art AI
+            technologies such as OpenAI&apos;s GPT-4, GPT-3.5 and Embeddings
+            models, Langchain, the Stability.ai API, and Pinecone. In terms of
+            web development, I&apos;ve utilized Next.js and Material Design.
+          </p>
+          <p>
+            I warmly invite your feedback and comments. You can reach me at
+            {"  "}
+            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>. Join me
+            in combining AI and music data in fresh, creative ways.
           </p>
         </div>
       </section>
