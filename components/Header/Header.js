@@ -9,7 +9,7 @@ const Nav = (props) => {
   }
 
   if (page == "chat") {
-    pageTitle = "Aframe";
+    pageTitle = "Aframe Chat";
   }
 
   if (page == "about") {
