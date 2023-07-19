@@ -199,7 +199,6 @@ body {
     display: block;
     width: 100%;
     max-width: 650px;
-    // margin-top: calc(var(--prompt-form-height) + 1rem);
     margin-top: 1.6rem;
 
     &--hidden {
@@ -225,8 +224,6 @@ body {
     &__call-to-action {
       margin: 2rem 0;
       @include noka(500);
-      // color: #8bd3fa;
-      // text-align: center;
     }
 
     &__example-prompts {
@@ -284,7 +281,7 @@ body {
     }
 
     .header {
-      padding-top: 55px;
+      padding-top: 54px;
     }
   }
 
