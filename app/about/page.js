@@ -1,49 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
-import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
-
 import "../styles/styles.scss";
 
 export default function Page() {
-  const formRef = useRef(null);
-
-  // o————————————————————————————————————o form height —>
-  //
-  // height of prompt form grows as user types. using a css
-  // variable this pushes the chat responses down
-  //
-  useEffect(() => {
-    const root = document.documentElement;
-    const promptForm = document.querySelector(".prompt-form");
-
-    function updateResponseContainerHeight() {
-      const promptFormHeight = promptForm.offsetHeight;
-      root.style.setProperty("--prompt-form-height", `${promptFormHeight}px`);
-    }
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        updateResponseContainerHeight();
-      }
-    });
-    resizeObserver.observe(formRef.current);
-
-    updateResponseContainerHeight();
-  }, []);
-
   return (
     <main className="thirdeyes thirdeyes--about flex min-h-screen flex-col items-center p-8">
-      <PromptForm formRef={formRef} />
       <Header page="about" />
 
       <section className="introduction introduction--visible">
         <div className="introduction__description">
           <p>
             Hello! I&apos;m Ray Weitzenberg and welcome to Aframe - an
-            exploration into the intersection of AI and music data.
+            exploration into the intersection of AI and music.
           </p>
           <p>
             Although I don&apos;t officially wear the &apos;data scientist&apos;
@@ -67,7 +37,7 @@ export default function Page() {
             For the heavy lifting, I&apos;ve utilized state-of-the-art AI
             technologies such as OpenAI&apos;s GPT-4, GPT-3.5 and Embeddings
             models, Langchain, the Stability.ai API, and Pinecone. In terms of
-            web development, I&apos;ve utilized Next.js and Material Design.
+            web development, I&apos;ve leveraged Next.js and Material Design.
           </p>
           <p>
             I warmly invite your feedback and comments. You can reach me at

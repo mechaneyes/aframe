@@ -279,13 +279,12 @@ body {
   // o————————————————————————————————————o about —>
   //
   &--about {
-    .prompt-form {
-      pointer-events: none;
-      cursor: default;
+    .introduction__description {
+      padding-bottom: 80px;
     }
 
-    .before-cursor {
-      display: none;
+    .header {
+      padding-top: 55px;
     }
   }
 
