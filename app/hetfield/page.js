@@ -8,6 +8,9 @@ import Header from "/components/Header/Header";
 import VerticalLinearStepper from "/components/Steppers/VerticalLinearStepper";
 import ChatCard from "/components/Chat/ChatCard";
 
+import { useAtom } from 'jotai'
+import { hetfieldConfirmedAtom } from '/context/stateMgmt'
+
 import "../styles/styles.scss";
 
 export default function Hetfield() {
@@ -22,6 +25,7 @@ export default function Hetfield() {
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [displayedTime, setDisplayedTime] = useState(Date.now());
   const [newCardAdded, setNewCardAdded] = useState(0);
+  const [hetfieldConfirmed, setHetfieldConfirmed] = useAtom(hetfieldConfirmedAtom)
 
   let promptFormProps = {
     placeholderVisible,
@@ -109,7 +113,7 @@ export default function Hetfield() {
   //
   useEffect(() => {
     let i = 0;
-    const copy = "start your exploration here: ";
+    const copy = "start your conversation here: ";
     const speed = 50;
     function writeTyper() {
       if (i < copy.length) {
@@ -119,8 +123,12 @@ export default function Hetfield() {
         setTimeout(writeTyper, speed);
       }
     }
-    writeTyper();
-  }, []);
+    // writeTyper();
+    if (hetfieldConfirmed) {
+      setPlaceholderVisible(true);
+      writeTyper();
+    }
+  }, [hetfieldConfirmed]);
 
   // o————————————————————————————————————o focus —>
   //

@@ -7,9 +7,9 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-// import { ThemeProvider } from "@material-ui/core/styles";
 
-// import { thirdEyesTheme } from "/components/themes/thirdEyesTheme";
+import { useAtom } from 'jotai'
+import { hetfieldConfirmedAtom } from '/context/stateMgmt'
 
 const steps = [
   {
@@ -41,6 +41,8 @@ export default function VerticalLinearStepper() {
     Array(steps.length).fill(Array(2).fill(false))
   );
   const [confirmedSelections, setConfirmedSelections] = useState(false);
+  const [hetfieldConfirmed, setHetfieldConfirmed] = useAtom(hetfieldConfirmedAtom)
+
 
   const handleButtonClick = (stepIndex, buttonIndex) => {
     const newButtonStates = [...buttonStates];
@@ -135,7 +137,6 @@ export default function VerticalLinearStepper() {
                         {selectedButtons.map((button, buttonIndex) => (
                           <span key={buttonIndex}>
                             {buttonStates[stepIndex][buttonIndex]}
-                            {console.log("buttonIndex", buttonIndex)}
                             {button.buttonLabel}
                             {buttonIndex < selectedButtons.length - 1 && ", "}
                           </span>
@@ -164,6 +165,7 @@ export default function VerticalLinearStepper() {
                 sx={{ mt: 1, mr: 1 }}
               >
                 {confirmedSelections ? "Confirmed" : "Confirm"}
+                {confirmedSelections ? setHetfieldConfirmed(true) : setHetfieldConfirmed(false)}
               </Button>
               <Button
                 className={confirmedSelections ? "confirmed--hidden" : ""}
