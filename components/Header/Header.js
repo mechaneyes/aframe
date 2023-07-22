@@ -18,7 +18,12 @@ const Nav = (props) => {
 
   return (
     <section className="header">
-      <h1 className="header__title">{pageTitle}</h1>
+      <h1
+        className="header__title"
+        onClick={() => window.location.reload(false)}
+      >
+        {pageTitle}
+      </h1>
       <nav className="nav">
         <ul>
           <li
