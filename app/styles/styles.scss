@@ -16,6 +16,7 @@
 body {
   display: flex;
   justify-content: center;
+  margin: 0;
   background-color: black;
 }
 
@@ -75,6 +76,10 @@ body {
 
   nav {
     ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
       li {
         color: white;
         line-height: 1.7rem;
@@ -207,9 +212,14 @@ body {
     &__example-prompts {
       margin-bottom: 2rem;
 
+      h3 {
+        font-weight: 300;
+      }
+
       ul {
         margin-top: 11px;
         margin-left: 16px;
+        padding: 0;
         list-style-type: circle;
       }
 
@@ -253,7 +263,8 @@ body {
     }
 
     .header {
-      padding-top: 54px;
+      margin: 0;
+      padding-top: 62px;
     }
   }
 
@@ -288,7 +299,8 @@ body {
     padding-bottom: 0;
 
     .header {
-      padding-top: 55px;
+      margin: 0;
+      padding-top: 115px;
     }
   }
 

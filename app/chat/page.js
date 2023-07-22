@@ -217,7 +217,7 @@ export default function Chat() {
   }, []);
 
   return (
-    <main className="thirdeyes">
+    <main className="thirdeyes thirdeyes--chat">
       <section className="chat-container">
         <div className="the-conversation">
           {messages.map((message, index) => (
