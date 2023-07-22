@@ -5,7 +5,7 @@ import "../styles/styles.scss";
 
 export default function Page() {
   return (
-    <main className="thirdeyes thirdeyes--about flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes">
       <Header page="about" />
 
       <section className="introduction introduction--visible">

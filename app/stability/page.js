@@ -232,7 +232,7 @@ export default function Home() {
   }, [placeholderVisible]);
 
   return (
-    <main className="thirdeyes thirdeyes--stability flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes">
       <PromptForm {...promptFormProps} />
       <Header page="stability" />
 

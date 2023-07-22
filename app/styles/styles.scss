@@ -2,6 +2,7 @@
 @import "react-chat-elements";
 @import "typography";
 @import "mixins";
+@import "modal";
 @import "header";
 @import "prompt-form";
 @import "chat";
@@ -13,6 +14,8 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
   background-color: black;
 }
 

@@ -225,7 +225,7 @@ export default function Home() {
   }, [placeholderVisible]);
 
   return (
-    <main className="thirdeyes flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes">
       <PromptForm {...promptFormProps} />
       <Header page="home" />
 
