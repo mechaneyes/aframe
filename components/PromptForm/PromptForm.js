@@ -1,23 +1,205 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { useSetAtom, useAtomValue } from "jotai";
 
 import Modal from "../Modal/Modal";
 
+import { introVisibleAtom } from "/services/state-jotai.js";
+import { examplePromptAtom } from "/services/state-jotai.js";
+import { gptFreestyleAtom } from "/services/state-jotai.js";
+import { gptReferencesAtom } from "/services/state-jotai.js";
+
 const PromptForm = (props) => {
+  const textareaRef = useRef(null);
+  const formRef = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [firstRun, setFirstRun] = useState(true);
+  const [inputValue, setInputValue] = useState("");
+  const [seenIds, setSeenIds] = useState(new Set());
+  const [promptSubmitted, setPromptSubmitted] = useState(false);
+  const [spinnerVisible, setSpinnerVisible] = useState(false);
+  const [displayTimer, setDisplayTimer] = useState("");
 
-  const {
-    placeholderVisible,
-    promptSubmitted,
-    spinnerVisible,
-    displayTimer,
-    formRef,
-    bottomOfPage,
-  } = props;
+  const examplePrompt = useAtomValue(examplePromptAtom);
+  const setIntroVisible = useSetAtom(introVisibleAtom);
+  const setGptFreestyle = useSetAtom(gptFreestyleAtom);
+  const setGptReferences = useSetAtom(gptReferencesAtom);
 
-  const hideBlinky = () => {
-    const beforeCursor = document.querySelector(".before-cursor");
-    beforeCursor.classList.add("no-blinky");
+  const { bottomOfPage } = props;
+
+  // o————————————————————————————————————o header placeholder —>
+  //
+  // typewriter animation on load
+  //
+  useEffect(() => {
+    let i = 0;
+    const copy = "start exploring here: ";
+    const speed = 50;
+    function writeTyper() {
+      if (i < copy.length) {
+        document.querySelector(".hello__typewriter").innerHTML +=
+          copy.charAt(i);
+        i++;
+        setTimeout(writeTyper, speed);
+      }
+    }
+    writeTyper();
+  }, []);
+
+  // o————————————————————————————————————o form height —>
+  //
+  // height of prompt form grows as user types. using a css
+  // variable this pushes the chat responses down
+  //
+  useEffect(() => {
+    const root = document.documentElement;
+    const promptForm = document.querySelector(".prompt-form");
+
+    function updateResponseContainerHeight() {
+      const promptFormHeight = promptForm.offsetHeight;
+      root.style.setProperty("--prompt-form-height", `${promptFormHeight}px`);
+    }
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        updateResponseContainerHeight();
+      }
+    });
+    resizeObserver.observe(formRef.current);
+
+    updateResponseContainerHeight();
+  }, []);
+
+  // o————————————————————————————————————o query timer —>
+  //
+  let totalSeconds = 0;
+
+  const setTime = () => {
+    ++totalSeconds;
   };
+
+  // o————————————————————————————————————o api, waves hands —>
+  //
+  const makeRequest = (requestValue) => {
+    setFirstRun(false);
+    setSpinnerVisible(true);
+    setPromptSubmitted(true);
+    setModalVisible(false);
+    setGptReferences([]);
+
+    const responseTimer = setInterval(setTime, 1000);
+
+    const inputElement =
+      document.getElementsByClassName("prompt-form__inner")[0];
+    inputElement.blur();
+    inputElement.innerHTML = requestValue;
+
+    const newPrompt = {
+      prompt: requestValue,
+    };
+    console.log("requestValue", requestValue);
+
+    axios
+      // .post("http://127.0.0.1:5000/prose", newPrompt, {
+      // .post("http://localhost:3001/prose", newPrompt, {
+      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+        timeout: 90000,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setGptFreestyle(response.data[0]);
+
+        ((response) => {
+          const newResponses = response.data[1].filter((item) => {
+            if (!seenIds.has(item.reviewid)) {
+              seenIds.add(item.reviewid);
+              return true;
+            }
+            return false;
+          });
+
+          const newChatResponse = newResponses.map((item, index) => (
+            <div
+              key={`${item.reviewid}-${index}`}
+              className="response__reference"
+            >
+              <a href={item.url} target="_blank" rel="noreferrer">
+                {item.title}
+              </a>
+            </div>
+          ));
+          setSeenIds(seenIds);
+
+          setGptReferences((gptReferences) => [
+            ...gptReferences,
+            ...newChatResponse,
+          ]);
+          setSpinnerVisible(false);
+          setPromptSubmitted(false);
+        })(response);
+      })
+      .then(() => {
+        setSpinnerVisible(false);
+        setPromptSubmitted(false);
+        setIntroVisible(false);
+        // setTriggerDisplay(!triggerDisplay);
+        setDisplayTimer(totalSeconds + "s");
+        clearInterval(responseTimer);
+        totalSeconds = 0;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // o————————————————————————————————————o form + modal —>
+  //
+  function handleChange(event) {
+    setInputValue(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    makeRequest(inputValue);
+    console.log(inputValue);
+  }
+
+  function handleEnterKey(event) {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  }
+
+  function OnInput() {
+    this.style.height = 0;
+    this.style.height = this.scrollHeight + "px";
+  }
+
+  const tx = document.getElementsByTagName("textarea");
+  for (let i = 0; i < tx.length; i++) {
+    tx[i].setAttribute(
+      "style",
+      "height:" + (tx[i].scrollHeight - 10) + "px;overflow-y:hidden;"
+    );
+    tx[i].addEventListener("input", OnInput, false);
+  }
+
+  useEffect(() => {
+    addEventListener("keydown", setModalVisible);
+  }, []);
+
+  useEffect(() => {
+    textareaRef.current.focus();
+    !firstRun && removeEventListener("keydown", setModalVisible);
+    setFirstRun(false);
+  }, [modalVisible]);
+
+  useEffect(() => {
+    examplePrompt !== "" && makeRequest(examplePrompt);
+  }, [examplePrompt]);
 
   return (
     <>
@@ -28,7 +210,15 @@ const PromptForm = (props) => {
       >
         <div className="modal__inputter">
           <span className="before-cursor">%</span>
-          <input type="text" onClick={hideBlinky} />
+          <form onSubmit={handleSubmit}>
+            <textarea
+              ref={textareaRef}
+              placeholder="Explore music insights"
+              value={inputValue}
+              onChange={handleChange}
+              onKeyDown={handleEnterKey}
+            ></textarea>
+          </form>
         </div>
       </Modal>
       <section
@@ -38,7 +228,7 @@ const PromptForm = (props) => {
         onClick={() => setModalVisible(true)}
       >
         <div className="prompt-form__centered">
-          <span className="before-cursor"> % { " " }</span>
+          <span className="before-cursor"> % </span>
           <div
             className={
               promptSubmitted
@@ -47,26 +237,12 @@ const PromptForm = (props) => {
             }
             ref={formRef}
           >
-            {placeholderVisible ? (
-              <div
-                className="prompt-form__inner"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                tabIndex="0"
-              >
-                <div className="hello">
-                  <div className="hello__typewriter"></div>
-                  <div className="prompt-form__cursor"></div>
-                </div>
+            <div className="prompt-form__inner" tabIndex="0">
+              <div className="hello">
+                <div className="hello__typewriter"></div>
+                <div className="prompt-form__cursor"></div>
               </div>
-            ) : (
-              <div
-                className="prompt-form__inner"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                tabIndex="0"
-              ></div>
-            )}
+            </div>
           </div>
           <div
             className={

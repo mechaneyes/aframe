@@ -1,3 +1,6 @@
 import { atom } from "jotai";
 
-export const firstInputAtom = atom(true);
+export const introVisibleAtom = atom(true);
+export const gptFreestyleAtom = atom([]);
+export const gptReferencesAtom = atom([]);
+export const examplePromptAtom = atom("");

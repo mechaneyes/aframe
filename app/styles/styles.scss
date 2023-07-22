@@ -21,7 +21,8 @@ body {
 }
 
 .thirdeyes {
-  position: relative;
+  width: 100%;
+  max-width: 650px;
   padding: 0 1rem 1rem;
   @include body-font(300);
   background-color: black;

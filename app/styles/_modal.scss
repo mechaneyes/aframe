@@ -40,16 +40,20 @@
       top: 10px;
       right: 10px;
       font-size: 1.2rem;
+      cursor: pointer;
     }
 
     .modal__main {
       top: 33%;
+      width: 100%;
+      max-width: 650px;
     }
 
     .modal__inputter {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      width: 100%;
       @include body-font(300);
     }
 
@@ -57,42 +61,34 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      padding-right: 5px;
       @include input-mono(200);
-
-      &.no-blinky {
-        &::after {
-            content: " ";
-        }
-      }
-
-      &::after {
-        content: "|";
-        display: inline-block;
-        width: 10px;
-        height: 1.9rem;
-        margin-right: 0;
-        font-size: 1.5rem;
-        // color: red;
-        animation: cursor-blinnk 1s infinite;
-      }
-
-      @keyframes cursor-blinnk {
-        50% {
-          opacity: 0;
-        }
-      }
     }
 
-    input {
+    form {
+        width: 100%;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    textarea {
       display: block;
       width: 100%;
+      height: 0rem;
+      min-height: 1.5rem;
       color: white;
       outline: none;
-      margin-left: -5px;
+      margin-left: 0;
       @include body-font(300);
+      line-height: 1.5rem;
       border: 0;
       border-bottom: 1px solid white;
       background-color: transparent;
+
+      &::placeholder {
+        color: gray;
+        padding-bottom: 0px;
+      }
     }
 
     &__cursor {
