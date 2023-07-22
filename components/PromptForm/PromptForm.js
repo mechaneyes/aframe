@@ -14,22 +14,31 @@ const PromptForm = (props) => {
     bottomOfPage,
   } = props;
 
+  const hideBlinky = () => {
+    const beforeCursor = document.querySelector(".before-cursor");
+    beforeCursor.classList.add("no-blinky");
+  };
+
   return (
     <>
-      <Modal show={modalVisible} setModalVisible={setModalVisible} typeUse="modal--input">
-        <p>Modal</p>
-        <input type="text" />
+      <Modal
+        show={modalVisible}
+        setModalVisible={setModalVisible}
+        typeUse="modal--input"
+      >
+        <div className="modal__inputter">
+          <span className="before-cursor">%</span>
+          <input type="text" onClick={hideBlinky} />
+        </div>
       </Modal>
       <section
         className={`${
           bottomOfPage ? "prompt-form prompt-form--bottom" : "prompt-form"
         }`}
+        onClick={() => setModalVisible(true)}
       >
         <div className="prompt-form__centered">
-          <span className="before-cursor"> % </span>
-          <button type="button" onClick={() => setModalVisible(true)}>
-            Open
-          </button>
+          <span className="before-cursor"> % { " " }</span>
           <div
             className={
               promptSubmitted

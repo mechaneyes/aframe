@@ -24,37 +24,75 @@
     display: none;
   }
 
+  &__close-button--top-right {
+    color: white;
+    background-color: transparent;
+  }
+
+  // o————————————————————————————————————o input modal —>
+  //
   &--input {
+    position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
 
-    &.modal__main {
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
+    .modal__close-button--top-right {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .modal__main {
+      top: 33%;
+    }
+
+    .modal__inputter {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      @include body-font(300);
+    }
+
+    .before-cursor {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      @include input-mono(200);
+
+      &.no-blinky {
+        &::after {
+            content: " ";
+        }
+      }
+
+      &::after {
+        content: "|";
+        display: inline-block;
+        width: 10px;
+        height: 1.9rem;
+        margin-right: 0;
+        font-size: 1.5rem;
+        // color: red;
+        animation: cursor-blinnk 1s infinite;
+      }
+
+      @keyframes cursor-blinnk {
+        50% {
+          opacity: 0;
+        }
+      }
     }
 
     input {
       display: block;
+      width: 100%;
       color: white;
+      outline: none;
+      margin-left: -5px;
+      @include body-font(300);
+      border: 0;
       border-bottom: 1px solid white;
       background-color: transparent;
-
-      &::before {
-        content: "--";
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        margin-right: 0.1em;
-        color: white;
-        background-color: white;
-        // animation: blink 1s infinite;
-      }
-    }
-
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
     }
 
     &__cursor {
