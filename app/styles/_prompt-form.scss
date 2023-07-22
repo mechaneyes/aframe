@@ -10,7 +10,7 @@
   width: 100%;
   min-height: 53px;
   @include input-mono(100);
-  font-size: 1rem;
+  font-size: 1.1rem;;
   color: white;
   background-color: #414141;
   overflow: hidden;
@@ -54,7 +54,7 @@
     height: auto;
     min-height: 52px;
     padding: 0.8rem 0 0.8rem 11px;
-    font-size: 1.1rem;
+    // font-size: 1.2rem;
 
     div {
       display: flex;
@@ -68,7 +68,7 @@
   }
 
   .before-cursor {
-    @include input-mono(500);
+    @include input-mono(200);
   }
 
   &__cursor {

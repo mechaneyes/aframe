@@ -84,3 +84,39 @@ $stratum1Weight: (
   font-style: normal;
   // letter-spacing: 0.09rem;
 }
+
+$stolzl: (
+  "thin": 100,
+  "light": 200,
+  "book": 300,
+  "regular": 400,
+) !default;
+
+@mixin stratum1($stolzl) {
+  font-family: "stratum-1-web", sans-serif;
+  font-weight: $stolzl;
+  font-style: normal;
+  // letter-spacing: 0.09rem;
+}
+
+
+// Inudstry
+// font-family: "industry", sans-serif;
+// 
+$industry-fontWeight: (
+  "thin": 200,
+  "light": 300,
+  "book": 400,
+  "medium": 500,
+  "bold": 700,
+) !default;
+
+@mixin body-font($industry-fontWeight) {
+  font-family: "industry", sans-serif;
+  font-size: 1.1rem;
+  color: #e2e2e2;
+  font-weight: $industry-fontWeight;
+  font-style: normal;
+  line-height: 1.7rem;
+}
+

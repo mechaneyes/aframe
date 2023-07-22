@@ -7,23 +7,6 @@
 @import "chat";
 @import "pages/hetfield";
 
-// $formaWeight: (
-//   "thin": 200,
-//   "xlight": 300,
-//   "light": 400,
-//   "regular": 500,
-//   "medium": 600,
-//   "bold": 700,
-// ) !default;
-
-// $nokaWeight: (
-//   "hairline": 100,
-//   "light": 300,
-//   "medium": 500,
-//   "semibold": 600,
-//   "bold": 800,
-// ) !default;
-
 :root {
   --prompt-form-height: 53px;
   --distance-from-left: auto;
@@ -36,8 +19,7 @@ body {
 .thirdeyes {
   position: relative;
   padding: 0 1rem 1rem;
-  @include noka(300);
-  color: white;
+  @include body-font(300);
   background-color: black;
 
   @include bp("xsmall") {
@@ -47,32 +29,29 @@ body {
   h1 {
     margin: 0.5rem 0 0.2rem;
     font-size: 2.2rem;
-    color: white;
-    font-weight: 300;
+    font-weight: 200;
     line-height: 3.4rem;
   }
 
   h2 {
     margin: 1rem 0 0.5rem 0;
     font-size: 1.5rem;
-    color: white;
   }
 
   h3 {
     margin: 2rem 0 0.5rem 0;
     font-size: 1.3rem;
-    color: white;
   }
 
   h4 {
     margin: 2rem 0 0.5rem 0;
     font-size: 1.1rem;
-    color: white;
   }
 
   p {
     margin: 0 0 1rem 0;
-    color: white;
+    // font-size: 1.3rem;
+    letter-spacing: 0.06rem;
   }
 
   a {
@@ -87,7 +66,7 @@ body {
   }
 
   .MuiTypography-root {
-    @include noka(300);
+    @include body-font(300);
     font-size: 1rem;
   }
 
@@ -213,17 +192,13 @@ body {
       margin-bottom: 1.5rem;
     }
 
-    &__note {
-      // font-weight: 100;
-    }
-
     &__image {
       margin-top: 2rem;
     }
 
     &__call-to-action {
       margin: 2rem 0;
-      @include noka(500);
+      font-weight: 500;
     }
 
     &__example-prompts {
@@ -238,8 +213,6 @@ body {
       li {
         margin-bottom: 0.9rem;
         color: #24c6ff;
-        font-weight: 300;
-        letter-spacing: 0.1rem;
         line-height: 1.4rem;
         text-decoration: underline;
         text-underline-offset: 5px;
@@ -266,10 +239,6 @@ body {
 
     &__reference {
       margin-bottom: 0.5rem;
-
-      a {
-        font-size: 1rem;
-      }
     }
   }
 
