@@ -14,7 +14,7 @@ import { gptReferencesAtom } from "/services/state-jotai.js";
 
 import "../styles/styles.scss";
 
-export default function Home() {
+export default function Stability() {
   const [introVisible, setIntroVisible] = useAtom(introVisibleAtom);
   const gptFreestyle = useAtomValue(gptFreestyleAtom);
   const gptReferences = useAtomValue(gptReferencesAtom);
@@ -53,10 +53,6 @@ export default function Home() {
           paragraph, in hopes that you won&apos;t notice it appearing after the
           fact. No 3rd paragraph, no image. Sorry.
         </p>
-        {/* <p>
-          Waiting for the image may feel like the passing of many moons, so
-          channel your inner sloth, sit back, and trust the process.
-        </p> */}
         <div className="introduction__image">
           <Image
             src="/party-pic-1024px-1.0.1.jpg"

@@ -4,7 +4,7 @@ const apiKey = process.env.NEXT_PUBLIC_STABILITY_API_KEY;
 
 if (!apiKey) throw new Error("Missing Stability API key.");
 
-export async function stability(image_prompt: string) {
+export async function stability(image_prompt: string, prompt2: boolean) {
   console.log("image_prompt:", image_prompt);
 
   const response = await fetch(
@@ -47,7 +47,13 @@ export async function stability(image_prompt: string) {
   const responseJSON = (await response.json()) as GenerationResponse;
   const theBase = responseJSON.artifacts[0].base64;
   const url = `data:image/png;base64,${theBase}`;
-  const stabilityImg = document.querySelector(".stability-image");
+  
+  let stabilityImg
+  if (prompt2) {
+    stabilityImg = document.querySelector(".stability-image--two");
+  } else {
+    stabilityImg = document.querySelector(".stability-image--one");
+  }
 
   const displayedPrompt = document.createElement("p");
   displayedPrompt.classList.add("displayed-prompt")

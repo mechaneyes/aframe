@@ -265,7 +265,7 @@ body {
 
     .header {
       margin: 0;
-      padding-top: 62px;
+      padding-top: calc(62px + 1rem);
     }
   }
 

@@ -111,9 +111,9 @@ const PromptForm = (props) => {
     }
 
     axios
-      // .post("http://127.0.0.1:5000/prose", newPrompt, {
+      // .post("http://127.0.0.1:5000/image", newPrompt, {
       // .post("http://localhost:3001/prose", newPrompt, {
-      // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
+      // .post(`https://thirdeyes-flask-dev.vercel.app/${endpoint}`, newPrompt, {
       // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
       .post(`https://third-eyes-flask.vercel.app/${endpoint}`, newPrompt, {
         timeout: 90000,
@@ -122,12 +122,16 @@ const PromptForm = (props) => {
         },
       })
       .then((response) => {
+        // o——————————————————o stability —>
+        //
         if (thePage === "stability") {
-          // o——————————————————o stability —>
-          //
-          console.log("responseJson", JSON.parse(response.data[2]));
+          // console.log("responseJson", JSON.parse(response.data[2]));
+
+          const prompt2 = true;
           const imagePrompts = JSON.parse(response.data[2]);
+
           stability(imagePrompts.img_description_1);
+          stability(imagePrompts.img_description_2, prompt2);
         }
 
         setGptFreestyle(response.data[0]);
