@@ -4,10 +4,10 @@ import { useSetAtom, useAtomValue } from "jotai";
 
 import Modal from "../Modal/Modal";
 
-import { introVisibleAtom } from "/services/state-jotai.js";
-import { examplePromptAtom } from "/services/state-jotai.js";
-import { gptFreestyleAtom } from "/services/state-jotai.js";
-import { gptReferencesAtom } from "/services/state-jotai.js";
+import { introVisibleAtom } from "/store/state-jotai.js";
+import { examplePromptAtom } from "/store/state-jotai.js";
+import { gptFreestyleAtom } from "/store/state-jotai.js";
+import { gptReferencesAtom } from "/store/state-jotai.js";
 
 const PromptForm = (props) => {
   const textareaRef = useRef(null);
