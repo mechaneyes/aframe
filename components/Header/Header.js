@@ -42,14 +42,14 @@ const Nav = (props) => {
             <Link href="/stability">Stability</Link>
           </li>{" "}
           &middot;{" "}
-          <li
+          {/* <li
             className={`nav__item nav__item--chat ${
               page == "chat" ? "nav__item--active" : ""
             }`}
           >
             <Link href="/chat">Chat</Link>
           </li>{" "}
-          &middot;{" "}
+          &middot;{" "} */}
           <li
             className={`nav__item nav__item--about ${
               page == "about" ? "nav__item--active" : ""

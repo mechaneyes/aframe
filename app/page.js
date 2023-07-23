@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import Image from "next/image";
 
@@ -14,11 +14,14 @@ import { gptReferencesAtom } from "/services/state-jotai.js";
 import "./styles/styles.scss";
 
 export default function Home() {
-  // const [placeholderVisible, setPlaceholderVisible] = useState(true);
-  const introVisible = useAtomValue(introVisibleAtom);
+  const [introVisible, setIntroVisible] = useAtom(introVisibleAtom);
   const gptFreestyle = useAtomValue(gptFreestyleAtom);
   const gptReferences = useAtomValue(gptReferencesAtom);
   const setExamplePrompt = useSetAtom(examplePromptAtom);
+
+  useEffect(() => {
+    setIntroVisible(true);
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   // o————————————————————————————————————o trigger via example prompts —>
   //
@@ -38,7 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="thirdeyes">
+    <main className="thirdeyes thirdeyes--home">
       <PromptForm />
       <Header page="home" />
 

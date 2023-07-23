@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useSetAtom, useAtomValue } from "jotai";
 
+import { stability } from "../../app/stability/stability";
 import Modal from "../Modal/Modal";
 
 import { introVisibleAtom } from "/services/state-jotai.js";
@@ -12,6 +13,7 @@ import { gptReferencesAtom } from "/services/state-jotai.js";
 const PromptForm = (props) => {
   const textareaRef = useRef(null);
   const formRef = useRef(null);
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [inputValue, setInputValue] = useState("");
@@ -97,19 +99,38 @@ const PromptForm = (props) => {
     const newPrompt = {
       prompt: requestValue,
     };
-    console.log("requestValue", requestValue);
+
+    const thePage = window.location.pathname.split("/").pop();
+
+    // change the api endpoint based on the page
+    // 
+    let endpoint = "";
+    if (thePage === "stability") {
+      endpoint = "image";
+    } else {
+      endpoint = "prose";
+    }
 
     axios
       // .post("http://127.0.0.1:5000/prose", newPrompt, {
       // .post("http://localhost:3001/prose", newPrompt, {
       // .post("https://thirdeyes-flask-dev.vercel.app/prose", newPrompt, {
-      .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      // .post("https://third-eyes-flask.vercel.app/prose", newPrompt, {
+      .post(`https://third-eyes-flask.vercel.app/${endpoint}`, newPrompt, {
         timeout: 90000,
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
+        if (thePage === "stability") {
+          // o——————————————————o stability —>
+          //
+          console.log("responseJson", JSON.parse(response.data[2]));
+          const imagePrompts = JSON.parse(response.data[2]);
+          stability(imagePrompts.img_description_1);
+        }
+
         setGptFreestyle(response.data[0]);
 
         ((response) => {
@@ -145,7 +166,6 @@ const PromptForm = (props) => {
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         setIntroVisible(false);
-        // setTriggerDisplay(!triggerDisplay);
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
@@ -195,11 +215,11 @@ const PromptForm = (props) => {
     textareaRef.current.focus();
     !firstRun && removeEventListener("keydown", setModalVisible);
     setFirstRun(false);
-  }, [modalVisible]);
+  }, [modalVisible]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     examplePrompt !== "" && makeRequest(examplePrompt);
-  }, [examplePrompt]);
+  }, [examplePrompt]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

@@ -275,7 +275,7 @@ body {
     .introduction {
       &__image {
         img {
-          filter: invert(1);
+          filter: hue-rotate(320deg);
         }
       }
     }
