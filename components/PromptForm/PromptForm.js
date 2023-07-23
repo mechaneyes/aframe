@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useSetAtom, useAtomValue } from "jotai";
 
-import { stability } from "../../app/stability/stability";
 import Modal from "../Modal/Modal";
 
 import { introVisibleAtom } from "/services/state-jotai.js";
@@ -27,7 +26,7 @@ const PromptForm = (props) => {
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
   const setGptReferences = useSetAtom(gptReferencesAtom);
 
-  const { bottomOfPage } = props;
+  const { stability, bottomOfPage } = props;
 
   // o————————————————————————————————————o header placeholder —>
   //

@@ -55,7 +55,7 @@ export default function Home() {
         }
       >
         <p className="introduction__description">
-          Use OpenAI&apos;s GPT-3 (the technology powering ChatGPT) to
+          Use OpenAI&apos;s GPT-3.5 (the technology powering ChatGPT) to
           interrogate a knowledge base built from 18,393 Pitchfork reviews. The
           app will surface insights and references for both industry needs and
           personal music discovery.

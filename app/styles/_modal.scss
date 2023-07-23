@@ -41,8 +41,12 @@
 
     .modal__main {
       top: 33%;
-      width: 100%;
+      width: 80%;
       max-width: 650px;
+
+      @include bp("xsmall") {
+        width: 100%;
+      }
     }
 
     .modal__inputter {
