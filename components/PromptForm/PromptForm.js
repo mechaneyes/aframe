@@ -12,7 +12,7 @@ import { gptReferencesAtom } from "/services/state-jotai.js";
 const PromptForm = (props) => {
   const textareaRef = useRef(null);
   const formRef = useRef(null);
-  
+
   const [modalVisible, setModalVisible] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [inputValue, setInputValue] = useState("");
@@ -102,7 +102,7 @@ const PromptForm = (props) => {
     const thePage = window.location.pathname.split("/").pop();
 
     // change the api endpoint based on the page
-    // 
+    //
     let endpoint = "";
     if (thePage === "stability") {
       endpoint = "image";
@@ -197,13 +197,15 @@ const PromptForm = (props) => {
     this.style.height = this.scrollHeight + "px";
   }
 
-  const tx = document.getElementsByTagName("textarea");
-  for (let i = 0; i < tx.length; i++) {
-    tx[i].setAttribute(
-      "style",
-      "height:" + (tx[i].scrollHeight - 10) + "px;overflow-y:hidden;"
-    );
-    tx[i].addEventListener("input", OnInput, false);
+  if (typeof document !== "undefined") {
+    const tx = document.getElementsByTagName("textarea");
+    for (let i = 0; i < tx.length; i++) {
+      tx[i].setAttribute(
+        "style",
+        "height:" + (tx[i].scrollHeight - 10) + "px;overflow-y:hidden;"
+      );
+      tx[i].addEventListener("input", OnInput, false);
+    }
   }
 
   useEffect(() => {
@@ -214,11 +216,11 @@ const PromptForm = (props) => {
     textareaRef.current.focus();
     !firstRun && removeEventListener("keydown", setModalVisible);
     setFirstRun(false);
-  }, [modalVisible]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [modalVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     examplePrompt !== "" && makeRequest(examplePrompt);
-  }, [examplePrompt]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [examplePrompt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
