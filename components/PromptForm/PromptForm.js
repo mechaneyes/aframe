@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import axios from "axios";
 import { useSetAtom, useAtomValue } from "jotai";
 
@@ -197,7 +197,7 @@ const PromptForm = (props) => {
     this.style.height = this.scrollHeight + "px";
   }
 
-  if (typeof document !== "undefined") {
+  useEffect(() => {
     const tx = document.getElementsByTagName("textarea");
     for (let i = 0; i < tx.length; i++) {
       tx[i].setAttribute(
@@ -206,7 +206,7 @@ const PromptForm = (props) => {
       );
       tx[i].addEventListener("input", OnInput, false);
     }
-  }
+  }, []);
 
   useEffect(() => {
     addEventListener("keydown", setModalVisible);
