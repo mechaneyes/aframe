@@ -99,6 +99,9 @@ const PromptForm = (props) => {
       prompt: requestValue,
     };
 
+    const textarea = document.querySelector('.modal--input textarea')
+    textarea.blur();
+
     const thePage = window.location.pathname.split("/").pop();
 
     // change the api endpoint based on the page
@@ -166,7 +169,6 @@ const PromptForm = (props) => {
         })(response);
       })
       .then(() => {
-        console.log('examplePrompt', examplePrompt)
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         setIntroVisible(false);
@@ -189,13 +191,13 @@ const PromptForm = (props) => {
   function handleSubmit(event) {
     event.preventDefault();
     makeRequest(inputValue);
-    console.log(inputValue);
   }
 
   function handleEnterKey(event) {
     if (event.key === "Enter") {
       handleSubmit(event);
-    } else if (event.key === "Escape") {
+    } 
+    if (event.key === "Escape") {
       setModalVisible(false);
     }
   }
@@ -229,6 +231,8 @@ const PromptForm = (props) => {
   useEffect(() => {
     examplePrompt !== "" && makeRequest(examplePrompt);
   }, [examplePrompt]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
 
   return (
     <>
