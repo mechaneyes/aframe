@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     setIntroVisible(true);
-  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // o————————————————————————————————————o trigger via example prompts —>
   //
@@ -57,11 +57,15 @@ export default function Home() {
         <p className="introduction__description">
           Use OpenAI&apos;s GPT-3.5 (the technology powering ChatGPT) to
           interrogate a knowledge base built from 18,393 Pitchfork reviews. The
-          app will surface insights and references for both industry needs and
-          personal music discovery.
+          app will surface insights and references for your personal music
+          discovery.
         </p>
-        <p className="introduction__call-to-action">Enter your prompt up top to begin.</p>
-        <p className="introduction__note">Note: Interacting with LLMs takes time. Patience, Daniel-son.</p>
+        <p className="introduction__call-to-action">
+          Enter your prompt up top to begin.
+        </p>
+        <p className="introduction__note">
+          Note: Interacting with LLMs takes time. Patience, Daniel-son.
+        </p>
         <div className="introduction__example-prompts">
           <h3>Example Prompts</h3>
           <ul>
@@ -69,7 +73,10 @@ export default function Home() {
             <li>
               What&apos;s Frankie Knuckles&apos;s impact on music and culture?
             </li>
-            <li>Give me a 20 song playlist inspired by David Mancuso&apos;s party, The Loft</li>
+            <li>
+              Give me a 20 song playlist inspired by David Mancuso&apos;s party,
+              The Loft
+            </li>
             <li>Dissect Radiohead&apos;s Kid A</li>
             <li>What is the history of the Roland TB-303?</li>
             <li>Tell me about music that incorporates NASA mission sounds</li>
