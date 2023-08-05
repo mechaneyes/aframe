@@ -195,6 +195,8 @@ const PromptForm = (props) => {
   function handleEnterKey(event) {
     if (event.key === "Enter") {
       handleSubmit(event);
+    } else if (event.key === "Escape") {
+      setModalVisible(false);
     }
   }
 
