@@ -20,7 +20,7 @@ export default function Page() {
               18,393 Pitchfork reviews
             </a>
             {" "}assembled during the frosty winter of 2016-2017. While the data
-            may not be the most current, it's provided a solid foundation for my
+            may not be the most current, it&apos;s provided a solid foundation for my
             venture into music-related data and my ongoing exploration of
             generative AI.
           </p>
@@ -32,7 +32,7 @@ export default function Page() {
           <p>
             I warmly invite your feedback and comments. You can reach me at
             {"  "}
-            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>. Let's
+            <a href="mailto:ray@mechaneyes.com">ray@mechaneyes.com</a>. Let&apos;s
             collaborate to merge AI and music data in innovative ways.
           </p>
         </div>

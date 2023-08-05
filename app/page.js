@@ -69,7 +69,7 @@ export default function Home() {
             <li>
               What&apos;s Frankie Knuckles&apos;s impact on music and culture?
             </li>
-            <li>Give me a 20 song playlist inspired by David Mancuso's party, The Loft</li>
+            <li>Give me a 20 song playlist inspired by David Mancuso&apos;s party, The Loft</li>
             <li>Dissect Radiohead&apos;s Kid A</li>
             <li>What is the history of the Roland TB-303?</li>
             <li>Tell me about music that incorporates NASA mission sounds</li>
