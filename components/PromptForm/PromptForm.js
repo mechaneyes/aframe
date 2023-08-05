@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, use } from "react";
 import axios from "axios";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 
 import Modal from "../Modal/Modal";
 
@@ -21,7 +21,7 @@ const PromptForm = (props) => {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
 
-  const examplePrompt = useAtomValue(examplePromptAtom);
+  const [examplePrompt, setExamplePrompt] = useAtom(examplePromptAtom);
   const setIntroVisible = useSetAtom(introVisibleAtom);
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
   const setGptReferences = useSetAtom(gptReferencesAtom);
@@ -166,9 +166,11 @@ const PromptForm = (props) => {
         })(response);
       })
       .then(() => {
+        console.log('examplePrompt', examplePrompt)
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         setIntroVisible(false);
+        setExamplePrompt("");
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;

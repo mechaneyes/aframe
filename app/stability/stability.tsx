@@ -7,6 +7,9 @@ if (!apiKey) throw new Error("Missing Stability API key.");
 export async function stability(image_prompt: string, prompt2: boolean) {
   console.log("image_prompt:", image_prompt);
 
+  // SDXL
+  // https://platform.stability.ai/docs/release-notes#whats-new-1
+  // 
   const response = await fetch(
     `${apiHost}/v1/generation/${engineId}/text-to-image`,
     {
