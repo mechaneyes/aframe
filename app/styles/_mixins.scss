@@ -99,6 +99,20 @@ $stolzl: (
   // letter-spacing: 0.09rem;
 }
 
+// Ethnocentric
+$ethnocentric: (
+  "extralight": 200,
+  "light": 300,
+  "regular": 400,
+  "bold": 700,
+) !default;
+
+@mixin ethnocentric() {
+  font-family: "ethnocentric", sans-serif;
+  font-weight: $stolzl;
+  font-style: normal;
+  // letter-spacing: 0.09rem;
+}
 
 // Inudstry
 // font-family: "industry", sans-serif;
@@ -120,3 +134,11 @@ $industry-fontWeight: (
   line-height: 1.7rem;
 }
 
+
+// H1 Font
+// 
+
+@mixin h1-font() {
+  font-family: ethnocentric, sans-serif;
+  font-style: normal;
+}
