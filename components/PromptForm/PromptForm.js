@@ -21,31 +21,12 @@ const PromptForm = (props) => {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
 
-  const [examplePrompt, setExamplePrompt] = useAtom(examplePromptAtom);
+  const examplePrompt = useAtomValue(examplePromptAtom);
   const setIntroVisible = useSetAtom(introVisibleAtom);
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
   const setGptReferences = useSetAtom(gptReferencesAtom);
 
   const { stability, bottomOfPage } = props;
-
-  // o————————————————————————————————————o header placeholder —>
-  //
-  // typewriter animation on load
-  //
-  useEffect(() => {
-    let i = 0;
-    const copy = "start exploring here: ";
-    const speed = 50;
-    function writeTyper() {
-      if (i < copy.length) {
-        document.querySelector(".hello__typewriter").innerHTML +=
-          copy.charAt(i);
-        i++;
-        setTimeout(writeTyper, speed);
-      }
-    }
-    writeTyper();
-  }, []);
 
   // o————————————————————————————————————o form height —>
   //
@@ -90,16 +71,16 @@ const PromptForm = (props) => {
 
     const responseTimer = setInterval(setTime, 1000);
 
-    const inputElement =
-      document.getElementsByClassName("prompt-form__inner")[0];
-    inputElement.blur();
-    inputElement.innerHTML = requestValue;
+    // const inputElement =
+    //   document.getElementsByClassName("prompt-form__inner")[0];
+    // inputElement.blur();
+    // inputElement.innerHTML = requestValue;
 
     const newPrompt = {
       prompt: requestValue,
     };
 
-    const textarea = document.querySelector('.modal--input textarea')
+    const textarea = document.querySelector("textarea");
     textarea.blur();
 
     const thePage = window.location.pathname.split("/").pop();
@@ -172,10 +153,11 @@ const PromptForm = (props) => {
         setSpinnerVisible(false);
         setPromptSubmitted(false);
         setIntroVisible(false);
-        setExamplePrompt("");
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
+        const refocusTextarea = document.querySelector("textarea");
+        refocusTextarea.focus();
       })
       .catch((error) => {
         console.log(error);
@@ -196,7 +178,7 @@ const PromptForm = (props) => {
   function handleEnterKey(event) {
     if (event.key === "Enter") {
       handleSubmit(event);
-    } 
+    }
     if (event.key === "Escape") {
       setModalVisible(false);
     }
@@ -208,15 +190,22 @@ const PromptForm = (props) => {
   }
 
   useEffect(() => {
-    const tx = document.getElementsByTagName("textarea");
-    for (let i = 0; i < tx.length; i++) {
-      tx[i].setAttribute(
-        "style",
-        "height:" + (tx[i].scrollHeight - 10) + "px;overflow-y:hidden;"
-      );
-      tx[i].addEventListener("input", OnInput, false);
-    }
-  }, []);
+    const introText = document.querySelector("textarea");
+    introText.setAttribute(
+      "style",
+      "height:" + (introText.scrollHeight - 20) + "px;overflow-y:hidden;"
+    );
+    introText.addEventListener("input", OnInput, false);
+
+    const responseForm = document.querySelector(
+      ".response__container textarea"
+    );
+    responseForm.setAttribute(
+      "style",
+      "height:" + (responseForm.scrollHeight - 20) + "px;overflow-y:hidden;"
+    );
+    responseForm.addEventListener("input", OnInput, false);
+  });
 
   useEffect(() => {
     addEventListener("keydown", setModalVisible);
@@ -228,15 +217,27 @@ const PromptForm = (props) => {
     setFirstRun(false);
   }, [modalVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // o————————————————————————————————————o trigger via example prompts —>
+  //
   useEffect(() => {
-    examplePrompt !== "" && makeRequest(examplePrompt);
-  }, [examplePrompt]); // eslint-disable-line react-hooks/exhaustive-deps
+    const examplePrompts = document.querySelectorAll(
+      ".introduction__example-prompts li"
+    );
 
-
+    examplePrompts.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        event.stopImmediatePropagation(); // Stop other event listeners from firing
+        makeRequest(event.target.textContent);
+        setInputValue(event.target.textContent);
+      });
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      <Modal
+      {/* <Modal
         show={modalVisible}
         setModalVisible={setModalVisible}
         typeUse="modal--input"
@@ -253,53 +254,58 @@ const PromptForm = (props) => {
             ></textarea>
           </form>
         </div>
-      </Modal>
+      </Modal> */}
       <section
         className={`${
           bottomOfPage ? "prompt-form prompt-form--bottom" : "prompt-form"
         }`}
         onClick={() => setModalVisible(true)}
       >
-        <div className="prompt-form__centered">
-          <span className="before-cursor"> % </span>
-          <div
-            className={
-              promptSubmitted
-                ? "prompt-form__input prompt-form--submitted"
-                : "prompt-form__input"
-            }
-            ref={formRef}
-          >
-            <div className="prompt-form__inner" tabIndex="0">
-              <div className="hello">
+        <span className="before-cursor"> % </span>
+        <div
+          className={
+            promptSubmitted
+              ? "prompt-form__input prompt-form--submitted"
+              : "prompt-form__input"
+          }
+          ref={formRef}
+        >
+          <div className="prompt-form__inner" tabIndex="0">
+            <form onSubmit={handleSubmit}>
+              <textarea
+                ref={textareaRef}
+                placeholder="Explore music insights"
+                value={inputValue}
+                onChange={handleChange}
+                onKeyDown={handleEnterKey}
+              ></textarea>
+            </form>
+            {/* <div className="hello">
                 <div className="hello__typewriter"></div>
                 <div className="prompt-form__cursor"></div>
-              </div>
-            </div>
+              </div> */}
           </div>
-          <div
-            className={
-              spinnerVisible
-                ? "spinner spinner--visible lds-ripple"
-                : "spinner spinner--hidden"
-            }
-          >
-            {spinnerVisible ? (
-              <>
-                <div></div>
-                <div></div>
-              </>
-            ) : (
-              <p
-                className={
-                  spinnerVisible
-                    ? "timer timer--hidden"
-                    : "timer timer--visible"
-                }
-                dangerouslySetInnerHTML={{ __html: displayTimer }}
-              ></p>
-            )}
-          </div>
+        </div>
+        <div
+          className={
+            spinnerVisible
+              ? "spinner spinner--visible lds-ripple"
+              : "spinner spinner--hidden"
+          }
+        >
+          {spinnerVisible ? (
+            <>
+              <div></div>
+              <div></div>
+            </>
+          ) : (
+            <p
+              className={
+                spinnerVisible ? "timer timer--hidden" : "timer timer--visible"
+              }
+              dangerouslySetInnerHTML={{ __html: displayTimer }}
+            ></p>
+          )}
         </div>
       </section>
     </>

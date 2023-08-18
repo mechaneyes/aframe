@@ -4,17 +4,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 53px;
-  @include input-mono(100);
-  font-size: 1.1rem;;
+  margin-bottom: 32px;
+  padding-left: 12px;
+  @include body-font(400);
+  letter-spacing: 0.05rem;
   color: white;
-  background-color: #414141;
+  // background-color: #414141;
   overflow: hidden;
-  border-bottom: 1px solid white;
+  border: 1px solid #6d6d6d;
+
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
 
   &--bottom {
     bottom: 0;
@@ -28,10 +34,6 @@
     font-style: italic;
   }
 
-  &__inner {
-    padding: 8px 0;
-  }
-
   &__centered {
     display: flex;
     justify-content: space-between;
@@ -42,7 +44,7 @@
     padding: 0 1rem;
 
     @include bp("xsmall") {
-      padding: 0 2rem;
+      padding: 0 1rem 0 0;
     }
 
     @media (min-width: 720px) {
@@ -56,18 +58,38 @@
     align-items: center;
     width: 100%;
     height: auto;
-    min-height: 52px;
+    // min-height: 52px;
     padding: 0.8rem 0 0.8rem 11px;
-    padding: 0 0 0 11px;
+    padding: 0 0 0 8px;
+  }
 
-    div {
+  &__inner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 4px 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    form {
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
 
-      &:focus {
-        outline: none;
-      }
+    textarea {
+      min-height: 30px;
+      width: 100%;
+      @include body-font(300);
+      color: white;
+      line-height: 30px;
+      border: 0;
+      background-color: transparent;
+      resize: none;
     }
   }
 
@@ -101,7 +123,7 @@
 
   display: flex;
   align-items: center;
-  margin-right: 0;
+  margin-right: 8px;
 
   .timer {
     margin: 0;

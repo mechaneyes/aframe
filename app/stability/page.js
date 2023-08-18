@@ -25,7 +25,7 @@ export default function Stability() {
 
   return (
     <main className="thirdeyes thirdeyes--stability">
-      <PromptForm stability={stability} />
+      {/* <PromptForm stability={stability} /> */}
       <Header page="stability" />
 
       <section

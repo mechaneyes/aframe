@@ -25,24 +25,23 @@ export default function Home() {
 
   // o————————————————————————————————————o trigger via example prompts —>
   //
-  useEffect(() => {
-    const examplePrompts = document.querySelectorAll(
-      ".introduction__example-prompts li"
-    );
-    examplePrompts.forEach((item) => {
-      item.addEventListener("click", (event) => {
-        setTimeout(() => {
-          setExamplePrompt(event.target.textContent);
-        }, 100);
-      });
-    });
+  // useEffect(() => {
+  //   const examplePrompts = document.querySelectorAll(
+  //     ".introduction__example-prompts li"
+  //   );
+  //   examplePrompts.forEach((item) => {
+  //     item.addEventListener("click", (event) => {
+  //       setTimeout(() => {
+  //         setExamplePrompt(event.target.textContent);
+  //       }, 100);
+  //     });
+  //   });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <main className="thirdeyes thirdeyes--home">
-      <PromptForm />
       <Header page="home" />
 
       {/* // o————————————————————————————————————o introduction —> */}
@@ -56,13 +55,16 @@ export default function Home() {
       >
         <p className="introduction__description">
           Use OpenAI&apos;s GPT-3.5 (the technology powering ChatGPT) to
-          interrogate a knowledge base built from 18,393 Pitchfork reviews. The
-          app will surface insights and references for your personal music
+          interrogate a knowledge base built from 18,393 Pitchfork reviews.
+          Aframe will surface insights and references for your personal music
           discovery.
         </p>
-        <p className="introduction__call-to-action">
+        {/* <p className="introduction__call-to-action">
           Enter your prompt up top to begin.
-        </p>
+        </p> */}
+
+        <PromptForm />
+
         <p className="introduction__note">
           Note: Interacting with LLMs takes time. Patience, Daniel-son.
         </p>
@@ -108,6 +110,7 @@ export default function Home() {
             : "response__container response__container--visible"
         }
       >
+        <PromptForm />
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}

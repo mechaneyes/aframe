@@ -18,12 +18,6 @@ const Nav = (props) => {
 
   return (
     <section className="header">
-      <h1
-        className="header__title"
-        onClick={() => window.location.reload(false)}
-      >
-        {pageTitle}
-      </h1>
       <nav className="nav">
         <ul>
           <li
@@ -73,6 +67,12 @@ const Nav = (props) => {
           </li>
         </ul>
       </nav>
+      <h1
+        className="header__title"
+        onClick={() => window.location.reload(false)}
+      >
+        {pageTitle}
+      </h1>
     </section>
   );
 };
