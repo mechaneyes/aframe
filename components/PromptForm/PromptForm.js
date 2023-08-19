@@ -8,6 +8,8 @@ import { introVisibleAtom } from "/store/state-jotai.js";
 import { examplePromptAtom } from "/store/state-jotai.js";
 import { gptFreestyleAtom } from "/store/state-jotai.js";
 import { gptReferencesAtom } from "/store/state-jotai.js";
+import { inputValueAtom } from "/store/state-jotai.js";
+import { totalTimeAtom } from "/store/state-jotai.js";
 
 const PromptForm = (props) => {
   const textareaRef = useRef(null);
@@ -15,7 +17,10 @@ const PromptForm = (props) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useAtom(inputValueAtom);
+  const [totalTime, setTotalTime] = useAtom(totalTimeAtom);
+  const intervalIdRef = useRef(null);
+  const [timerVisible, setTimerVisible] = useState(false);
   const [seenIds, setSeenIds] = useState(new Set());
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
@@ -33,31 +38,43 @@ const PromptForm = (props) => {
   // height of prompt form grows as user types. using a css
   // variable this pushes the chat responses down
   //
-  useEffect(() => {
-    const root = document.documentElement;
-    const promptForm = document.querySelector(".prompt-form");
+  function handleTextareaInput() {
+    if (textareaRef.current) {
+      // const promptFormHeight = `${textareaRef.current.offsetHeight}px`;
+      // document.documentElement.style.setProperty("--prompt-form-height", promptFormHeight);
 
-    function updateResponseContainerHeight() {
-      const promptFormHeight = promptForm.offsetHeight;
-      root.style.setProperty("--prompt-form-height", `${promptFormHeight}px`);
-    }
+      document.querySelector(
+        ".prompt-form"
+      ).style.height = `${textareaRef.current.scrollHeight}px`;
+      document.querySelector(
+        ".prompt-form__input"
+      ).style.height = `${textareaRef.current.scrollHeight}px`;
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        updateResponseContainerHeight();
+      const promptForm = document.querySelector(".prompt-form");
+      if (parseInt(promptForm.style.height) > 44) {
+        document.querySelector(".prompt-form textarea").style.paddingBottom = "10px";
       }
-    });
-    resizeObserver.observe(formRef.current);
-
-    updateResponseContainerHeight();
-  }, []);
+    }
+  }
 
   // o————————————————————————————————————o query timer —>
   //
-  let totalSeconds = 0;
+  let countTime;
+  const startTimer = () => {
+    countTime = 0;
+    intervalIdRef.current = setInterval(setTime, 100);
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalIdRef.current);
+  };
 
   const setTime = () => {
-    ++totalSeconds;
+    countTime = Number(countTime) + 0.1;
+    countTime = countTime.toFixed(1);
+
+    setTotalTime(countTime);
+    console.log("totalTime", totalTime);
   };
 
   // o————————————————————————————————————o api, waves hands —>
@@ -69,7 +86,8 @@ const PromptForm = (props) => {
     setModalVisible(false);
     setGptReferences([]);
 
-    const responseTimer = setInterval(setTime, 1000);
+    startTimer();
+    setTimerVisible(true);
 
     // const inputElement =
     //   document.getElementsByClassName("prompt-form__inner")[0];
@@ -106,6 +124,8 @@ const PromptForm = (props) => {
         },
       })
       .then((response) => {
+        stopTimer();
+
         // o——————————————————o stability —>
         //
         if (thePage === "stability") {
@@ -158,6 +178,7 @@ const PromptForm = (props) => {
         totalSeconds = 0;
         const refocusTextarea = document.querySelector("textarea");
         refocusTextarea.focus();
+        textarea.innerHTML = inputValue;
       })
       .catch((error) => {
         console.log(error);
@@ -166,10 +187,6 @@ const PromptForm = (props) => {
 
   // o————————————————————————————————————o form + modal —>
   //
-  function handleChange(event) {
-    setInputValue(event.target.value);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     makeRequest(inputValue);
@@ -183,29 +200,6 @@ const PromptForm = (props) => {
       setModalVisible(false);
     }
   }
-
-  function OnInput() {
-    this.style.height = 0;
-    this.style.height = this.scrollHeight + "px";
-  }
-
-  useEffect(() => {
-    const introText = document.querySelector("textarea");
-    introText.setAttribute(
-      "style",
-      "height:" + (introText.scrollHeight - 20) + "px;overflow-y:hidden;"
-    );
-    introText.addEventListener("input", OnInput, false);
-
-    const responseForm = document.querySelector(
-      ".response__container textarea"
-    );
-    responseForm.setAttribute(
-      "style",
-      "height:" + (responseForm.scrollHeight - 20) + "px;overflow-y:hidden;"
-    );
-    responseForm.addEventListener("input", OnInput, false);
-  });
 
   useEffect(() => {
     addEventListener("keydown", setModalVisible);
@@ -276,37 +270,15 @@ const PromptForm = (props) => {
                 ref={textareaRef}
                 placeholder="Explore music insights"
                 value={inputValue}
-                onChange={handleChange}
+                onChange={(e) => setInputValue(e.target.value)}
+                onInput={handleTextareaInput}
                 onKeyDown={handleEnterKey}
               ></textarea>
             </form>
-            {/* <div className="hello">
-                <div className="hello__typewriter"></div>
-                <div className="prompt-form__cursor"></div>
-              </div> */}
           </div>
         </div>
-        <div
-          className={
-            spinnerVisible
-              ? "spinner spinner--visible lds-ripple"
-              : "spinner spinner--hidden"
-          }
-        >
-          {spinnerVisible ? (
-            <>
-              <div></div>
-              <div></div>
-            </>
-          ) : (
-            <p
-              className={
-                spinnerVisible ? "timer timer--hidden" : "timer timer--visible"
-              }
-              dangerouslySetInnerHTML={{ __html: displayTimer }}
-            ></p>
-          )}
-        </div>
+        {/* <p className={timerVisible ? "timer timer--visible" : "timer timer--hidden"}>{totalTime}s</p> */}
+        <p className="timer timer--visible">{totalTime}s</p>
       </section>
     </>
   );

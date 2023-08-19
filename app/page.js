@@ -115,8 +115,16 @@ export default function Home() {
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
         ></div>
-        <h2>References</h2>
-        <div className="response response--references">{gptReferences}</div>
+        <div className="response response__intro">
+          <h2>References</h2>
+          <p>Wondering where the AI's insights come from?</p>{" "}
+          <p>
+            For clarity and trust, we've provided direct links to the relevant
+            Pitchfork reviews here, guiding you directly to the original
+            content.
+          </p>
+        </div>
+        <div className="response response__references">{gptReferences}</div>
       </section>
     </main>
   );

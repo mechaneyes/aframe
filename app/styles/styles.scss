@@ -9,7 +9,7 @@
 @import "pages/hetfield";
 
 :root {
-  --prompt-form-height: 53px;
+  --prompt-form-height: 44px;
   --distance-from-left: auto;
 }
 
@@ -29,6 +29,10 @@ body {
 
   @include bp("xsmall") {
     padding: 0 2rem 2rem;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   h1 {
@@ -198,6 +202,10 @@ body {
       cursor: pointer;
     }
 
+    &__description {
+      margin-bottom: 24px;
+    }
+
     &__feedback {
       margin-bottom: 1.5rem;
     }
@@ -250,6 +258,10 @@ body {
       &--hidden {
         display: none;
       }
+    }
+
+    &__intro {
+      margin: 56px 0 24px;
     }
 
     &__reference {
