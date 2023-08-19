@@ -25,7 +25,7 @@ const PromptForm = (props) => {
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
-  const isMobile = window.innerWidth <= 768; // Set the breakpoint to 768px or your desired value
+  const [thePage, setThePage] = useState("");
 
   const examplePrompt = useAtomValue(examplePromptAtom);
   const setIntroVisible = useSetAtom(introVisibleAtom);
@@ -33,6 +33,14 @@ const PromptForm = (props) => {
   const setGptReferences = useSetAtom(gptReferencesAtom);
 
   const { stability, bottomOfPage } = props;
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setIsMobile(window.innerWidth <= 768);
+    }
+  }, []);
 
   // o————————————————————————————————————o form height —>
   //
@@ -97,7 +105,7 @@ const PromptForm = (props) => {
     const textarea = document.querySelector("textarea");
     textarea.blur();
 
-    const thePage = window.location.pathname.split("/").pop();
+    setThePage(window.location.pathname.split("/").pop());
 
     // change the api endpoint based on the page
     //
