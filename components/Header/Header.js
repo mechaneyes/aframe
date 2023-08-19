@@ -2,23 +2,22 @@ import Link from "next/link";
 
 const Nav = (props) => {
   let page = props.page;
-  let pageTitle = "Third Eyes";
+  let pageTitle = "Aframe";
 
   if (page == "stability") {
-    pageTitle = "Third Eyes v Stability AI";
+    pageTitle = "Aframe v Stability AI";
   }
 
   if (page == "chat") {
-    pageTitle = "Third Chat";
+    pageTitle = "Aframe Chat";
   }
 
   if (page == "about") {
-    pageTitle = "About Third Eyes";
+    pageTitle = "About Aframe";
   }
 
   return (
     <section className="header">
-      <h1 className="header__title">{pageTitle}</h1>
       <nav className="nav">
         <ul>
           <li
@@ -37,14 +36,14 @@ const Nav = (props) => {
             <Link href="/stability">Stability</Link>
           </li>{" "}
           &middot;{" "}
-          <li
+          {/* <li
             className={`nav__item nav__item--chat ${
               page == "chat" ? "nav__item--active" : ""
             }`}
           >
             <Link href="/chat">Chat</Link>
           </li>{" "}
-          &middot;{" "}
+          &middot;{" "} */}
           <li
             className={`nav__item nav__item--about ${
               page == "about" ? "nav__item--active" : ""
@@ -68,6 +67,12 @@ const Nav = (props) => {
           </li>
         </ul>
       </nav>
+      <h1
+        className="header__title"
+        onClick={() => window.location.reload(false)}
+      >
+        {pageTitle}
+      </h1>
     </section>
   );
 };

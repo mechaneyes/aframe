@@ -4,7 +4,8 @@
   display: block;
   width: 100%;
   max-width: 650px;
-  margin-top: calc(var(--prompt-form-height) + 1rem);
+  // margin-top: calc(var(--prompt-form-height) + 2rem);
+  margin-top: 16px;
 
   &__title {
     color: white;
@@ -14,9 +15,10 @@
 // o————————————————————————————————————o nav —>
 //
 nav {
+  margin-bottom: 24px;
   font-weight: 300;
-  font-size: 1.1rem;
-  letter-spacing: 0.09rem;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
   line-height: 1.7rem;
 
   ul {

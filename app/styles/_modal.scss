@@ -1,0 +1,108 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+
+  &__main {
+    position: fixed;
+    width: 80%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--display-block {
+    display: block;
+
+    & ~ section {
+      filter: blur(3px);
+    }
+  }
+
+  &--display-none {
+    display: none;
+  }
+
+  &__close-button--top-right {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 1.6rem;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  // o————————————————————————————————————o input modal —>
+  //
+  &--input {
+    position: fixed;
+
+    .modal__main {
+      top: 33%;
+      width: 80%;
+      max-width: 650px;
+
+      @include bp("xsmall") {
+        width: 100%;
+      }
+    }
+
+    .modal__inputter {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      @include body-font(300);
+    }
+
+    .before-cursor {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-right: 5px;
+      @include input-mono(200);
+    }
+
+    form {
+      width: 100%;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      height: 0rem;
+      min-height: 1.5rem;
+      color: white;
+      outline: none;
+      margin-left: 0;
+      @include body-font(300);
+      line-height: 0.7;
+      border: 0;
+      border-bottom: 1px solid white;
+      background-color: transparent;
+
+      &::placeholder {
+        color: gray;
+        padding-bottom: 0;
+      }
+    }
+
+    &__cursor {
+      display: inline-block;
+      background: white;
+      line-height: 1rem;
+      margin-left: 1px;
+      animation: blink-animation 0.95s steps(2, start) infinite;
+      width: 1px;
+      height: 1.35rem;
+    }
+  }
+}

@@ -108,7 +108,7 @@ export default function Chat() {
   //
   useEffect(() => {
     let i = 0;
-    const copy = "start your exploration here: ";
+    const copy = "start exploring here: ";
     const speed = 50;
     function writeTyper() {
       if (i < copy.length) {
@@ -172,7 +172,7 @@ export default function Chat() {
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
-      //   .post("http://localhost:3001/chat", newPrompt, {
+      // .post("http://localhost:3001/chat", newPrompt, {
       // .post("https://thirdeyes-flask-dev.vercel.app/chat", newPrompt, {
       .post("https://third-eyes-flask.vercel.app/chat", newPrompt, {
         timeout: 90000,
@@ -217,7 +217,7 @@ export default function Chat() {
   }, []);
 
   return (
-    <main className="thirdeyes thirdeyes--chat flex min-h-screen flex-col items-center p-8">
+    <main className="thirdeyes thirdeyes--chat">
       <section className="chat-container">
         <div className="the-conversation">
           {messages.map((message, index) => (
@@ -232,13 +232,16 @@ export default function Chat() {
           ))}
         </div>
         <p className="chat-info">
-          Coming soon your conversation will be localized around the factually
-          correct music info baked into this app.
+          Coming soon, your conversation will be localized around the music data
+          baked into Hear in Color.
         </p>
         <p>
-          This is currently a simple chat interface between you and GPT-4. It&apos;s
-          identical to what you find with ChatGPT. Though unlike ChatGPT, your
-          conversation here isn&apos;t shared with OpenAI.
+          I used this page to experimnent with the UI you&apos;ll trigger below.
+        </p>
+        <p>
+          This is currently a simple chat interface between you and GPT-4.
+          It&apos;s identical to what you find with ChatGPT, though unlike
+          ChatGPT, your conversation here isn&apos;t shared with OpenAI.
         </p>
         <Header page="chat" />
       </section>

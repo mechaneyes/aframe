@@ -1,26 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap");
+
 // o————————————————————————————————————o prompt form —>
 //
 .prompt-form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 53px;
-  @include input-mono(100);
-  font-size: 1rem;
+  height: var(--prompt-form-height, 44px);
+  min-height: 44px;
+  margin-bottom: 32px;
+  padding-left: 12px;
+  // padding-bottom: 16px;
+  @include body-font(400);
+  letter-spacing: 0.05rem;
   color: white;
-  background-color: #414141;
-  overflow: hidden;
-  border-bottom: 1px solid white;
+  // overflow: hidden;
+  border: 1px solid #6d6d6d;
 
-  &--bottom {
-    bottom: 0;
-    top: auto;
-    border-top: 1px solid white;
-    border-bottom: 0;
+  form {
+    width: 100%;
+    height: 100%;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 0;
+    // padding: 0;
+    margin: 0;
+    @include body-font(300);
+    line-height: 1.5rem;
+    border: none;
+    background-color: transparent;
+    resize: none;
+
+    &::placeholder {
+      color: #989898;
+      line-height: 1.5rem;
+    }
+  }
+
+  textarea:focus,
+  input:focus {
+    outline: none;
   }
 
   &--submitted {
@@ -28,47 +55,28 @@
     font-style: italic;
   }
 
-  &__centered {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &__input {
     width: 100%;
-    max-width: 650px;
-    margin: auto;
-    padding: 0 1rem;
-
-    @include bp("xsmall") {
-      padding: 0 2rem;
-    }
-
-    @media (min-width: 720px) {
-      padding: 0;
-    }
+    height: 100%;
+    // padding: 0.8rem 0 0.8rem 11px;
+    padding: 0 0 0 8px;
   }
 
-  &__input {
+  &__inner {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    height: auto;
-    min-height: 52px;
-    padding: 0.8rem 0 0.8rem 11px;
-    font-size: 1.1rem;
+    height: 100%;
 
-    div {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      &:focus {
-        outline: none;
-      }
+    &:focus {
+      outline: none;
     }
   }
 
   .before-cursor {
-    @include input-mono(500);
+    @include input-mono(200);
   }
 
   &__cursor {
@@ -86,78 +94,27 @@
       visibility: hidden;
     }
   }
-}
 
-// o————————————————————————————————————o spinner —>
-//
-.spinner {
-  $ripple-position: 18px;
-  $ripple-size-2: 36px;
-  $ripple-size-1: 40px;
-
-  display: flex;
-  align-items: center;
-  margin-right: 0;
-
-  .timer {
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
+  // o————————————————————————————————————o timer —>
+  //
   .timer {
     &--visible {
+      margin: 0 8px 0 16px;
+      font-family: "Roboto Mono", monospace;
+      font-size: 1rem;
+      color: #989898;
       visibility: visible;
     }
-
+  
     &--hidden {
+      margin: 0 8px 0 16px;
       visibility: hidden;
     }
   }
-
-  &.lds-ripple {
-    position: relative;
-    width: $ripple-size-1;
-    height: $ripple-size-1;
-  }
-  &.lds-ripple div {
-    position: absolute;
-    border: 2px solid #fff;
-    opacity: 1;
-    border-radius: 50%;
-    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  }
-  &.lds-ripple div:nth-child(2) {
-    animation-delay: -0.5s;
-  }
-
-  @keyframes lds-ripple {
-    0% {
-      top: $ripple-position;
-      left: $ripple-position;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    4.9% {
-      top: $ripple-position;
-      left: $ripple-position;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    5% {
-      top: $ripple-position;
-      left: $ripple-position;
-      width: 0;
-      height: 0;
-      opacity: 1;
-    }
-    100% {
-      top: 0px;
-      left: 0px;
-      width: $ripple-size-2;
-      height: $ripple-size-2;
-      opacity: 0;
+  
+  .response__container {
+    .prompt-form {
+      margin-top: 16px;
     }
   }
 }
