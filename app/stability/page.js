@@ -81,9 +81,9 @@ export default function Stability() {
         ></div>
         <div className="response response__intro">
           <h2>References</h2>
-          <p>Wondering where the AI's insights come from?</p>{" "}
+          <p>Wondering where the AI&apos;s insights come from?</p>{" "}
           <p>
-            For clarity and trust, we've provided direct links to the relevant
+            For clarity and trust, we&apos;ve provided direct links to the relevant
             Pitchfork reviews here, guiding you directly to the original
             content.
           </p>
