@@ -9,7 +9,7 @@
 
 // import "../styles/styles.scss";
 
-// export default function Chat() {
+export default function Chat() {
 //   const [placeholderVisible, setPlaceholderVisible] = useState(true);
 //   const [promptSubmitted, setPromptSubmitted] = useState(false);
 //   const [spinnerVisible, setSpinnerVisible] = useState(false);
@@ -249,4 +249,6 @@
 //       <PromptForm {...promptFormProps} />
 //     </main>
 //   );
-// }
+
+  return
+}
