@@ -35,6 +35,8 @@ export default function Stability() {
             : "introduction introduction--hidden"
         }
       >
+        <PromptForm />
+
         <p className="introduction__description">
           In this experiment multiple Large Language Models (LLMs) are strung
           together to generate information, this time with one additional step:
@@ -43,10 +45,10 @@ export default function Stability() {
           content.
         </p>
         <p>
-          After the copy is generated and presented that output is sent back
-          to GPT-3.5 to distill its sentiment into a single sentence. This
-          sentence becomes a new prompt then sent to the Stability API which
-          uses Stable Diffusion, a text-to-image model, to generate the image.
+          After the copy is generated and presented that output is sent back to
+          GPT-3.5 to distill its sentiment into a single sentence. This sentence
+          becomes a new prompt then sent to the Stability API which uses Stable
+          Diffusion, a text-to-image model, to generate the image.
         </p>
         <p>
           Because this process is so slow, the image is injected after the 3rd
@@ -77,7 +79,15 @@ export default function Stability() {
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
         ></div>
-        <h2>References</h2>
+        <div className="response response__intro">
+          <h2>References</h2>
+          <p>Wondering where the AI's insights come from?</p>{" "}
+          <p>
+            For clarity and trust, we've provided direct links to the relevant
+            Pitchfork reviews here, guiding you directly to the original
+            content.
+          </p>
+        </div>
         <div className="response response--references">{gptReferences}</div>
       </section>
     </main>

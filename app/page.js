@@ -59,9 +59,6 @@ export default function Home() {
           Aframe will surface insights and references for your personal music
           discovery.
         </p>
-        {/* <p className="introduction__call-to-action">
-          Enter your prompt up top to begin.
-        </p> */}
 
         <PromptForm />
 

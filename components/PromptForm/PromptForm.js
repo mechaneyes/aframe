@@ -25,6 +25,7 @@ const PromptForm = (props) => {
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
+  const isMobile = window.innerWidth <= 768; // Set the breakpoint to 768px or your desired value
 
   const examplePrompt = useAtomValue(examplePromptAtom);
   const setIntroVisible = useSetAtom(introVisibleAtom);
@@ -35,14 +36,10 @@ const PromptForm = (props) => {
 
   // o————————————————————————————————————o form height —>
   //
-  // height of prompt form grows as user types. using a css
-  // variable this pushes the chat responses down
+  // height of prompt form grows on input
   //
   function handleTextareaInput() {
     if (textareaRef.current) {
-      // const promptFormHeight = `${textareaRef.current.offsetHeight}px`;
-      // document.documentElement.style.setProperty("--prompt-form-height", promptFormHeight);
-
       document.querySelector(
         ".prompt-form"
       ).style.height = `${textareaRef.current.scrollHeight}px`;
@@ -52,10 +49,14 @@ const PromptForm = (props) => {
 
       const promptForm = document.querySelector(".prompt-form");
       if (parseInt(promptForm.style.height) > 44) {
-        document.querySelector(".prompt-form textarea").style.paddingBottom = "10px";
+        document.querySelector(".prompt-form textarea").style.paddingBottom =
+          "10px";
       }
     }
   }
+
+  // o————————————————————————————————————o show modal for mobile —>
+  //
 
   // o————————————————————————————————————o query timer —>
   //
@@ -88,11 +89,6 @@ const PromptForm = (props) => {
 
     startTimer();
     setTimerVisible(true);
-
-    // const inputElement =
-    //   document.getElementsByClassName("prompt-form__inner")[0];
-    // inputElement.blur();
-    // inputElement.innerHTML = requestValue;
 
     const newPrompt = {
       prompt: requestValue,
@@ -176,9 +172,18 @@ const PromptForm = (props) => {
         setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
         totalSeconds = 0;
-        const refocusTextarea = document.querySelector("textarea");
-        refocusTextarea.focus();
+        // const refocusTextarea = document.querySelector("textarea");
+        // refocusTextarea.focus();
         textarea.innerHTML = inputValue;
+
+        console.log("introVisible", introVisible)
+
+        if (!isMobile) {
+          const refocusTextarea = document.querySelector("textarea");
+          refocusTextarea.focus();
+        } else {
+          setModalVisible(false);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -201,16 +206,6 @@ const PromptForm = (props) => {
     }
   }
 
-  useEffect(() => {
-    addEventListener("keydown", setModalVisible);
-  }, []);
-
-  useEffect(() => {
-    textareaRef.current.focus();
-    !firstRun && removeEventListener("keydown", setModalVisible);
-    setFirstRun(false);
-  }, [modalVisible]); // eslint-disable-line react-hooks/exhaustive-deps
-
   // o————————————————————————————————————o trigger via example prompts —>
   //
   useEffect(() => {
@@ -231,29 +226,29 @@ const PromptForm = (props) => {
 
   return (
     <>
-      {/* <Modal
-        show={modalVisible}
-        setModalVisible={setModalVisible}
-        typeUse="modal--input"
-      >
-        <div className="modal__inputter">
-          <span className="before-cursor">%</span>
-          <form onSubmit={handleSubmit}>
-            <textarea
-              ref={textareaRef}
-              placeholder="Explore music insights"
-              value={inputValue}
-              onChange={handleChange}
-              onKeyDown={handleEnterKey}
-            ></textarea>
-          </form>
-        </div>
-      </Modal> */}
+      {modalVisible && (
+        <Modal
+          show={modalVisible}
+          setModalVisible={setModalVisible}
+          typeUse="modal--input"
+        >
+          <div className="modal__inputter">
+            <span className="before-cursor">%</span>
+            <form onSubmit={handleSubmit}>
+              <textarea
+                ref={textareaRef}
+                placeholder="Explore music insights"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleEnterKey}
+                ></textarea>
+            </form>
+          </div>
+        </Modal>
+      )}
       <section
-        className={`${
-          bottomOfPage ? "prompt-form prompt-form--bottom" : "prompt-form"
-        }`}
-        onClick={() => setModalVisible(true)}
+        className="prompt-form"
+        onClick={() => isMobile && setModalVisible(true)}
       >
         <span className="before-cursor"> % </span>
         <div
@@ -273,6 +268,7 @@ const PromptForm = (props) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onInput={handleTextareaInput}
                 onKeyDown={handleEnterKey}
+                onFocus={() => isMobile && setModalVisible(true)}
               ></textarea>
             </form>
           </div>

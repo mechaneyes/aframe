@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 1;
 
   &__main {
@@ -84,14 +84,14 @@
       outline: none;
       margin-left: 0;
       @include body-font(300);
-      line-height: 1.5rem;
+      line-height: 0.7;
       border: 0;
       border-bottom: 1px solid white;
       background-color: transparent;
 
       &::placeholder {
         color: gray;
-        padding-bottom: 0px;
+        padding-bottom: 0;
       }
     }
 
