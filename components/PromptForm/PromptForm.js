@@ -230,17 +230,6 @@ const PromptForm = (props) => {
     }
   }, [modalVisible]);
 
-  useEffect(() => {
-    const hocusFocus = () => {
-      textareaRef.current.focus();
-    };
-    if (firstRun) {
-      addEventListener("keydown", hocusFocus);
-    }
-    !firstRun && removeEventListener("keydown", hocusFocus);
-    setFirstRun(false);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   // o————————————————————————————————————o trigger via example prompts —>
   //
   useEffect(() => {
@@ -271,7 +260,7 @@ const PromptForm = (props) => {
           <form onSubmit={handleSubmit}>
             <textarea
               ref={textareaRef}
-              placeholder="Explore music insights"
+              placeholder="Discover music. Start typing..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleEnterKey}
@@ -297,7 +286,7 @@ const PromptForm = (props) => {
             <form onSubmit={handleSubmit}>
               <textarea
                 ref={textareaRef}
-                placeholder="Explore music insights"
+                placeholder="Discover music. Start typing..."
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onInput={handleTextareaInput}
