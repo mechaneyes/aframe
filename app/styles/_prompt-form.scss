@@ -108,8 +108,10 @@
   // o————————————————————————————————————o timer —>
   //
   .timer {
+    min-width: 44px;
+    
     &--visible {
-      margin: 0 8px 0 16px;
+      margin: 0 16px 0 8px;
       font-family: "Roboto Mono", monospace;
       font-size: 1rem;
       color: #989898;

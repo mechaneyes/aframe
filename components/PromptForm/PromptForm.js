@@ -64,7 +64,7 @@ const PromptForm = (props) => {
   // o————————————————————————————————————o resize for example prompst —>
   //
   // form is set to accomodate example prompts 50ms after makeRequest()
-  // 
+  //
   const resizeViaExamples = () => {
     let heightToSet = document.querySelectorAll(".prompt-form textarea");
     heightToSet = heightToSet[0].scrollHeight;
@@ -72,12 +72,22 @@ const PromptForm = (props) => {
     const forms = document.querySelectorAll(".prompt-form");
     const inputs = document.querySelectorAll(".prompt-form__input");
 
-    for (const form of forms) {
-      form.style.height = `${heightToSet + 11}px`;
-    }
+    if (heightToSet > 44) {
+      for (const form of forms) {
+        form.style.height = `${heightToSet + 11}px`;
+      }
 
-    for (const input of inputs) {
-      input.style.height = `${heightToSet + 11}px`;
+      for (const input of inputs) {
+        input.style.height = `${heightToSet + 11}px`;
+      }
+    } else {
+      for (const form of forms) {
+        form.style.height = `${heightToSet}px`;
+      }
+
+      for (const input of inputs) {
+        input.style.height = `${heightToSet}px`;
+      }
     }
   };
 
