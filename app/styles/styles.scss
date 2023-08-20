@@ -19,6 +19,7 @@ body {
   margin: 0;
   background-color: black;
   background-color: #0c0c0c;
+  background-image: none;
 }
 
 .thirdeyes {
@@ -36,7 +37,7 @@ body {
   }
 
   h1 {
-    margin: 0.5rem 0 0rem;
+    margin: 0;
     @include h1-font();
     font-size: 2.3rem;
     font-weight: 200;

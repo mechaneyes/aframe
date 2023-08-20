@@ -37,8 +37,8 @@ const PromptForm = (props) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (window !== undefined) {
-      setIsMobile(window.innerWidth <= 768);
+    if (window !== undefined && window.innerWidth <= 450) {
+      setIsMobile(true);
     }
   }, []);
 
@@ -69,6 +69,7 @@ const PromptForm = (props) => {
   // o————————————————————————————————————o query timer —>
   //
   let countTime;
+
   const startTimer = () => {
     countTime = 0;
     intervalIdRef.current = setInterval(setTime, 100);
@@ -184,8 +185,6 @@ const PromptForm = (props) => {
         // refocusTextarea.focus();
         textarea.innerHTML = inputValue;
 
-        console.log("introVisible", introVisible)
-
         if (!isMobile) {
           const refocusTextarea = document.querySelector("textarea");
           refocusTextarea.focus();
@@ -214,6 +213,16 @@ const PromptForm = (props) => {
     }
   }
 
+  useEffect(() => {
+    const staticTextarea = document.querySelector("textarea");
+    staticTextarea.blur();
+
+    if (modalVisible) {
+      const modalTextarea = document.querySelector(".modal__inputter textarea");
+      modalTextarea.focus();
+    }
+  }, [modalVisible]);
+
   // o————————————————————————————————————o trigger via example prompts —>
   //
   useEffect(() => {
@@ -234,26 +243,24 @@ const PromptForm = (props) => {
 
   return (
     <>
-      {modalVisible && (
-        <Modal
-          show={modalVisible}
-          setModalVisible={setModalVisible}
-          typeUse="modal--input"
-        >
-          <div className="modal__inputter">
-            <span className="before-cursor">%</span>
-            <form onSubmit={handleSubmit}>
-              <textarea
-                ref={textareaRef}
-                placeholder="Explore music insights"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleEnterKey}
-                ></textarea>
-            </form>
-          </div>
-        </Modal>
-      )}
+      <Modal
+        show={modalVisible}
+        setModalVisible={setModalVisible}
+        typeUse="modal--input"
+      >
+        <div className="modal__inputter">
+          <span className="before-cursor">%</span>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              ref={textareaRef}
+              placeholder="Explore music insights"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleEnterKey}
+            ></textarea>
+          </form>
+        </div>
+      </Modal>
       <section
         className="prompt-form"
         onClick={() => isMobile && setModalVisible(true)}
@@ -276,7 +283,6 @@ const PromptForm = (props) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onInput={handleTextareaInput}
                 onKeyDown={handleEnterKey}
-                onFocus={() => isMobile && setModalVisible(true)}
               ></textarea>
             </form>
           </div>
