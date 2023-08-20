@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import Image from "next/image";
 
 import PromptForm from "/components/PromptForm/PromptForm";
 import Header from "/components/Header/Header";
 import { introVisibleAtom } from "/store/state-jotai.js";
+import { modalVisibleAtom } from "/store/state-jotai.js";
 import { examplePromptAtom } from "/store/state-jotai.js";
 import { gptFreestyleAtom } from "/store/state-jotai.js";
 import { gptReferencesAtom } from "/store/state-jotai.js";
@@ -15,30 +16,35 @@ import "./styles/styles.scss";
 
 export default function Home() {
   const [introVisible, setIntroVisible] = useAtom(introVisibleAtom);
+  const modalVisible = useAtomValue(modalVisibleAtom);
   const gptFreestyle = useAtomValue(gptFreestyleAtom);
   const gptReferences = useAtomValue(gptReferencesAtom);
   const setExamplePrompt = useSetAtom(examplePromptAtom);
+  const [introClasses, setIntroClasses] = useState(
+    "introduction introduction--visible"
+  );
+  const [modalClasses, setModalClasses] = useState(
+    "introduction introduction--no-modal"
+  );
+
+  // o————————————————————————————————————o introduction classNames —>
+  //
+  useEffect(() => {
+    if (introVisible) {
+      setIntroClasses("introduction introduction--visible");
+    } else {
+      setIntroClasses("introduction introduction--hidden");
+    }
+  }, [introVisible]);
 
   useEffect(() => {
-    setIntroVisible(true);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // o————————————————————————————————————o trigger via example prompts —>
-  //
-  // useEffect(() => {
-  //   const examplePrompts = document.querySelectorAll(
-  //     ".introduction__example-prompts li"
-  //   );
-  //   examplePrompts.forEach((item) => {
-  //     item.addEventListener("click", (event) => {
-  //       setTimeout(() => {
-  //         setExamplePrompt(event.target.textContent);
-  //       }, 100);
-  //     });
-  //   });
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    console.log("modalVisible", modalVisible);
+    if (modalVisible) {
+      setModalClasses("blur--modal");
+    } else {
+      setModalClasses("blur--no-modal");
+    }
+  }, [modalVisible]);
 
   return (
     <main className="thirdeyes thirdeyes--home">
@@ -47,11 +53,7 @@ export default function Home() {
       {/* // o————————————————————————————————————o introduction —> */}
       {/* // */}
       <section
-        className={
-          introVisible
-            ? "introduction introduction--visible"
-            : "introduction introduction--hidden"
-        }
+        className={[...introClasses.concat(" ", ...modalClasses)].join("")}
       >
         <p className="introduction__description">
           Use OpenAI&apos;s GPT-3.5 (the technology powering ChatGPT) to
@@ -69,9 +71,7 @@ export default function Home() {
           <h3>Example Prompts</h3>
           <ul>
             <li>Introduce me to ambient music</li>
-            <li>
-              What&apos;s Frankie Knuckles&apos;s impact on music and culture?
-            </li>
+            <li>How did Frankie Knuckles impact music and culture?</li>
             <li>
               Give me a 20 song playlist inspired by David Mancuso&apos;s party,
               The Loft
@@ -103,11 +103,22 @@ export default function Home() {
       <section
         className={
           introVisible
-            ? "response__container response__container--hidden"
-            : "response__container response__container--visible"
+            ? [
+                ...modalClasses.concat(
+                  " ",
+                  "response__container response__container--hidden"
+                ),
+              ].join("")
+            : [
+                ...modalClasses.concat(
+                  " ",
+                  "response__container response__container--visible"
+                ),
+              ].join("")
         }
       >
         <PromptForm />
+
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
@@ -116,9 +127,9 @@ export default function Home() {
           <h2>References</h2>
           <p>Wondering where the AI&apos;s insights come from?</p>{" "}
           <p>
-            For clarity and trust, we&apos;ve provided direct links to the relevant
-            Pitchfork reviews here, guiding you directly to the original
-            content.
+            For clarity and trust, we&apos;ve provided direct links to the
+            relevant Pitchfork reviews here, guiding you directly to the
+            original content.
           </p>
         </div>
         <div className="response response__references">{gptReferences}</div>

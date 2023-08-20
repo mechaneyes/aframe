@@ -5,7 +5,7 @@ import axios from "axios";
 import Modal from "components/Modal/Modal";
 
 import { introVisibleAtom } from "/store/state-jotai.js";
-import { examplePromptAtom } from "/store/state-jotai.js";
+import { modalVisibleAtom } from "/store/state-jotai.js";
 import { gptFreestyleAtom } from "/store/state-jotai.js";
 import { gptReferencesAtom } from "/store/state-jotai.js";
 import { inputValueAtom } from "/store/state-jotai.js";
@@ -14,19 +14,19 @@ import { totalTimeAtom } from "/store/state-jotai.js";
 const PromptForm = (props) => {
   const textareaRef = useRef(null);
   const formRef = useRef(null);
+  const intervalIdRef = useRef(null);
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [introVisible, setIntroVisible] = useAtom(introVisibleAtom);
+  const [modalVisible, setModalVisible] = useAtom(modalVisibleAtom);
   const [inputValue, setInputValue] = useAtom(inputValueAtom);
   const [totalTime, setTotalTime] = useAtom(totalTimeAtom);
-  const intervalIdRef = useRef(null);
   const [timerVisible, setTimerVisible] = useState(false);
   const [seenIds, setSeenIds] = useState(new Set());
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [thePage, setThePage] = useState("");
   const [hasRun, setHasRun] = useState(false);
 
-  const examplePrompt = useAtomValue(examplePromptAtom);
-  const setIntroVisible = useSetAtom(introVisibleAtom);
+  // const setIntroVisible = useSetAtom(introVisibleAtom);
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
   const setGptReferences = useSetAtom(gptReferencesAtom);
 
@@ -156,6 +156,7 @@ const PromptForm = (props) => {
       })
       .then((response) => {
         stopTimer();
+        setIntroVisible(false);
 
         // o——————————————————o stability —>
         //
@@ -201,7 +202,6 @@ const PromptForm = (props) => {
       })
       .then(() => {
         setPromptSubmitted(false);
-        setIntroVisible(false);
         clearInterval(responseTimer);
         textarea.innerHTML = inputValue;
 

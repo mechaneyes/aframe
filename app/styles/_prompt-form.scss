@@ -108,6 +108,8 @@
   // o————————————————————————————————————o timer —>
   //
   .timer {
+    display: flex;
+    justify-content: flex-end;
     min-width: 44px;
     
     &--visible {
