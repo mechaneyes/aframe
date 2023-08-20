@@ -22,9 +22,11 @@ const PromptForm = (props) => {
   const [totalTime, setTotalTime] = useAtom(totalTimeAtom);
   const [timerVisible, setTimerVisible] = useState(false);
   const [seenIds, setSeenIds] = useState(new Set());
+  const [endpoint, setEndpoint] = useState("prose");
   const [promptSubmitted, setPromptSubmitted] = useState(false);
   const [thePage, setThePage] = useState("");
   const [hasRun, setHasRun] = useState(false);
+  const [promptFormClasses, setPromptFormClasses] = useState("");
 
   // const setIntroVisible = useSetAtom(introVisibleAtom);
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
@@ -111,6 +113,22 @@ const PromptForm = (props) => {
     setTotalTime(countTime);
   };
 
+  // o————————————————————————————————————o set endpoint —>
+  //
+  useEffect(() => {
+    setThePage(window.location.pathname.split("/").pop());
+  }, []);
+
+  useEffect(() => {
+    if (thePage === "stability") {
+      setEndpoint("image");
+      setPromptFormClasses("prompt-form prompt-form--has-run");
+    } else {
+      setEndpoint("prose");
+      setPromptFormClasses("prompt-form prompt-form--has-run");
+    }
+  }, [thePage]);
+
   // o————————————————————————————————————o api, waves hands —>
   //
   const makeRequest = (requestValue) => {
@@ -131,17 +149,6 @@ const PromptForm = (props) => {
 
     const textarea = document.querySelector("textarea");
     textarea.blur();
-
-    setThePage(window.location.pathname.split("/").pop());
-
-    // change the api endpoint based on the page
-    //
-    let endpoint = "";
-    if (thePage === "stability") {
-      endpoint = "image";
-    } else {
-      endpoint = "prose";
-    }
 
     axios
       // .post("http://127.0.0.1:5000/image", newPrompt, {
@@ -202,7 +209,6 @@ const PromptForm = (props) => {
       })
       .then(() => {
         setPromptSubmitted(false);
-        clearInterval(responseTimer);
         textarea.innerHTML = inputValue;
 
         if (!isMobile) {
@@ -288,7 +294,7 @@ const PromptForm = (props) => {
         </div>
       </Modal>
       <section
-        className={hasRun ? "prompt-form" : "prompt-form prompt-form--has-run"}
+        className={promptFormClasses}
         onClick={() => isMobile && setModalVisible(true)}
       >
         <span className="before-cursor"> % </span>

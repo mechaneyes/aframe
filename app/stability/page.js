@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import Image from "next/image";
 
@@ -12,30 +12,40 @@ import { introVisibleAtom } from "/store/state-jotai.js";
 import { gptFreestyleAtom } from "/store/state-jotai.js";
 import { gptReferencesAtom } from "/store/state-jotai.js";
 
-import "../styles/styles.scss";
+import "app/styles/styles.scss";
 
 export default function Stability() {
   const [introVisible, setIntroVisible] = useAtom(introVisibleAtom);
   const gptFreestyle = useAtomValue(gptFreestyleAtom);
   const gptReferences = useAtomValue(gptReferencesAtom);
 
+  const [introClasses, setIntroClasses] = useState(
+    "introduction introduction--visible"
+  );
+  const [modalClasses, setModalClasses] = useState(
+    "introduction introduction--no-modal"
+  );
+
+  // o————————————————————————————————————o introduction classNames —>
+  //
   useEffect(() => {
-    setIntroVisible(true);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (introVisible) {
+      setIntroClasses("introduction introduction--visible");
+    } else {
+      setIntroClasses("introduction introduction--hidden");
+    }
+  }, [introVisible]);
 
   return (
     <main className="thirdeyes thirdeyes--stability">
-      {/* <PromptForm stability={stability} /> */}
       <Header page="stability" />
 
+      {/* // o————————————————————————————————————o introduction —> */}
+      {/*  */}
       <section
-        className={
-          introVisible
-            ? "introduction introduction--visible"
-            : "introduction introduction--hidden"
-        }
+        className={[...introClasses.concat(" ", ...modalClasses)].join("")}
       >
-        <PromptForm />
+        <PromptForm stability={stability} />
 
         <p className="introduction__description">
           In this experiment multiple Large Language Models (LLMs) are strung
@@ -68,13 +78,27 @@ export default function Stability() {
         </div>
       </section>
 
+      {/* // o————————————————————————————————————o response —> */}
+      {/*  */}
       <section
         className={
           introVisible
-            ? "response__container response__container--hidden"
-            : "response__container response__container--visible"
+            ? [
+                ...modalClasses.concat(
+                  " ",
+                  "response__container response__container--hidden"
+                ),
+              ].join("")
+            : [
+                ...modalClasses.concat(
+                  " ",
+                  "response__container response__container--visible"
+                ),
+              ].join("")
         }
       >
+        <PromptForm stability={stability} />
+
         <div
           className="response response--creative"
           dangerouslySetInnerHTML={{ __html: gptFreestyle }}
@@ -83,9 +107,9 @@ export default function Stability() {
           <h2>References</h2>
           <p>Wondering where the AI&apos;s insights come from?</p>{" "}
           <p>
-            For clarity and trust, we&apos;ve provided direct links to the relevant
-            Pitchfork reviews here, guiding you directly to the original
-            content.
+            For clarity and trust, we&apos;ve provided direct links to the
+            relevant Pitchfork reviews here, guiding you directly to the
+            original content.
           </p>
         </div>
         <div className="response response--references">{gptReferences}</div>
