@@ -38,6 +38,7 @@
     border: none;
     background-color: transparent;
     resize: none;
+    cursor: auto;
 
     &::placeholder {
       color: #989898;
@@ -48,6 +49,10 @@
   textarea:focus,
   input:focus {
     outline: none;
+  }
+
+  &--has-run {
+    margin-top: 24px;
   }
 
   &--submitted {
@@ -64,7 +69,7 @@
 
   &__inner {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -84,6 +89,7 @@
     background: white;
     line-height: 1rem;
     margin-left: 1px;
+    margin-right: 2px;
     animation: blink-animation 0.95s steps(2, start) infinite;
     width: 1px;
     height: 1.35rem;

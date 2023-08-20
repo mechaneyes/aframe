@@ -26,6 +26,7 @@ const PromptForm = (props) => {
   const [spinnerVisible, setSpinnerVisible] = useState(false);
   const [displayTimer, setDisplayTimer] = useState("");
   const [thePage, setThePage] = useState("");
+  const [hasRun, setHasRun] = useState(false);
 
   const examplePrompt = useAtomValue(examplePromptAtom);
   const setIntroVisible = useSetAtom(introVisibleAtom);
@@ -95,7 +96,7 @@ const PromptForm = (props) => {
     setPromptSubmitted(true);
     setModalVisible(false);
     setGptReferences([]);
-
+    setHasRun(true);
     startTimer();
     setTimerVisible(true);
 
@@ -214,14 +215,31 @@ const PromptForm = (props) => {
   }
 
   useEffect(() => {
-    const staticTextarea = document.querySelector("textarea");
-    staticTextarea.blur();
-
     if (modalVisible) {
-      const modalTextarea = document.querySelector(".modal__inputter textarea");
-      modalTextarea.focus();
+      const staticTextarea = document.querySelector("textarea");
+      staticTextarea.blur();
+
+      if (modalVisible) {
+        const modalTextarea = document.querySelector(
+          ".modal__inputter textarea"
+        );
+        modalTextarea.focus();
+      }
+    } else {
+      document.querySelector(".introduction textarea").focus();
     }
   }, [modalVisible]);
+
+  useEffect(() => {
+    const hocusFocus = () => {
+      textareaRef.current.focus();
+    };
+    if (firstRun) {
+      addEventListener("keydown", hocusFocus);
+    }
+    !firstRun && removeEventListener("keydown", hocusFocus);
+    setFirstRun(false);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // o————————————————————————————————————o trigger via example prompts —>
   //
@@ -262,7 +280,7 @@ const PromptForm = (props) => {
         </div>
       </Modal>
       <section
-        className="prompt-form"
+        className={hasRun ? "prompt-form" : "prompt-form prompt-form--has-run"}
         onClick={() => isMobile && setModalVisible(true)}
       >
         <span className="before-cursor"> % </span>
@@ -275,6 +293,7 @@ const PromptForm = (props) => {
           ref={formRef}
         >
           <div className="prompt-form__inner" tabIndex="0">
+            {/* <div className="prompt-form__cursor"></div> */}
             <form onSubmit={handleSubmit}>
               <textarea
                 ref={textareaRef}
@@ -283,6 +302,7 @@ const PromptForm = (props) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 onInput={handleTextareaInput}
                 onKeyDown={handleEnterKey}
+                autoFocus
               ></textarea>
             </form>
           </div>
