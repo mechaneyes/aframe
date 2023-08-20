@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, use } from "react";
-import axios from "axios";
+import { useState, useEffect, useRef } from "react";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import axios from "axios";
 
-import Modal from "../Modal/Modal";
+import Modal from "components/Modal/Modal";
 
 import { introVisibleAtom } from "/store/state-jotai.js";
 import { examplePromptAtom } from "/store/state-jotai.js";
@@ -16,15 +16,12 @@ const PromptForm = (props) => {
   const formRef = useRef(null);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [firstRun, setFirstRun] = useState(true);
   const [inputValue, setInputValue] = useAtom(inputValueAtom);
   const [totalTime, setTotalTime] = useAtom(totalTimeAtom);
   const intervalIdRef = useRef(null);
   const [timerVisible, setTimerVisible] = useState(false);
   const [seenIds, setSeenIds] = useState(new Set());
   const [promptSubmitted, setPromptSubmitted] = useState(false);
-  const [spinnerVisible, setSpinnerVisible] = useState(false);
-  const [displayTimer, setDisplayTimer] = useState("");
   const [thePage, setThePage] = useState("");
   const [hasRun, setHasRun] = useState(false);
 
@@ -33,7 +30,7 @@ const PromptForm = (props) => {
   const setGptFreestyle = useSetAtom(gptFreestyleAtom);
   const setGptReferences = useSetAtom(gptReferencesAtom);
 
-  const { stability, bottomOfPage } = props;
+  const { stability } = props;
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -64,8 +61,25 @@ const PromptForm = (props) => {
     }
   }
 
-  // o————————————————————————————————————o show modal for mobile —>
+  // o————————————————————————————————————o resize for example prompst —>
   //
+  // form is set to accomodate example prompts 50ms after makeRequest()
+  // 
+  const resizeViaExamples = () => {
+    let heightToSet = document.querySelectorAll(".prompt-form textarea");
+    heightToSet = heightToSet[0].scrollHeight;
+
+    const forms = document.querySelectorAll(".prompt-form");
+    const inputs = document.querySelectorAll(".prompt-form__input");
+
+    for (const form of forms) {
+      form.style.height = `${heightToSet + 11}px`;
+    }
+
+    for (const input of inputs) {
+      input.style.height = `${heightToSet + 11}px`;
+    }
+  };
 
   // o————————————————————————————————————o query timer —>
   //
@@ -85,20 +99,21 @@ const PromptForm = (props) => {
     countTime = countTime.toFixed(1);
 
     setTotalTime(countTime);
-    console.log("totalTime", totalTime);
   };
 
   // o————————————————————————————————————o api, waves hands —>
   //
   const makeRequest = (requestValue) => {
-    setFirstRun(false);
-    setSpinnerVisible(true);
     setPromptSubmitted(true);
     setModalVisible(false);
     setGptReferences([]);
     setHasRun(true);
     startTimer();
     setTimerVisible(true);
+
+    setTimeout(() => {
+      resizeViaExamples();
+    }, 50);
 
     const newPrompt = {
       prompt: requestValue,
@@ -171,19 +186,13 @@ const PromptForm = (props) => {
             ...gptReferences,
             ...newChatResponse,
           ]);
-          setSpinnerVisible(false);
           setPromptSubmitted(false);
         })(response);
       })
       .then(() => {
-        setSpinnerVisible(false);
         setPromptSubmitted(false);
         setIntroVisible(false);
-        setDisplayTimer(totalSeconds + "s");
         clearInterval(responseTimer);
-        totalSeconds = 0;
-        // const refocusTextarea = document.querySelector("textarea");
-        // refocusTextarea.focus();
         textarea.innerHTML = inputValue;
 
         if (!isMobile) {

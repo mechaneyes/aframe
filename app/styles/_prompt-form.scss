@@ -53,6 +53,10 @@
 
   &--has-run {
     margin-top: 24px;
+
+    textarea {
+      padding: 11px 0 1px;
+    }
   }
 
   &--submitted {
