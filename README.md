@@ -24,7 +24,7 @@ The Next.js frontend is also hosted on Vercel.
 
 The response from GPT-3.5 is presented, and just below I've included links to the Pitchfork reviews that were used to generate the prompt and are used by you to corroborate the factually validity of the response.
 
-#### No hallucination
+#### No hallucination zone
 What all this means is that the app is not allowed to hallucinate. If any, the factual inconsistencies come from Pitchfork. If the information isn't in that dataset, **which again cuts out at 2017**, the app will simply throw it's hands up and leave for the day.
 
 ### Stability.ai API
@@ -35,10 +35,7 @@ Here you see me make the same interaction with Pinecone and OpenAI, this time wi
 Oh, all of this ping pong between models is fairly slow. For that reason, the image is injected after the third paragraph of the text response. Patience please.
 
 ### it's a spiritual thing, a body thing, a soul thing
-Isn't an a-frame a type of house? Well, yes.
-
-The Spotify DJ, which I'
-m enjoying these days, recently told me, "You like house. I get it."
+Isn't an a-frame a type of house? Well, yes. The Spotify DJ, which I'm enjoying these days, recently told me, "You like house. I get it."
 
 ## A parting soundtrack
 And while we're on the subject of music &mdash;  we always are &mdash;  it's not the housiest of house but ...  
